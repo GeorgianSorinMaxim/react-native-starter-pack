@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  isTVSelectable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "backgroundColor": "#CE0924",
+        "borderRadius": 6,
+        "display": "flex",
+        "marginBottom": 12,
+        "padding": 12,
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#fff",
+            "fontWeight": "bold",
+            "overflow": "hidden",
+          },
+        ]
+      }
+    >
+      Nando's
+    </Text>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#fff",
+            "overflow": "hidden",
+            "paddingTop": 12,
+          },
+        ]
+      }
+    >
+      , , 
+    </Text>
+  </View>
+</View>
+`;

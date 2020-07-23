@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<RNGestureHandlerButton
+  activeOpacity={0.105}
+  collapsable={false}
+  onActiveStateChange={[Function]}
+  onGestureEvent={[Function]}
+  onGestureHandlerEvent={[Function]}
+  onGestureHandlerStateChange={[Function]}
+  onHandlerStateChange={[Function]}
+  onPress={[Function]}
+  style={
+    Array [
+      Object {
+        "overflow": "hidden",
+      },
+      Array [
+        Object {
+          "backgroundColor": "#fdfdfd",
+          "borderBottomWidth": 0,
+          "borderColor": "#ededed",
+          "borderWidth": 0.5,
+          "paddingHorizontal": 15,
+          "paddingVertical": 15,
+        },
+        false,
+      ],
+    ]
+  }
+  underlayColor="black"
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "black",
+        "bottom": 0,
+        "left": 0,
+        "opacity": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "marginRight": 12,
+        }
+      }
+    >
+      <Text
+        allowFontScaling={false}
+        style={
+          Array [
+            Object {
+              "color": "rgba(0,0,0,0.35)",
+              "fontSize": 22,
+            },
+            undefined,
+            Object {
+              "fontFamily": "FontAwesome",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
+    <Text
+      style={
+        Object {
+          "alignSelf": "flex-start",
+          "fontSize": 15,
+          "marginTop": 1,
+        }
+      }
+    >
+      Nandos
+    </Text>
+  </View>
+</RNGestureHandlerButton>
+`;

@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LinksScreen renders the LinksScreen screen 1`] = `null`;

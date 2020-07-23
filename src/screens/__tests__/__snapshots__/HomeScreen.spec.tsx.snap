@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomeScreen renders the HomeScreen screen 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#fff",
+      "flex": 1,
+      "paddingBottom": 32,
+      "paddingTop": 12,
+    }
+  }
+>
+  <Image
+    resizeMode="contain"
+    source={
+      Object {
+        "testUri": "../../../src/assets/images/logo.jpg",
+      }
+    }
+    style={
+      Object {
+        "alignSelf": "center",
+        "height": 50,
+        "width": 100,
+      }
+    }
+  />
+  <Text
+    style={
+      Array [
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        },
+      ]
+    }
+  >
+    No data available
+  </Text>
+</View>
+`;
