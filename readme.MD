@@ -1,5 +1,7 @@
 ### React Native app
 
+- Based on https://github.com/expo/create-react-native-app with ejected Expo
+
 ### Initial setup
 
 - Install React Native `npm install -g react-native-cli`
@@ -17,6 +19,8 @@
 ### Install the app
 
 `$ yarn`
+
+`$ react-native link`
 
 `$ cd ios && pod install`
 
@@ -51,9 +55,15 @@
 - Eslint (for TypeScript) is used in the project for checking the JS/TS errors.
 - TypeScript is used in the project.
 - react-native-vector-icons has been used to improve the UI apprerance using icons in the navigator and in other UI elements.
-- react-native-reanimated has been added to the project with the aim of animating components like the restaurant card or the logo.
 
 ### TODOs before going live:
+- Add a loader component for the initial fetch by using a loading flag in Redux that's initially set to true. Once the data is fetch the flag is set to false. While the flag is true, render the loader, otherwise render the data or the placeholder.
 - Improve and extend the tests (e.g. for networkingApi.js and for the navigator).
 - Improve and extend the typings (see the TODOs placed in the code) and transform networkingApi.js and useLinking.js into .tsx.
 - Animate UI elements.
+- Manual test the app on multiple devices on both platforms (or use AWS Device Farm).
+- Create the app in Play Store and App Store.
+- Create signing certificates for iOS.
+- Build a CI pipeline.
+- Build, sign, archive and upload the app to App Store / Play Store.
+- Release for Beta / Internal testing for getting feedback.
