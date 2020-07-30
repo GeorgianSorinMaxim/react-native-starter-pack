@@ -87,7 +87,7 @@ exports[`renders correctly 1`] = `
         }
       }
     >
-      Nandos
+      Google
     </Text>
   </View>
 </RNGestureHandlerButton>

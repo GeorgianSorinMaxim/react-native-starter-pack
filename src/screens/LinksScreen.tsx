@@ -11,8 +11,8 @@ const LinksScreen = () => {
       contentContainerStyle={styles.contentContainer}
     >
       <LinkButton
-        label="Nando's"
-        onPress={() => Linking.openURL("https://www.nandos.com")}
+        label="Google"
+        onPress={() => Linking.openURL("https://www.google.com")}
         isLastOption={false}
       />
     </ScrollView>

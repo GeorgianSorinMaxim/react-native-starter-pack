@@ -67,3 +67,6 @@
 - Build a CI pipeline.
 - Build, sign, archive and upload the app to App Store / Play Store.
 - Release for Beta / Internal testing for getting feedback.
+
+
+TODO: Upgrade React Native, React and other dependencies

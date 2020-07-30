@@ -69,6 +69,6 @@
     "typescript": "^3.7.5"
   },
   "private": true,
-  "name": "nandos-test",
+  "name": "react-native-project",
   "version": "1.0.0"
 }

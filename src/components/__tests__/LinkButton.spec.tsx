@@ -5,7 +5,7 @@ import LinkButton from "../LinkButton";
 
 it(`renders correctly`, () => {
   const defaultProps = {
-    label: 'Nandos',
+    label: 'Google',
     onPress: () => {},
     isLastOption: false
   };

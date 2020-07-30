@@ -6,8 +6,8 @@ import Card from "../Card";
 it(`renders correctly`, () => {
   const defaultProps = {
     item: {
-      name: "Nando's",
-      url: "https://www.nandos.com",
+      name: "Google.com",
+      url: "https://www.google.com",
       geo: {
         address: {
           streetAddress: "",
