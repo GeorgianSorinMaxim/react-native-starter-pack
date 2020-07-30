@@ -48,25 +48,39 @@
 
 - The application state is stored using Redux.
 - redux-saga is used as the Redux middleware for managing the side effects (e.g. data fetching).
-- The Redux store is persisted with redux-persist (not necessary for this task, but useful as the application would grow).
+- The Redux store is persisted with redux-persist (not necessary the current funcionality of the app, but useful as the application would grow).
 - The navigation is done using react-navigation. This library has been added since as the app would grow, there would be a need for navigation fairly quickly.
 - Unit tests are written with Jest.
-- Reselect (https://github.com/reduxjs/reselect) is used because in a production app because we could compute derived data, allowing Redux to store the minimal possible state. For the purposses of this assignment Reselect is not useful.
+- Reselect (https://github.com/reduxjs/reselect) is used because in a production app because we could compute derived data, allowing Redux to store the minimal possible state.
 - Eslint (for TypeScript) is used in the project for checking the JS/TS errors.
 - TypeScript is used in the project.
 - react-native-vector-icons has been used to improve the UI apprerance using icons in the navigator and in other UI elements.
 
-### TODOs before going live:
-- Add a loader component for the initial fetch by using a loading flag in Redux that's initially set to true. Once the data is fetch the flag is set to false. While the flag is true, render the loader, otherwise render the data or the placeholder.
-- Improve and extend the tests (e.g. for networkingApi.js and for the navigator).
-- Improve and extend the typings (see the TODOs placed in the code) and transform networkingApi.js and useLinking.js into .tsx.
-- Animate UI elements.
+### TODOs:
+- Add a loader component for the initial fetch by using a loading flag in Redux that's initially set to true. Once the data is fetch the flag is set to false. While the flag is true, render the loader, otherwise render the data or the placeholder
+- Improve and extend the tests (e.g. for networkingApi.js and for the navigator)
+- Improve and extend the typings (see the TODOs placed in the code) and transform networkingApi.js and useLinking.js into .tsx
+
+### Components to be implemented
+- Custom inputs with validation
+- Dropdown
+- Generic header with title and left / right buttons
+- Generic modal
+- Animate UI elements
+- Internationalization with i18n (https://github.com/react-native-community/react-native-localize and https://github.com/fnando/i18n-js)
+- Run the app in different environments: dev, prod, uat
+- react-native-camera
+- react-native-maps
+- Graphs
+- Feature flagging
+- Local notifications
+
+### TODOs before going live
 - Manual test the app on multiple devices on both platforms (or use AWS Device Farm).
 - Create the app in Play Store and App Store.
 - Create signing certificates for iOS.
-- Build a CI pipeline.
+- Build a CI pipeline using Bitrise or AppCenter.
 - Build, sign, archive and upload the app to App Store / Play Store.
 - Release for Beta / Internal testing for getting feedback.
-
-
-TODO: Upgrade React Native, React and other dependencies
+- Fix bugs and re-test the app.
+- Release the first verion of the app.

@@ -104,7 +104,7 @@ exports[`LinksScreen renders the LinksScreen screen 1`] = `
             }
           }
         >
-          Nando's
+          Google
         </Text>
       </View>
     </RNGestureHandlerButton>
