@@ -1,23 +1,25 @@
 import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { RectButton } from "react-native-gesture-handler";
 
-type LinkButtonProps = {
+import Colors from "../constants/Colors";
+
+type ButtonWithIconProps = {
   label: string,
+  icon: string,
   onPress: () => void,
-  isLastOption: boolean
 }
 
-const LinkButton = ({ label, onPress, isLastOption }: LinkButtonProps) => {
+const ButtonWithIcon = ({ label, icon, onPress }: ButtonWithIconProps) => {
   return (
     <RectButton
-      style={[styles.option, isLastOption && styles.lastOption]}
+      style={styles.option}
       onPress={onPress}
     >
       <View style={styles.buttonContainer}>
         <View style={styles.iconContainer}>
-          <Icon name="link" size={22} color="rgba(0,0,0,0.35)" />
+          <Icon name={icon} size={18} color="rgba(0, 0, 0, 0.15)" />
         </View>
         <Text style={styles.optionText}>{label}</Text>
       </View>
@@ -33,21 +35,20 @@ const styles = StyleSheet.create({
     marginRight: 12
   },
   option: {
-    backgroundColor: "#fdfdfd",
-    paddingHorizontal: 15,
     paddingVertical: 15,
+    paddingHorizontal: 15,
+    borderColor: Colors.grey,
     borderWidth: StyleSheet.hairlineWidth,
-    borderBottomWidth: 0,
-    borderColor: "#ededed"
-  },
-  lastOption: {
-    borderBottomWidth: StyleSheet.hairlineWidth
+    marginTop: -1,
+    marginBottom: 1
   },
   optionText: {
-    fontSize: 15,
+    marginTop: 1,
+    fontSize: 12,
+    letterSpacing: 4,
     alignSelf: "flex-start",
-    marginTop: 1
+    textTransform: "uppercase",
   }
 });
 
-export default LinkButton;
+export default ButtonWithIcon;

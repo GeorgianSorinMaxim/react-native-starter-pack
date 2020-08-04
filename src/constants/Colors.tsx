@@ -4,11 +4,16 @@ const red = "#CE0924";
 export default {
   red,
   blue,
-  white: "#fff",
-  grey: "#bababa",
-  lightGrey: "#f1f1f1",
+  required: red,
+  link: "#007AFF",
+  black: "#000",
+  white: "#FFF",
+  grey: "#BABABA",
+  gold: "#D4AF37",
+  darkGrey: "#666666",
+  lightGrey: "#F1F1F1",
   backgroundColor: "#0099FF",
 
-  tabIconDefault: "#ccc",
+  tabIconDefault: "#CCC",
   tabIconSelected: blue
 };

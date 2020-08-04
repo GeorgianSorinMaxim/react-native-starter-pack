@@ -4,7 +4,6 @@ exports[`renders correctly 1`] = `
 <View
   accessible={true}
   focusable={true}
-  isTVSelectable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -35,20 +34,20 @@ exports[`renders correctly 1`] = `
       style={
         Array [
           Object {
-            "color": "#fff",
+            "color": "#FFF",
             "fontWeight": "bold",
             "overflow": "hidden",
           },
         ]
       }
     >
-      Nando's
+      Google.com
     </Text>
     <Text
       style={
         Array [
           Object {
-            "color": "#fff",
+            "color": "#FFF",
             "overflow": "hidden",
             "paddingTop": 12,
           },

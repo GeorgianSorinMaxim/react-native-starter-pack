@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import Colors from '../constants/Colors';
 
@@ -13,7 +13,7 @@ export default function TabBarIcon(props: IconProps) {
     <Icon
       size={20}
       name={props.name}
-      color={props.focused ? Colors.tabIconSelected : Colors.tabIconDefault}
+      color={props.focused ? Colors.gold : Colors.tabIconDefault}
     />
   );
 }
