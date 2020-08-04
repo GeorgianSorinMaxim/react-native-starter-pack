@@ -1,2 +1,2 @@
-export const RESTAURANTS = "Restaurants";
-export const LINKS = "Restaurants";
+export const HOME = "HOME";
+export const SETTINGS = "SETTINGS";
