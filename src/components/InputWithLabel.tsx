@@ -1,5 +1,5 @@
-import React, { Component } from "react"
-import { StyleProp, StyleSheet, Text, TextInput, TextStyle, View, ViewStyle } from "react-native"
+import React, { Component } from "react";
+import { StyleProp, StyleSheet, Text, TextInput, TextStyle, View, ViewStyle } from "react-native";
 import Colors from "../constants/Colors";
 
 interface State {
@@ -32,10 +32,10 @@ export default class InputWithLabel extends Component<Props, State> {
   onBlur = () => this.setState({ isFocused: false })
 
   render() {
-    const { label, value, hideLabelWhenFocused, required, maxLength, style, error, placeholder, secureTextEntry, ...props } = this.props
-    const { isFocused } = this.state
+    const { label, value, hideLabelWhenFocused, required, maxLength, style, error, placeholder, secureTextEntry, ...props } = this.props;
+    const { isFocused } = this.state;
 
-    const keyboardType = this.props.keyboardType ? this.props.keyboardType : "default"
+    const keyboardType = this.props.keyboardType ? this.props.keyboardType : "default";
 
     const isEmpty = !value || value.length === 0;
 
@@ -47,9 +47,9 @@ export default class InputWithLabel extends Component<Props, State> {
       color: Colors.black,
       top: isSmallLabel ? 4 : 14,
       fontSize: isSmallLabel ? 12 : 16,
-      }
+    };
 
-    const showRequired = required && !value
+    const showRequired = required && !value;
 
     return (
       <View style={style}>
@@ -134,4 +134,4 @@ const styles = StyleSheet.create({
     fontSize: 10,
     textTransform: "uppercase"
   }
-})
+});

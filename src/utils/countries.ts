@@ -1,5 +1,3 @@
-import { find } from 'lodash'
-
 export const data = [
   { name: 'Afghanistan', flag: '🇦🇫', code: 'AF', dialCode: '+93' },
   { name: 'Åland Islands', flag: '🇦🇽', code: 'AX', dialCode: '+358' },
@@ -247,7 +245,4 @@ export const data = [
   { name: 'Yemen', flag: '🇾🇪', code: 'YE', dialCode: '+967' },
   { name: 'Zambia', flag: '🇿🇲', code: 'ZM', dialCode: '+260' },
   { name: 'Zimbabwe', flag: '🇿🇼', code: 'ZW', dialCode: '+263' },
-]
-// We know it's there
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-export default find(data, { code: 'GB' })!
+];

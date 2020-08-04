@@ -4,8 +4,6 @@ import FastImage from "react-native-fast-image";
 
 import Icon from "react-native-vector-icons/Ionicons";
 import Colors from "../constants/Colors";
-// @ts-ignore
-import defaultImage from "../assets/images/picturePlaceholder.png";
 
 interface Props {
   data: string[]
@@ -25,7 +23,7 @@ type ImageHeight = {
   height: number
 }
 
-const WIDTH = Dimensions.get('window').width;
+const WIDTH = Dimensions.get("window").width;
 const keyExtractor = (item: string, index: number) => `${item} ${index}`;
 const ImagePlaceholder = (props: ImageHeight) => (
   <View style={[ { height: props.height }, styles.imagePlaceholder]} >
@@ -114,18 +112,18 @@ class Carousel extends Component<Props, State> {
 const styles = StyleSheet.create({
   elementContainer: {
     width: WIDTH,
-    alignItems: 'center',
-    overflow: 'visible',
-    justifyContent: 'space-between',
+    alignItems: "center",
+    overflow: "visible",
+    justifyContent: "space-between",
   },
   image: {
     width: WIDTH,
   },
   currentItemIndicatorContainer: {
     marginTop: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
   },
   dot: {
     width: 8,
@@ -140,10 +138,10 @@ const styles = StyleSheet.create({
   imagePlaceholder: {
     width: WIDTH,
     backgroundColor: Colors.lightGrey,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center'
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center"
   }
-})
+});
 
 export default Carousel;

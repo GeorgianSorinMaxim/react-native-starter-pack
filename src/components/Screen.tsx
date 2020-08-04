@@ -14,7 +14,7 @@ const Screen: FC<Props> = ({ children, noHorizontalPadding }) => (
       {children}
     </KeyboardAwareScrollView>
   </View>
-)
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -34,4 +34,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default Screen
+export default Screen;

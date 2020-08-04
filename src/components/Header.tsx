@@ -35,7 +35,7 @@ export interface Props extends ViewProps {
 
 class Header extends Component<Props> {
   renderButton(button: ButtonOptions, position: string) {
-    const { Icon, title, disabled, onPress, loading } = button
+    const { Icon, title, disabled, onPress, loading } = button;
 
     return (
       <TouchableOpacity style={styles.leftColumn} onPress={onPress} disabled={disabled}>
@@ -68,7 +68,7 @@ class Header extends Component<Props> {
       leftButton,
       rightButton,
       ...props
-    } = this.props
+    } = this.props;
 
     return (
       <View {...props} style={[styles.header, { borderColor: Colors.lightGrey, backgroundColor: Colors.white }]}>

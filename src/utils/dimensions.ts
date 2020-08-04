@@ -1,6 +1,5 @@
 import { Dimensions, PixelRatio } from "react-native";
 
-
 export const IPHONE_SE_HEIGHT = 667;
 export const IPHONE_11_HEIGHT = 812;
 

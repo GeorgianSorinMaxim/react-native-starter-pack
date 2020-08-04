@@ -8,6 +8,7 @@ import { SettingsScreen } from "../screens/SettingsScreen";
 import { HOME, SETTINGS } from "./routes";
 
 import Colors from "../constants/Colors";
+import { isSmallScreen } from "../utils/dimensions";
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = HOME;
@@ -35,6 +36,11 @@ const BottomTabNavigator = ({ navigation, route }: BottomTabNavigatorProps) => {
       initialRouteName={INITIAL_ROUTE_NAME}
       tabBarOptions={{
         activeTintColor: Colors.gold,
+        style: {
+          height: isSmallScreen ? 80 : 100,
+          paddingTop: 10,
+          paddingBottom: isSmallScreen ? 20 : 40
+        }
       }}
     >
       <BottomTab.Screen

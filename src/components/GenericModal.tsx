@@ -33,7 +33,7 @@ class GenericModal extends Component<Props> {
       secondaryButton,
       titleStyle,
       children,
-    } = this.props
+    } = this.props;
 
     return (
       <Modal visible transparent>

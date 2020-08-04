@@ -102,11 +102,11 @@
 - Release the first verion of the app.
 
 ### TODOs:
-- Test on Android
 - Cleanup home page
 - Add a loader component for the initial fetch by using a loading flag in Redux that's initially set to true. Once the data is fetch the flag is set to false. While the flag is true, render the loader, otherwise render the data or the placeholder
 
 - Login / Regiser: Add image on background like on Harrod's app and validation
+- WebViewInModal
 - Write and improve tests (e.g. for /components, networkingApi.js and for the navigator)
 - Improve and extend the typings (see the TODOs placed in the code) and transform networkingApi.js and useLinking.js into .tsx
 

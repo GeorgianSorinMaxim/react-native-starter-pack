@@ -39,32 +39,32 @@ class Dropdown extends Component<Props, State> {
   state = {
     itemIndex: 0,
     renderPicker: false,
-  }
+  };
 
   showPicker = () => {
-    this.setState({ renderPicker: true })
+    this.setState({ renderPicker: true });
   }
 
   setDropdownValue = (itemIndex: number) => {
-    this.setState({ itemIndex })
+    this.setState({ itemIndex });
   }
 
   onValueChange = () => {
     this.setState({ renderPicker: false })
-    const { pickerData, onValueSelected } = this.props
-    const { itemIndex } = this.state
+    const { pickerData, onValueSelected } = this.props;
+    const { itemIndex } = this.state;
 
     if (pickerData && onValueSelected) {
-      const selectedPickerValue = pickerData[itemIndex]
-      onValueSelected(selectedPickerValue)
+      const selectedPickerValue = pickerData[itemIndex];
+      onValueSelected(selectedPickerValue);
     }
   }
 
   onCountryCodeValueChange = (selectedPickerValue: CountryCodeValueType) => {
-    this.setState({ renderPicker: false })
-    const { onCountryCodeValueSelected } = this.props
+    this.setState({ renderPicker: false });
+    const { onCountryCodeValueSelected } = this.props;
     if (onCountryCodeValueSelected) {
-      onCountryCodeValueSelected(selectedPickerValue)
+      onCountryCodeValueSelected(selectedPickerValue);
     }
   }
 
@@ -80,8 +80,8 @@ class Dropdown extends Component<Props, State> {
       styleInput,
       styleArrow,
       required,
-    } = this.props
-    const { renderPicker, itemIndex } = this.state
+    } = this.props;
+    const { renderPicker, itemIndex } = this.state;
 
     return (
       <View>

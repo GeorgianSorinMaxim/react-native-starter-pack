@@ -17,7 +17,7 @@ const NavigationLink: FC<Props> = ({ text, onPress }) => (
 const styles = StyleSheet.create({
   linkContainer: {
     paddingVertical: 12,
-    alignSelf: 'center'
+    alignSelf: "center"
   },
   linkText: {
     fontSize: 14,
