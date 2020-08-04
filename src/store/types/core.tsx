@@ -1,4 +1,4 @@
-import { Action } from 'redux'
+import { Action } from 'redux';
 
 export type ActionFactory<A> = () => A
 export type PayloadActionFactory<A, P> = (payload: P) => A

@@ -9,7 +9,8 @@ import { rootSaga } from "./sagas";
 const persistConfig = {
   key: "root",
   version: 0,
-  storage: AsyncStorage
+  storage: AsyncStorage,
+  blacklist: ["login", "signup"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -29,6 +30,7 @@ const getEnhancers = (sagaMiddleware) => {
 
 export const storeWrapper = { store: null };
 
+// @ts-ignore
 export const configureStore = () => {
   const sagaMiddleware = createSagaMiddleware();
 

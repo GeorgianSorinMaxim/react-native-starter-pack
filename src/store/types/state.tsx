@@ -11,7 +11,23 @@ export type Restaurant = {
 }
 
 export type RootState = {
-  app: {
+  user: {
+    id: string,
+    email: string,
+    firstName?: string,
+    lastName?: string
+  },
+  login: {
+    isLogging: boolean,
+    loginError: null | string,
+    loginInfo: null | any,
+  },
+  signup: {
+    isRegistering: boolean,
+    registeringError: null | string,
+    registrationInfo: null | any
+  },
+  data: {
     data: {
       data: {
         restaurant: {

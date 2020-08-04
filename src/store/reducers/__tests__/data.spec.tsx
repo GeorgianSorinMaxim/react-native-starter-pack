@@ -1,9 +1,9 @@
-import { ActionTypes } from "../../actions/app";
-import { app } from "../app";
+import { ActionTypes } from "../../actions/data";
+import { data } from "../data";
 
-describe("App reducer", () => {
+describe("Data reducer", () => {
   it("default", () => {
-    const state = app(undefined, {
+    const state = data(undefined, {
       type: ActionTypes.DATA_FETCHED_FAILURE,
       payload: []
     });
@@ -16,7 +16,7 @@ describe("App reducer", () => {
   it("DATA_FETCHED_SUCCESS", () => {
     const payload = ["mock"];
 
-    const state = app(undefined, {
+    const state = data(undefined, {
       type: ActionTypes.DATA_FETCHED_SUCCESS,
       payload
     });
@@ -27,7 +27,7 @@ describe("App reducer", () => {
   it("DATA_FETCHED_FAILURE", () => {
     const payload = [];
 
-    const state = app(undefined, {
+    const state = data(undefined, {
       type: ActionTypes.DATA_FETCHED_FAILURE,
       payload
     });

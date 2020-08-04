@@ -1,6 +1,6 @@
 import { put, all, call } from "redux-saga/effects";
 
-import { ActionTypes } from "../actions/app";
+import { ActionTypes } from "../actions/data";
 
 import { _doGet } from "../../api/networkingApi";
 
@@ -26,7 +26,7 @@ export const fetchData = function* () {
   }
 };
 
-export function* app() {
+export function* data() {
   yield all([
     call(fetchData),
   ]);
