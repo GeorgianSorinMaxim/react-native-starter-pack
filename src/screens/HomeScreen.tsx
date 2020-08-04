@@ -1,29 +1,21 @@
 import * as React from "react";
 import {
   FlatList,
-  Image,
   StyleSheet,
   View,
 } from "react-native";
 import { connect } from "react-redux";
 
-import Card from "../components/Card";
-import BodyText from "../components/BodyText";
 import Colors from "../constants/Colors";
-// @ts-ignore
-import logo from "../assets/images/logo.jpg";
+import { BodyText, Card, Carousel } from "../components";
 
 import { getRestaurants } from "../store/selectors";
-
 import { Restaurant } from "../store/types/state";
 
 interface Props {
 	restaurants: Restaurant[] | null
 }
-
-interface State {}
-
-export class HomeScreenBase extends React.Component<Props, State> {
+export class HomeScreenBase extends React.Component<Props> {
   constructor(props) {
     super(props);
   }
@@ -35,9 +27,14 @@ export class HomeScreenBase extends React.Component<Props, State> {
   render() {
     const restaurantsList = this.props && this.props.restaurants ? this.props.restaurants : [];
 
+    const images = [
+      'https://i2-prod.manchestereveningnews.co.uk/sport/football/football-news/article18690279.ece/ALTERNATES/s458/0_GettyImages-1254252032.jpg',
+      'https://i2-prod.manchestereveningnews.co.uk/sport/football/article18692768.ece/ALTERNATES/s458/0_GettyImages-1227788641.jpg',
+    ];
+
     return (
       <View style={styles.screenContainer}>
-        <Image source={logo} style={styles.logo} resizeMode="contain" />
+        <Carousel data={images} height={200} />
 
         {restaurantsList.length > 0 ? (
           <View style={styles.listContainer}>
@@ -46,6 +43,7 @@ export class HomeScreenBase extends React.Component<Props, State> {
               keyExtractor={({ url }) => url}
               renderItem={({ item }) => this.renderItem(item)}
               style={styles.listContainer}
+              showsVerticalScrollIndicator={false}
             />
           </View>
         ) : <BodyText style={styles.centeredText}>No data available</BodyText>}
@@ -53,11 +51,6 @@ export class HomeScreenBase extends React.Component<Props, State> {
     );
   }
 }
-
-// @ts-ignore
-HomeScreenBase.navigationOptions = {
-  header: null
-};
 
 const styles = StyleSheet.create({
   screenContainer: {

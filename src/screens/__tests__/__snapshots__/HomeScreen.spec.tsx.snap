@@ -4,28 +4,210 @@ exports[`HomeScreen renders the HomeScreen screen 1`] = `
 <View
   style={
     Object {
-      "backgroundColor": "#fff",
+      "backgroundColor": "#FFF",
       "flex": 1,
       "paddingBottom": 32,
       "paddingTop": 12,
     }
   }
 >
-  <Image
-    resizeMode="contain"
-    source={
-      Object {
-        "testUri": "../../../src/assets/images/logo.jpg",
+  <View>
+    <RCTScrollView
+      data={
+        Array [
+          "https://i2-prod.manchestereveningnews.co.uk/sport/football/football-news/article18690279.ece/ALTERNATES/s458/0_GettyImages-1254252032.jpg",
+          "https://i2-prod.manchestereveningnews.co.uk/sport/football/article18692768.ece/ALTERNATES/s458/0_GettyImages-1227788641.jpg",
+        ]
       }
-    }
-    style={
-      Object {
-        "alignSelf": "center",
-        "height": 50,
-        "width": 100,
+      disableVirtualization={false}
+      getItem={[Function]}
+      getItemCount={[Function]}
+      horizontal={true}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      onContentSizeChange={[Function]}
+      onEndReachedThreshold={2}
+      onLayout={[Function]}
+      onMomentumScrollEnd={[Function]}
+      onScroll={[Function]}
+      onScrollBeginDrag={[Function]}
+      onScrollEndDrag={[Function]}
+      onScrollToIndexFailed={[Function]}
+      pagingEnabled={true}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEnabled={true}
+      scrollEventThrottle={50}
+      showsHorizontalScrollIndicator={false}
+      stickyHeaderIndices={Array []}
+      updateCellsBatchingPeriod={50}
+      viewabilityConfigCallbackPairs={Array []}
+      windowSize={21}
+    >
+      <View>
+        <View
+          onLayout={[Function]}
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              null,
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "justifyContent": "space-between",
+                "overflow": "visible",
+                "width": 750,
+              }
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "overflow": "hidden",
+                  },
+                  Array [
+                    Object {
+                      "width": 750,
+                    },
+                    Object {
+                      "height": 200,
+                    },
+                  ],
+                ]
+              }
+            >
+              <FastImageView
+                resizeMode="cover"
+                source={
+                  Object {
+                    "priority": "high",
+                    "uri": "https://i2-prod.manchestereveningnews.co.uk/sport/football/football-news/article18690279.ece/ALTERNATES/s458/0_GettyImages-1254252032.jpg",
+                  }
+                }
+                style={
+                  Object {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+        <View
+          onLayout={[Function]}
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              null,
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "justifyContent": "space-between",
+                "overflow": "visible",
+                "width": 750,
+              }
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "overflow": "hidden",
+                  },
+                  Array [
+                    Object {
+                      "width": 750,
+                    },
+                    Object {
+                      "height": 200,
+                    },
+                  ],
+                ]
+              }
+            >
+              <FastImageView
+                resizeMode="cover"
+                source={
+                  Object {
+                    "priority": "high",
+                    "uri": "https://i2-prod.manchestereveningnews.co.uk/sport/football/article18692768.ece/ALTERNATES/s458/0_GettyImages-1227788641.jpg",
+                  }
+                }
+                style={
+                  Object {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "marginTop": 12,
+        }
       }
-    }
-  />
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#BABABA",
+              "borderRadius": 4,
+              "height": 8,
+              "marginHorizontal": 3,
+              "width": 8,
+            },
+            null,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#BABABA",
+              "borderRadius": 4,
+              "height": 8,
+              "marginHorizontal": 3,
+              "width": 8,
+            },
+            Object {
+              "opacity": 0.4,
+            },
+          ]
+        }
+      />
+    </View>
+  </View>
   <Text
     style={
       Array [

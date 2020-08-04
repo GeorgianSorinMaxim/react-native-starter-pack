@@ -7,16 +7,13 @@ import { PersistGate } from "redux-persist/integration/react";
 
 // Navigation
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-
-import BottomTabNavigator from "./src/navigation/BottomTabNavigator";
 import useLinking from "./src/navigation/useLinking";
+
+import { Root } from "./src/screens/Root";
 
 // Redux store
 import { configureStore } from "./src/store/configureStore";
 const { store, persistor } = configureStore();
-
-const Stack = createStackNavigator();
 
 const Loading = () => (
   <View style={styles.loadingContainer}>
@@ -61,9 +58,7 @@ const App = () => {
             ref={containerRef}
             initialState={initialNavigationState}
           >
-            <Stack.Navigator>
-              <Stack.Screen name="Root" component={BottomTabNavigator} />
-            </Stack.Navigator>
+            <Root />
           </NavigationContainer>
         </PersistGate>
       </Provider>
