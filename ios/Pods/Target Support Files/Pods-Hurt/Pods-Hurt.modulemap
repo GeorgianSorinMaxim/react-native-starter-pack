@@ -1,0 +1,6 @@
+module Pods_Hurt {
+  umbrella header "Pods-Hurt-umbrella.h"
+
+  export *
+  module * { export * }
+}
