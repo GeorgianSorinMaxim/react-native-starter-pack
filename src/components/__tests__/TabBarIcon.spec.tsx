@@ -6,7 +6,7 @@ import TabBarIcon from "../TabBarIcon";
 it(`renders correctly`, () => {
   const defaultProps = {
     name: "map",
-    focused: true
+    focused: true,
   };
   const tree = renderer.create(<TabBarIcon {...defaultProps} />).toJSON();
 

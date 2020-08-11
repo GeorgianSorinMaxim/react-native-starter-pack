@@ -6,9 +6,9 @@ import { NotLoggedInNavigator } from "../navigation/NotLoggedInNavigator";
 
 interface Props {
   user: {
-    id: string
-    email: string
-  }
+    id: string;
+    email: string;
+  };
 }
 
 export class RootBase extends React.Component<Props> {
@@ -18,15 +18,12 @@ export class RootBase extends React.Component<Props> {
 
   render() {
     const { user } = this.props;
-    return user && user.id ? <MainNavigator /> : <NotLoggedInNavigator/>;
+    return user && user.id ? <MainNavigator /> : <NotLoggedInNavigator />;
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-export const Root = connect(
-  mapStateToProps,
-  null
-)(RootBase);
+export const Root = connect(mapStateToProps, null)(RootBase);

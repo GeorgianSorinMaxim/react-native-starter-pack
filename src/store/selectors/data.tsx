@@ -8,4 +8,6 @@ export const getRestaurants = (state: RootState) =>
   state.data.data &&
   state.data.data.data &&
   state.data.data.data.restaurant &&
-  state.data.data.data.restaurant.items ? state.data.data.data.restaurant.items : [];
+  state.data.data.data.restaurant.items
+    ? state.data.data.data.restaurant.items
+    : [];

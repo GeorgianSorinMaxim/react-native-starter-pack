@@ -1,14 +1,13 @@
 import { Dimensions, PixelRatio } from "react-native";
 
-
 export const IPHONE_SE_HEIGHT = 667;
 export const IPHONE_11_HEIGHT = 812;
 
-export const isSmallScreen = Dimensions.get('screen').height < IPHONE_SE_HEIGHT;
-export const isBigScreen = Dimensions.get('screen').height >= IPHONE_11_HEIGHT;
+export const isSmallScreen = Dimensions.get("screen").height < IPHONE_SE_HEIGHT;
+export const isBigScreen = Dimensions.get("screen").height >= IPHONE_11_HEIGHT;
 
 export const normalizeText = (size: number) => {
-  const { height, width } = Dimensions.get('screen');
+  const { height, width } = Dimensions.get("screen");
   const pixelRatio = PixelRatio.get();
 
   if (pixelRatio >= 2 && pixelRatio < 3) {
@@ -43,7 +42,7 @@ export const normalizeText = (size: number) => {
     }
 
     if (height >= 667 && height <= 735) {
-      return size * 1.2
+      return size * 1.2;
     }
 
     // iPhone 6s Plus / 7 Plus

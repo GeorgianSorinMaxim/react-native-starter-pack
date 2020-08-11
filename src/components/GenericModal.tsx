@@ -4,21 +4,21 @@ import { Modal, StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, 
 import Colors from "../constants/Colors";
 
 export type ButtonOptions = {
-  title: string
-  onPress: () => void
-  style?: StyleProp<TextStyle>
-}
+  title: string;
+  onPress: () => void;
+  style?: StyleProp<TextStyle>;
+};
 
 interface Props {
-  title: string
-  primaryButton: ButtonOptions
-  secondaryButton?: ButtonOptions
-  body?: string
-  bodyStyle?: StyleProp<TextStyle>
-  buttonShapeStyle?: StyleProp<ViewStyle>
-  titleStyle?: StyleProp<TextStyle>
-  children?: ReactNode
-  modalStyle?: StyleProp<ViewStyle>
+  title: string;
+  primaryButton: ButtonOptions;
+  secondaryButton?: ButtonOptions;
+  body?: string;
+  bodyStyle?: StyleProp<TextStyle>;
+  buttonShapeStyle?: StyleProp<ViewStyle>;
+  titleStyle?: StyleProp<TextStyle>;
+  children?: ReactNode;
+  modalStyle?: StyleProp<ViewStyle>;
 }
 
 class GenericModal extends Component<Props> {
@@ -33,7 +33,7 @@ class GenericModal extends Component<Props> {
       secondaryButton,
       titleStyle,
       children,
-    } = this.props
+    } = this.props;
 
     return (
       <Modal visible transparent>
@@ -41,9 +41,7 @@ class GenericModal extends Component<Props> {
           <View style={[modalStyle || styles.modalContainer, { backgroundColor: Colors.white }]}>
             <Text style={[styles.modalHeader, titleStyle || { color: Colors.blue }]}>{title}</Text>
 
-            {body ? (
-              <Text style={[styles.body, bodyStyle || { color: Colors.black }]}>{body}</Text>
-            ) : null}
+            {body ? <Text style={[styles.body, bodyStyle || { color: Colors.black }]}>{body}</Text> : null}
 
             {children || null}
 
@@ -51,22 +49,14 @@ class GenericModal extends Component<Props> {
               {secondaryButton ? (
                 <TouchableOpacity onPress={secondaryButton.onPress} style={buttonShapeStyle || styles.callToAction}>
                   <Text
-                    style={[
-                      styles.modalButton,
-                      secondaryButton.style ? secondaryButton.style : { color: Colors.grey },
-                    ]}
+                    style={[styles.modalButton, secondaryButton.style ? secondaryButton.style : { color: Colors.grey }]}
                   >
                     {secondaryButton.title}
                   </Text>
                 </TouchableOpacity>
               ) : null}
               <TouchableOpacity onPress={primaryButton.onPress} style={buttonShapeStyle || styles.callToAction}>
-                <Text
-                  style={[
-                    styles.modalButton,
-                    primaryButton.style ? primaryButton.style : { color: Colors.grey },
-                  ]}
-                >
+                <Text style={[styles.modalButton, primaryButton.style ? primaryButton.style : { color: Colors.grey }]}>
                   {primaryButton.title}
                 </Text>
               </TouchableOpacity>
@@ -74,7 +64,7 @@ class GenericModal extends Component<Props> {
           </View>
         </View>
       </Modal>
-    )
+    );
   }
 }
 

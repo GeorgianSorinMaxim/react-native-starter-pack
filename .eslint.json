@@ -23,7 +23,7 @@
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2018,
+    "ecmaVersion": 7,
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true,
@@ -39,8 +39,8 @@
     "import/ignore": ["node_modules"],
     "import/resolver": {
       "node": {
-        "paths": ["src", "src/entities"],
-        "extensions": [".ts", ".tsx"]
+        "paths": ["src"],
+        "extensions": [".js", ".ts", ".tsx"]
       }
     }
   },

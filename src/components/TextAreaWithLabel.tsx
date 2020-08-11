@@ -1,25 +1,25 @@
-import React, { Component } from "react"
-import { StyleProp, StyleSheet, Text, TextInput, TextStyle, View, ViewStyle } from "react-native"
+import React, { Component } from "react";
+import { StyleProp, StyleSheet, Text, TextInput, TextStyle, View, ViewStyle } from "react-native";
 
 import Colors from "../constants/Colors";
 
 interface State {
-  isFocused: boolean
+  isFocused: boolean;
 }
 
 interface Props {
-  value: string
-  numberOfLines: number
-  label?: string
-  required?: boolean
-  maxLength?: number
-  onChangeText: (value: string) => void
-  style?: StyleProp<ViewStyle>
+  value: string;
+  numberOfLines: number;
+  label?: string;
+  required?: boolean;
+  maxLength?: number;
+  onChangeText: (value: string) => void;
+  style?: StyleProp<ViewStyle>;
 }
 
 export default class TextAreaWithLabel extends Component<Props, State> {
   state = {
-    isFocused: false
+    isFocused: false,
   };
 
   onFocus = () => this.setState({ isFocused: true });
@@ -60,17 +60,14 @@ export default class TextAreaWithLabel extends Component<Props, State> {
           numberOfLines={numberOfLines}
           scrollEnabled={false}
           defaultValue={value}
-          style={[
-            styles.textareaInput,
-            required && value === '' ? { borderBottomColor: Colors.required } : null,
-          ]}
+          style={[styles.textareaInput, required && value === "" ? { borderBottomColor: Colors.required } : null]}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
           maxLength={maxLength}
           autoCapitalize="none"
         />
       </View>
-    )
+    );
   }
 }
 

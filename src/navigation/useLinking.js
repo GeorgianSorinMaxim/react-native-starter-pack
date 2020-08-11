@@ -1,6 +1,6 @@
 import { useLinking } from "@react-navigation/native";
 
-import { RESTAURANTS, LINKS } from './routes';
+import { RESTAURANTS, LINKS } from "./routes";
 
 export default (containerRef) => {
   return useLinking(containerRef, {
@@ -10,9 +10,9 @@ export default (containerRef) => {
         path: "root",
         screens: {
           Restaurants: RESTAURANTS,
-          Links: LINKS
-        }
-      }
-    }
+          Links: LINKS,
+        },
+      },
+    },
   });
-}
+};

@@ -16,11 +16,11 @@ describe("Data sagas", () => {
         payload: {
           action: {
             payload: [],
-            type: "DATA_FETCHED_FAILURE"
+            type: "DATA_FETCHED_FAILURE",
           },
-          channel: undefined
+          channel: undefined,
         },
-        type: "PUT"
+        type: "PUT",
       });
     });
 
@@ -29,7 +29,7 @@ describe("Data sagas", () => {
       const generator = cloneableGenerator(data.fetchData)(ActionTypes.DATA_FETCHED_SUCCESS);
 
       let next = generator.next();
-      next = generator.next({ success: true, payload: { data: ["mock"] }});
+      next = generator.next({ success: true, payload: { data: ["mock"] } });
 
       expect(next.value).toEqual({
         "@@redux-saga/IO": true,
@@ -37,11 +37,11 @@ describe("Data sagas", () => {
         payload: {
           action: {
             payload: { data: ["mock"] },
-            type: "DATA_FETCHED_SUCCESS"
+            type: "DATA_FETCHED_SUCCESS",
           },
-          channel: undefined
+          channel: undefined,
         },
-        type: "PUT"
+        type: "PUT",
       });
     });
   });

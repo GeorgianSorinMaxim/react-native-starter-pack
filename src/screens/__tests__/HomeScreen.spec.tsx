@@ -13,9 +13,7 @@ describe("HomeScreen", () => {
       restaurants: [],
     };
 
-    const tree = renderer
-      .create(<HomeScreenBase {...defaultProps} />)
-      .toJSON();
+    const tree = renderer.create(<HomeScreenBase {...defaultProps} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

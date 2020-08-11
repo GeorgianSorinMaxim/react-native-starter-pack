@@ -17,12 +17,12 @@ export const NotLoggedInNavigator = () => {
         }}
       />
       <Stack.Screen
-          name="Registration"
-          component={RegistrationScreen}
-          options={{
-            headerShown: false,
-          }}
-        />
+        name="Registration"
+        component={RegistrationScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack.Navigator>
   );
-}
+};

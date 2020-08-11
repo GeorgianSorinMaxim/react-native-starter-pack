@@ -3,90 +3,81 @@ import { Modal, Picker, StyleProp, StyleSheet, Text, TextInput, TouchableOpacity
 
 import { PhoneNumberPrefix } from "../components";
 import Colors from "../constants/Colors";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from "react-native-vector-icons/FontAwesome";
 
 interface CountryCodeValueType {
-  name: string
-  flag: string
-  code: string
-  dialCode: string
+  name: string;
+  flag: string;
+  code: string;
+  dialCode: string;
 }
 
 interface PickerElement {
-  key: string
-  value: any
+  key: string;
+  value: any;
 }
 
 interface Props {
-  onValueSelected?: (item: PickerElement) => void
-  onCountryCodeValueSelected?: (item: CountryCodeValueType) => void
-  countryCodePicker?: boolean
-  pickerData?: any[]
-  placeholder?: string
-  style?: StyleProp<ViewStyle>
-  styleInput?: StyleProp<ViewStyle>
-  styleArrow?: StyleProp<ViewStyle>
-  value?: string
-  required?: boolean
+  onValueSelected?: (item: PickerElement) => void;
+  onCountryCodeValueSelected?: (item: CountryCodeValueType) => void;
+  countryCodePicker?: boolean;
+  pickerData?: any[];
+  placeholder?: string;
+  style?: StyleProp<ViewStyle>;
+  styleInput?: StyleProp<ViewStyle>;
+  styleArrow?: StyleProp<ViewStyle>;
+  value?: string;
+  required?: boolean;
 }
 
 interface State {
-  itemIndex: number
-  renderPicker: boolean
+  itemIndex: number;
+  renderPicker: boolean;
 }
 
 class Dropdown extends Component<Props, State> {
   state = {
     itemIndex: 0,
     renderPicker: false,
-  }
+  };
 
   showPicker = () => {
-    this.setState({ renderPicker: true })
-  }
+    this.setState({ renderPicker: true });
+  };
 
   setDropdownValue = (itemIndex: number) => {
-    this.setState({ itemIndex })
-  }
+    this.setState({ itemIndex });
+  };
 
   onValueChange = () => {
-    this.setState({ renderPicker: false })
-    const { pickerData, onValueSelected } = this.props
-    const { itemIndex } = this.state
+    this.setState({ renderPicker: false });
+    const { pickerData, onValueSelected } = this.props;
+    const { itemIndex } = this.state;
 
     if (pickerData && onValueSelected) {
-      const selectedPickerValue = pickerData[itemIndex]
-      onValueSelected(selectedPickerValue)
+      const selectedPickerValue = pickerData[itemIndex];
+      onValueSelected(selectedPickerValue);
     }
-  }
+  };
 
   onCountryCodeValueChange = (selectedPickerValue: CountryCodeValueType) => {
-    this.setState({ renderPicker: false })
-    const { onCountryCodeValueSelected } = this.props
+    this.setState({ renderPicker: false });
+    const { onCountryCodeValueSelected } = this.props;
     if (onCountryCodeValueSelected) {
-      onCountryCodeValueSelected(selectedPickerValue)
+      onCountryCodeValueSelected(selectedPickerValue);
     }
-  }
+  };
 
-  renderPickerData = (item: PickerElement, index: number) => <Picker.Item label={item.key} value={index} key={index} />
+  renderPickerData = (item: PickerElement, index: number) => <Picker.Item label={item.key} value={index} key={index} />;
 
   render() {
-    const {
-      pickerData,
-      countryCodePicker,
-      placeholder,
-      value,
-      style,
-      styleInput,
-      styleArrow,
-      required,
-    } = this.props
-    const { renderPicker, itemIndex } = this.state
+    const { pickerData, countryCodePicker, placeholder, value, style, styleInput, styleArrow, required } = this.props;
+    const { renderPicker, itemIndex } = this.state;
 
     return (
       <View>
         <TouchableOpacity onPress={this.showPicker} style={[styles.container, style]}>
-          <View pointerEvents={'none'}>
+          <View pointerEvents={"none"}>
             <TextInput
               placeholder={placeholder}
               value={value}
@@ -128,13 +119,13 @@ class Dropdown extends Component<Props, State> {
           </Modal>
         ) : null}
       </View>
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: "100%",
   },
   textInput: {
     height: 46,
@@ -142,7 +133,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     color: Colors.black,
     borderColor: Colors.black,
-    borderWidth: StyleSheet.hairlineWidth
+    borderWidth: StyleSheet.hairlineWidth,
   },
   dropdownArrow: {
     position: "absolute",

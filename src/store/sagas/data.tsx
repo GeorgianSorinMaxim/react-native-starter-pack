@@ -16,18 +16,16 @@ export const fetchData = function* () {
   if (fetchData && fetchData.success) {
     yield put({
       type: ActionTypes.DATA_FETCHED_SUCCESS,
-      payload: fetchData.payload
+      payload: fetchData.payload,
     });
   } else {
     yield put({
       type: ActionTypes.DATA_FETCHED_FAILURE,
-      payload: []
+      payload: [],
     });
   }
 };
 
 export function* data() {
-  yield all([
-    call(fetchData),
-  ]);
+  yield all([call(fetchData)]);
 }

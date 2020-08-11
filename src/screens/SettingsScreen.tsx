@@ -8,21 +8,21 @@ import uuid from "react-native-uuid";
 import { BodyText, ButtonWithIcon, Divider, Title, Screen } from "../components";
 import Colors from "../constants/Colors";
 
-import { actions as LoginActions } from '../store/actions/login';
+import { actions as LoginActions } from "../store/actions/login";
 import { getUser } from "../store/selectors";
 
 import { contact } from "../utils/contact";
 
 type OwnProps = {
-  logout: () => void,
+  logout: () => void;
   user: {
-    id: string,
-    email: string,
-    firstName?: string,
-    lastName?: string
-  }
-}
-type Props = OwnProps & NavigationInjectedProps
+    id: string;
+    email: string;
+    firstName?: string;
+    lastName?: string;
+  };
+};
+type Props = OwnProps & NavigationInjectedProps;
 
 export class SettingsScreenBase extends React.Component<Props> {
   state = {
@@ -59,7 +59,7 @@ export class SettingsScreenBase extends React.Component<Props> {
         systemName,
         ip,
         osVersion,
-        uuid: id
+        uuid: id,
       });
     } catch (e) {
       return console.log("** getDeviceData error");
@@ -68,18 +68,10 @@ export class SettingsScreenBase extends React.Component<Props> {
 
   onLogout = () => {
     this.props.logout();
-  }
+  };
 
   onContact = () => {
-    const {
-      bundleId,
-      buildNumber,
-      version,
-      systemName,
-      ip,
-      osVersion,
-      uuid
-    } = this.state;
+    const { bundleId, buildNumber, version, systemName, ip, osVersion, uuid } = this.state;
 
     const EMAIL = "georgian.maxim@gmail.com";
     const SUBJECT = "I have a question or concern:";
@@ -94,8 +86,8 @@ export class SettingsScreenBase extends React.Component<Props> {
       IP: ${ip} \n
       UUID: ${uuid} \n
     `;
-    contact(EMAIL, SUBJECT, BODY)
-  }
+    contact(EMAIL, SUBJECT, BODY);
+  };
 
   render() {
     return (
@@ -106,7 +98,9 @@ export class SettingsScreenBase extends React.Component<Props> {
           <View style={styles.bodyContainer}>
             <View style={styles.textContainer}>
               <BodyText style={styles.headerText}>Name</BodyText>
-              <BodyText style={styles.contentText}>{this.props.user.firstName} {this.props.user.lastName}</BodyText>
+              <BodyText style={styles.contentText}>
+                {this.props.user.firstName} {this.props.user.lastName}
+              </BodyText>
             </View>
             <View style={styles.textContainer}>
               <BodyText style={styles.headerText}>Email</BodyText>
@@ -128,20 +122,12 @@ export class SettingsScreenBase extends React.Component<Props> {
           label="Terms & Conditions"
           onPress={() => Linking.openURL("http://www.devxldn.com")}
         />
-        <ButtonWithIcon
-          icon="mail-outline"
-          label="Contact"
-          onPress={this.onContact}
-        />
-        <ButtonWithIcon
-          icon="log-out-outline"
-          label="Logout"
-          onPress={this.onLogout}
-        />
+        <ButtonWithIcon icon="mail-outline" label="Contact" onPress={this.onContact} />
+        <ButtonWithIcon icon="log-out-outline" label="Logout" onPress={this.onLogout} />
       </Screen>
     );
   }
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -155,24 +141,20 @@ const styles = StyleSheet.create({
   },
   headerText: {
     paddingBottom: 4,
-    color: Colors.grey
+    color: Colors.grey,
   },
   contentText: {
     color: Colors.gold,
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: getUser(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  logout: () =>
-    dispatch(LoginActions.logout()),
+const mapDispatchToProps = (dispatch) => ({
+  logout: () => dispatch(LoginActions.logout()),
 });
 
-export const SettingsScreen = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SettingsScreenBase);
+export const SettingsScreen = connect(mapStateToProps, mapDispatchToProps)(SettingsScreenBase);

@@ -15,5 +15,5 @@ export default {
   backgroundColor: "#0099FF",
 
   tabIconDefault: "#CCC",
-  tabIconSelected: blue
+  tabIconSelected: blue,
 };

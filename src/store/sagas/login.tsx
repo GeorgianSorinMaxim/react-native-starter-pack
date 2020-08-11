@@ -10,27 +10,27 @@ export const onLogin = function* (action) {
   if (res && res.id) {
     yield put({
       type: ActionTypes.LOGIN_SUCCESS,
-      payload: res
+      payload: res,
     });
   } else {
     yield put({
       type: ActionTypes.LOGIN_FAILURE,
-      payload: res
+      payload: res,
     });
   }
 };
 
-export const onLogout = function*() {
+export const onLogout = function* () {
   const res = yield firebaseApi.logout();
 
   if (res === "DONE") {
     yield put({
-      type: ActionTypes.LOGOUT_SUCCESS
+      type: ActionTypes.LOGOUT_SUCCESS,
     });
   } else {
     yield put({
       type: ActionTypes.LOGOUT_FAILURE,
-      payload: res
+      payload: res,
     });
   }
 };

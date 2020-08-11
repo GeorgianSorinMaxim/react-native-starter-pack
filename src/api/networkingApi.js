@@ -19,7 +19,7 @@
 
 export const _doGet = async (url, payload) => {
   const headers = {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
   };
 
   const options = {
@@ -28,7 +28,7 @@ export const _doGet = async (url, payload) => {
     mode: "cors",
     cache: "default",
     credentials: "include",
-    redirect: "error"
+    redirect: "error",
   };
 
   if (payload) {
@@ -36,25 +36,25 @@ export const _doGet = async (url, payload) => {
   }
 
   return fetch(url, options).then(
-    response =>
+    (response) =>
       new Promise((resolve, reject) => {
         const result = {
           success: response.ok,
           statusCode: response.status,
           statusText: response.statusText,
           requestUrl: url,
-          requestMethod: options.method
+          requestMethod: options.method,
         };
 
         if (response.ok) {
           response
             .json()
-            .then(json => resolve({ ...result, payload: json }))
+            .then((json) => resolve({ ...result, payload: json }))
             .catch(() => resolve(result));
         } else {
           result.requestBody = options.body;
           resolve(result);
         }
-      })
+      }),
   );
 };

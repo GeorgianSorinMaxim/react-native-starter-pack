@@ -5,10 +5,10 @@ import { RectButton } from "react-native-gesture-handler";
 import Colors from "../constants/Colors";
 
 type ButtonProps = {
-  title: string,
-  onPress: () => void,
-  disabled?: boolean
-}
+  title: string;
+  onPress: () => void;
+  disabled?: boolean;
+};
 
 const Button = ({ title, onPress, disabled }: ButtonProps) => {
   return !disabled ? (
@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
     color: Colors.white,
     alignSelf: "center",
     letterSpacing: 4,
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });
 
 export default Button;

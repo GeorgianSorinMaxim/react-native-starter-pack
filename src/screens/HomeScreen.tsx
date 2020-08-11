@@ -1,9 +1,5 @@
 import * as React from "react";
-import {
-  FlatList,
-  StyleSheet,
-  View,
-} from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 
 import Colors from "../constants/Colors";
@@ -13,7 +9,7 @@ import { getRestaurants } from "../store/selectors";
 import { Restaurant } from "../store/types/state";
 
 interface Props {
-	restaurants: Restaurant[] | null
+  restaurants: Restaurant[] | null;
 }
 export class HomeScreenBase extends React.Component<Props> {
   constructor(props) {
@@ -21,15 +17,15 @@ export class HomeScreenBase extends React.Component<Props> {
   }
 
   renderItem = (item: Restaurant) => {
-    return <Card item={item} />
-  }
+    return <Card item={item} />;
+  };
 
   render() {
     const restaurantsList = this.props && this.props.restaurants ? this.props.restaurants : [];
 
     const images = [
-      'https://i2-prod.manchestereveningnews.co.uk/sport/football/football-news/article18690279.ece/ALTERNATES/s458/0_GettyImages-1254252032.jpg',
-      'https://i2-prod.manchestereveningnews.co.uk/sport/football/article18692768.ece/ALTERNATES/s458/0_GettyImages-1227788641.jpg',
+      "https://i2-prod.manchestereveningnews.co.uk/sport/football/football-news/article18690279.ece/ALTERNATES/s458/0_GettyImages-1254252032.jpg",
+      "https://i2-prod.manchestereveningnews.co.uk/sport/football/article18692768.ece/ALTERNATES/s458/0_GettyImages-1227788641.jpg",
     ];
 
     return (
@@ -46,7 +42,9 @@ export class HomeScreenBase extends React.Component<Props> {
               showsVerticalScrollIndicator={false}
             />
           </View>
-        ) : <BodyText style={styles.centeredText}>No data available</BodyText>}
+        ) : (
+          <BodyText style={styles.centeredText}>No data available</BodyText>
+        )}
       </View>
     );
   }
@@ -57,28 +55,24 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 12,
     paddingBottom: 32,
-    backgroundColor: Colors.white
+    backgroundColor: Colors.white,
   },
   listContainer: {
-    margin: 12
+    margin: 12,
   },
   centeredText: {
     fontSize: 16,
-    textAlign: 'center',
+    textAlign: "center",
   },
   logo: {
     height: 50,
     width: 100,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
 });
 
-const mapStateToProps = state => ({
-  restaurants: getRestaurants(state)
+const mapStateToProps = (state) => ({
+  restaurants: getRestaurants(state),
 });
 
-
-export const HomeScreen = connect(
-  mapStateToProps,
-  null
-)(HomeScreenBase);
+export const HomeScreen = connect(mapStateToProps, null)(HomeScreenBase);

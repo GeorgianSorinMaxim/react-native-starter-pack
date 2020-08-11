@@ -1,4 +1,4 @@
-import { Reducer } from 'redux'
+import { Reducer } from "redux";
 
 import { ActionTypes, Actions } from "../actions/data";
 import State from "../types/state";

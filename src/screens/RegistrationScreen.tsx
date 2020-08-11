@@ -2,27 +2,27 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { View, StyleSheet } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
-import * as Progress from 'react-native-progress';
+import * as Progress from "react-native-progress";
 
 import { Button, InputWithLabel, NavigationLink, Screen, Title } from "../components";
 import Colors from "../constants/Colors";
 
-import { actions as RegistrationActions } from '../store/actions/signup';
+import { actions as RegistrationActions } from "../store/actions/signup";
 import { getRegistrationStatus, getRegistrationError } from "../store/selectors";
 
 interface OwnProps {
-  isRegistering: boolean,
-  error?: string,
-  register: (firstName: string, lastName: string, email: string, password: string) => void
+  isRegistering: boolean;
+  error?: string;
+  register: (firstName: string, lastName: string, email: string, password: string) => void;
 }
 
-type Props = OwnProps & NavigationInjectedProps
+type Props = OwnProps & NavigationInjectedProps;
 interface State {
-  password: string,
-  confirmPassword: string,
-  email: string,
-  firstName: string
-  lastName: string
+  password: string;
+  confirmPassword: string;
+  email: string;
+  firstName: string;
+  lastName: string;
 }
 
 export class RegistrationScreenBase extends React.Component<Props, State> {
@@ -30,28 +30,28 @@ export class RegistrationScreenBase extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
     };
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (this.props.isRegistering !== prevProps.isRegistering && this.props.isRegistering === false) {
-      this.setState({ firstName: '', lastName: '', password: '', email: '', confirmPassword: '' });
+      this.setState({ firstName: "", lastName: "", password: "", email: "", confirmPassword: "" });
     }
   }
 
   onLoginLinkPress = () => {
-    this.props.navigation.navigate('Login');
-  }
+    this.props.navigation.navigate("Login");
+  };
 
   onRegisterPress = () => {
     const { firstName, lastName, email, password, confirmPassword } = this.state;
 
-    if (email === '' || password === '' || confirmPassword === '' || firstName === '' || lastName === '') {
+    if (email === "" || password === "" || confirmPassword === "" || firstName === "" || lastName === "") {
       alert("Please input all your details");
       return;
     }
@@ -62,7 +62,7 @@ export class RegistrationScreenBase extends React.Component<Props, State> {
     }
 
     this.props.register(firstName, lastName, email, password);
-  }
+  };
 
   render() {
     const { firstName, lastName, email, password, confirmPassword } = this.state;
@@ -70,7 +70,7 @@ export class RegistrationScreenBase extends React.Component<Props, State> {
 
     return (
       <Screen>
-        <View style={styles.titleContainer} >
+        <View style={styles.titleContainer}>
           <Title label="New account" />
         </View>
 
@@ -107,15 +107,13 @@ export class RegistrationScreenBase extends React.Component<Props, State> {
           secureTextEntry
         />
 
-        <Button
-          disabled={isRegistering}
-          title="REGISTER"
-          onPress={() => this.onRegisterPress()}
-        />
+        <Button disabled={isRegistering} title="REGISTER" onPress={() => this.onRegisterPress()} />
 
         <NavigationLink text="Already have an account? Login" onPress={this.onLoginLinkPress} />
 
-        {isRegistering ? <Progress.Circle size={24} indeterminate={true} color={Colors.gold} style={styles.loader} /> : null}
+        {isRegistering ? (
+          <Progress.Circle size={24} indeterminate={true} color={Colors.gold} style={styles.loader} />
+        ) : null}
       </Screen>
     );
   }
@@ -128,21 +126,18 @@ const styles = StyleSheet.create({
   },
   loader: {
     paddingVertical: 24,
-    alignSelf: "center"
-  }
+    alignSelf: "center",
+  },
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isRegistering: getRegistrationStatus(state),
-  error: getRegistrationError(state)
+  error: getRegistrationError(state),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   register: (firstName: string, lastName: string, email: string, password: string) =>
     dispatch(RegistrationActions.register(firstName, lastName, email, password)),
 });
 
-export const RegistrationScreen = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RegistrationScreenBase);
+export const RegistrationScreen = connect(mapStateToProps, mapDispatchToProps)(RegistrationScreenBase);

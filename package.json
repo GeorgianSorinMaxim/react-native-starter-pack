@@ -5,7 +5,9 @@
     "ios": "react-native run-ios --simulator=\"iPhone X\" ",
     "test": "jest --watchAll",
     "lint": "eslint \"./src/**/*.{ts,tsx}\" -c .eslint.json",
-    "lint-fix": "eslint --fix \"**/*.js\""
+    "lint-fix": "eslint --fix \"**/*.js\"",
+    "prettier": "prettier -c \"./src/**/*.{js,ts,tsx}\"",
+    "prettier:fix": "yarn prettier --write"
   },
   "jest": {
     "preset": "react-native",

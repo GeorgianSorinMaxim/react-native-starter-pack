@@ -7,7 +7,7 @@ import BodyText from "./BodyText";
 import { Restaurant } from "../store/types/state";
 
 interface Props {
-  item: Restaurant
+  item: Restaurant;
 }
 
 interface State {}
@@ -18,8 +18,8 @@ class Card extends React.Component<Props, State> {
   }
 
   onItemTap = (url: string) => {
-    Linking.openURL(url).catch(err => console.warn(err));
-  }
+    Linking.openURL(url).catch((err) => console.warn(err));
+  };
 
   render() {
     const { item } = this.props;
@@ -35,7 +35,7 @@ class Card extends React.Component<Props, State> {
       </TouchableOpacity>
     );
   }
-};
+}
 
 const styles = StyleSheet.create({
   item: {
@@ -48,13 +48,13 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
   restaurantName: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     color: Colors.white,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   address: {
     color: Colors.white,
-    overflow: 'hidden',
+    overflow: "hidden",
     paddingTop: 12,
   },
 });

@@ -4,14 +4,14 @@ import { StyleSheet, View, ViewProps } from "react-native";
 import Colors from "../constants/Colors";
 
 interface OwnProps {
-  margin?: number
+  margin?: number;
 }
 
-type Props = ViewProps & OwnProps
+type Props = ViewProps & OwnProps;
 
 const Divider: FC<Props> = ({ margin, ...props }) => (
-  <View {...props} style={[ styles.container, margin ? { marginVertical: margin } : null ]} />
-)
+  <View {...props} style={[styles.container, margin ? { marginVertical: margin } : null]} />
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
     borderRightWidth: 0,
     borderBottomWidth: 0,
     borderLeftWidth: 0,
-    borderColor: Colors.gold
-  }
+    borderColor: Colors.gold,
+  },
 });
 
 export default Divider;

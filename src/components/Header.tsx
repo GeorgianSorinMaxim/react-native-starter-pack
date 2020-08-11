@@ -15,27 +15,27 @@ import {
 import Colors from "../constants/Colors";
 import { isBigScreen, normalizeText } from "../utils/dimensions";
 
-const isIOS = Platform.OS === 'ios';
+const isIOS = Platform.OS === "ios";
 
 export type ButtonOptions = {
-  onPress: () => void
-  disabled?: boolean
-  title?: string
-  Icon?: ComponentType<any>
-  loading?: boolean
-}
+  onPress: () => void;
+  disabled?: boolean;
+  title?: string;
+  Icon?: ComponentType<any>;
+  loading?: boolean;
+};
 
 export interface Props extends ViewProps {
-  title?: string
-  titleStyle?: StyleProp<ViewStyle>
-  titleTextStyle?: StyleProp<TextStyle>
-  leftButton?: ButtonOptions
-  rightButton?: ButtonOptions
+  title?: string;
+  titleStyle?: StyleProp<ViewStyle>;
+  titleTextStyle?: StyleProp<TextStyle>;
+  leftButton?: ButtonOptions;
+  rightButton?: ButtonOptions;
 }
 
 class Header extends Component<Props> {
   renderButton(button: ButtonOptions, position: string) {
-    const { Icon, title, disabled, onPress, loading } = button
+    const { Icon, title, disabled, onPress, loading } = button;
 
     return (
       <TouchableOpacity style={styles.leftColumn} onPress={onPress} disabled={disabled}>
@@ -57,18 +57,11 @@ class Header extends Component<Props> {
         ) : null}
         {loading ? <ActivityIndicator /> : null}
       </TouchableOpacity>
-    )
+    );
   }
 
   render() {
-    const {
-      title,
-      titleStyle,
-      titleTextStyle,
-      leftButton,
-      rightButton,
-      ...props
-    } = this.props
+    const { title, titleStyle, titleTextStyle, leftButton, rightButton, ...props } = this.props;
 
     return (
       <View {...props} style={[styles.header, { borderColor: Colors.lightGrey, backgroundColor: Colors.white }]}>
@@ -84,7 +77,7 @@ class Header extends Component<Props> {
 
         {rightButton ? this.renderButton(rightButton, "right") : <View style={styles.rightColumn}></View>}
       </View>
-    )
+    );
   }
 }
 

@@ -4,38 +4,36 @@ import FastImage from "react-native-fast-image";
 
 import Icon from "react-native-vector-icons/Ionicons";
 import Colors from "../constants/Colors";
-// @ts-ignore
-import defaultImage from "../assets/images/picturePlaceholder.png";
 
 interface Props {
-  data: string[]
-  height: number
+  data: string[];
+  height: number;
 }
 
 type State = {
-  visibleItem: number
+  visibleItem: number;
 };
 
 type CarouselImage = {
-  index: number
-  item: string
+  index: number;
+  item: string;
 };
 
 type ImageHeight = {
-  height: number
-}
+  height: number;
+};
 
-const WIDTH = Dimensions.get('window').width;
+const WIDTH = Dimensions.get("window").width;
 const keyExtractor = (item: string, index: number) => `${item} ${index}`;
 const ImagePlaceholder = (props: ImageHeight) => (
-  <View style={[ { height: props.height }, styles.imagePlaceholder]} >
+  <View style={[{ height: props.height }, styles.imagePlaceholder]}>
     <Icon name="image-outline" color={Colors.grey} size={50} />
   </View>
 );
 
 class Carousel extends Component<Props, State> {
   state = {
-    visibleItem: 0
+    visibleItem: 0,
   };
 
   handleScroll = (e: NativeSyntheticEvent<any>) => {
@@ -47,9 +45,9 @@ class Carousel extends Component<Props, State> {
     const itemNum = Math.min(Math.max(0, itemNumFromOffset), data.length - 1);
 
     this.setState({
-      visibleItem: itemNum
+      visibleItem: itemNum,
     });
-  }
+  };
 
   renderItem = ({ item }: CarouselImage) => {
     return item ? (
@@ -63,25 +61,19 @@ class Carousel extends Component<Props, State> {
           key={item}
         />
       </View>
-    ) : <ImagePlaceholder height={this.props.height} />;
-  }
+    ) : (
+      <ImagePlaceholder height={this.props.height} />
+    );
+  };
 
   renderCurrentItemIndicators = () => {
     const { data } = this.props;
-    const textInputComponents = data.map(
-      (item, index) => (
-        <View
-          key={index}
-          style={[
-            styles.dot,
-            this.state.visibleItem !== index ? styles.inactive : null,
-          ]}
-        />
-      )
-    );
+    const textInputComponents = data.map((item, index) => (
+      <View key={index} style={[styles.dot, this.state.visibleItem !== index ? styles.inactive : null]} />
+    ));
 
     return textInputComponents;
-  }
+  };
 
   render = () => {
     const { data } = this.props;
@@ -108,24 +100,24 @@ class Carousel extends Component<Props, State> {
         ) : null}
       </View>
     );
-  }
+  };
 }
 
 const styles = StyleSheet.create({
   elementContainer: {
     width: WIDTH,
-    alignItems: 'center',
-    overflow: 'visible',
-    justifyContent: 'space-between',
+    alignItems: "center",
+    overflow: "visible",
+    justifyContent: "space-between",
   },
   image: {
     width: WIDTH,
   },
   currentItemIndicatorContainer: {
     marginTop: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
   },
   dot: {
     width: 8,
@@ -140,10 +132,10 @@ const styles = StyleSheet.create({
   imagePlaceholder: {
     width: WIDTH,
     backgroundColor: Colors.lightGrey,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-})
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
 
 export default Carousel;

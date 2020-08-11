@@ -5,7 +5,7 @@ describe("Data reducer", () => {
   it("default", () => {
     const state = data(undefined, {
       type: ActionTypes.DATA_FETCHED_FAILURE,
-      payload: []
+      payload: [],
     });
 
     expect(state).toEqual({
@@ -18,10 +18,10 @@ describe("Data reducer", () => {
 
     const state = data(undefined, {
       type: ActionTypes.DATA_FETCHED_SUCCESS,
-      payload
+      payload,
     });
 
-    expect(state).toEqual({ data: ['mock'] });
+    expect(state).toEqual({ data: ["mock"] });
   });
 
   it("DATA_FETCHED_FAILURE", () => {
@@ -29,7 +29,7 @@ describe("Data reducer", () => {
 
     const state = data(undefined, {
       type: ActionTypes.DATA_FETCHED_FAILURE,
-      payload
+      payload,
     });
 
     expect(state).toEqual({ data: [] });

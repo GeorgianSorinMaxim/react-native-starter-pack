@@ -12,10 +12,10 @@ it(`renders correctly`, () => {
         address: {
           streetAddress: "",
           postalCode: "",
-          addressLocality: ""
-        }
-      }
-    }
+          addressLocality: "",
+        },
+      },
+    },
   };
   const tree = renderer.create(<Card {...defaultProps} />).toJSON();
 

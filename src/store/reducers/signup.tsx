@@ -1,4 +1,4 @@
-import { Reducer } from 'redux'
+import { Reducer } from "redux";
 
 import { ActionTypes, RegistrationActions } from "../actions/signup";
 import State from "../types/state";
@@ -6,7 +6,7 @@ import State from "../types/state";
 export const DEFAULT_STATE = {
   isRegistering: false,
   registeringError: null,
-  registrationInfo: null
+  registrationInfo: null,
 };
 
 export const signup: Reducer<State, RegistrationActions> = (state = DEFAULT_STATE, action) => {
@@ -15,19 +15,19 @@ export const signup: Reducer<State, RegistrationActions> = (state = DEFAULT_STAT
       return {
         isRegistering: true,
         registeringError: null,
-        registrationInfo: null
+        registrationInfo: null,
       };
     case ActionTypes.REGISTRATION_SUCCESS:
       return {
         isRegistering: false,
         registeringError: null,
-        registrationInfo: action.payload
+        registrationInfo: action.payload,
       };
     case ActionTypes.REGISTRATION_FAILURE:
       return {
         isRegistering: false,
         registeringError: action.payload.message,
-        registrationInfo: null
+        registrationInfo: null,
       };
   }
   return state;

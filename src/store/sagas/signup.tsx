@@ -14,7 +14,7 @@ const onRegister = async (firstName, lastName, email, password) =>
         id: uid,
         email,
         firstName,
-        lastName
+        lastName,
       };
       const usersRef = firebase.firestore().collection("users");
       usersRef
@@ -34,25 +34,22 @@ const onRegister = async (firstName, lastName, email, password) =>
       return error;
     });
 
-
 export const register = function* (action) {
   const res = yield call(onRegister, action.firstName, action.lastName, action.email, action.password);
 
   if (res && res.id) {
     yield put({
       type: ActionTypes.REGISTRATION_SUCCESS,
-      payload: res
+      payload: res,
     });
   } else {
     yield put({
       type: ActionTypes.REGISTRATION_FAILURE,
-      payload: res
+      payload: res,
     });
   }
 };
 
 export function* signup() {
-  yield all([
-    takeEvery(ActionTypes.REGISTRATION_START, register),
-  ]);
+  yield all([takeEvery(ActionTypes.REGISTRATION_START, register)]);
 }

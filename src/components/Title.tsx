@@ -4,18 +4,16 @@ import { StyleSheet, Text, View, ViewProps } from "react-native";
 import Colors from "../constants/Colors";
 
 interface OwnProps {
-  label: string
+  label: string;
 }
 
-type Props = ViewProps & OwnProps
+type Props = ViewProps & OwnProps;
 
 const Title: FC<Props> = ({ label }) => (
   <View style={styles.container}>
-    <Text style={styles.title}>
-      {label}
-    </Text>
+    <Text style={styles.title}>{label}</Text>
   </View>
-)
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -24,8 +22,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    color: Colors.gold
-  }
+    color: Colors.gold,
+  },
 });
 
 export default Title;
