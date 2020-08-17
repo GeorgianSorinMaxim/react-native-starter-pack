@@ -96,12 +96,14 @@ export class SettingsScreenBase extends React.Component<Props> {
           <Title label="Your details" />
           <Divider />
           <View style={styles.bodyContainer}>
-            <View style={styles.textContainer}>
-              <BodyText style={styles.headerText}>Name</BodyText>
-              <BodyText style={styles.contentText}>
-                {this.props.user.firstName} {this.props.user.lastName}
-              </BodyText>
-            </View>
+            {this.props.user.firstName && this.props.user.lastName ? (
+              <View style={styles.textContainer}>
+                <BodyText style={styles.headerText}>Name</BodyText>
+                <BodyText style={styles.contentText}>
+                  {this.props.user.firstName} {this.props.user.lastName}
+                </BodyText>
+              </View>
+            ) : null}
             <View style={styles.textContainer}>
               <BodyText style={styles.headerText}>Email</BodyText>
               <BodyText style={styles.contentText}>{this.props.user.email}</BodyText>

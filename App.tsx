@@ -8,6 +8,8 @@ import { PersistGate } from "redux-persist/integration/react";
 // Navigation
 import { NavigationContainer } from "@react-navigation/native";
 import useLinking from "./src/navigation/useLinking";
+import { navigationRef } from './src/navigation/RootNavigation';
+
 
 import { Root } from "./src/screens/Root";
 
@@ -24,8 +26,7 @@ const Loading = () => (
 const App = () => {
   const [ isLoadingComplete, setLoadingComplete ] = React.useState(false);
   const [ initialNavigationState, setInitialNavigationState ] = React.useState();
-  const containerRef = React.useRef();
-  const { getInitialState } = useLinking(containerRef);
+  const { getInitialState } = useLinking(navigationRef);
 
   // Load any resources or data that we need prior to rendering the app
   React.useEffect(() => {
@@ -55,7 +56,7 @@ const App = () => {
           {Platform.OS === "ios" && <StatusBar barStyle="default" />}
           <NavigationContainer
             // @ts-ignore
-            ref={containerRef}
+            ref={navigationRef}
             initialState={initialNavigationState}
           >
             <Root />

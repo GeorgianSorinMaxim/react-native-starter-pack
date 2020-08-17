@@ -39,7 +39,11 @@ export class RegistrationScreenBase extends React.Component<Props, State> {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.isRegistering !== prevProps.isRegistering && this.props.isRegistering === false) {
+    if (
+      this.props.isRegistering !== prevProps.isRegistering &&
+      this.props.isRegistering === false &&
+      !this.props.error
+    ) {
       this.setState({ firstName: "", lastName: "", password: "", email: "", confirmPassword: "" });
     }
   }
