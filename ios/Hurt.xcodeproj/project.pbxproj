@@ -11,23 +11,8 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2B1E274F1981413C9339EEBC /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 029B763EB94C488BBBE6B19A /* AntDesign.ttf */; };
 		3BF2C45FD7916D6144F2102F /* libPods-Hurt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80A17B5AC8BF3CA9C670ED1D /* libPods-Hurt.a */; };
-		3C7215F7EAC5479D9A954D6D /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C8A077354074B6F85761288 /* FontAwesome.ttf */; };
-		8149FE1B4917400F9BAC61A4 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C79674BA0604B6E8084629D /* MaterialCommunityIcons.ttf */; };
-		A1161FE716F94F76A22EB9FB /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5CB68A300D940FCBF757249 /* Octicons.ttf */; };
-		AAFCDE0F8A4448CD80C3B80E /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B73C33EE30F049049D772B66 /* Zocial.ttf */; };
-		B4787890BDFD4F46B97EE673 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE5B873EE73B485682BF257E /* Fontisto.ttf */; };
-		C003E75444AC4B22AEB18167 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBBA0EB7D46340EA9BFFBC21 /* Foundation.ttf */; };
-		C702C23119DB450896E6F0E4 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10C0330BC2214F9CB44103EA /* MaterialIcons.ttf */; };
-		CA2FA77D7EEB4C9F92E5B8C9 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 242ED162583749B98D5546F1 /* SimpleLineIcons.ttf */; };
-		CB65489A076F4FB69722A5C5 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20527627706443719625971F /* Feather.ttf */; };
-		D05051861D74407FA78C608E /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCA7E162FDEE4031B40419E9 /* Ionicons.ttf */; };
-		D6573972FDB54048A80EEE5E /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E00D7A1E0DB244A4B6CBC707 /* Entypo.ttf */; };
-		DD6180EF3C42443AB7228A0B /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA3D1AB3CED44A3AA60A28FF /* EvilIcons.ttf */; };
-		E3B427C8A3E5407485C7B2A2 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E09A50E9D8B41CFBFADEEDE /* FontAwesome5_Brands.ttf */; };
-		FDD5CE82FE254FB1837573C3 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC6FD6B12A984E8E8A6CFE46 /* FontAwesome5_Solid.ttf */; };
-		FE671308CF94488DB7B6F8C4 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 811F8457239C401492440E8F /* FontAwesome5_Regular.ttf */; };
+		7C56388D2575688200C5430E /* Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56388C2575688200C5430E /* Swift.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +34,8 @@
 		3981A2048D2AF4E7631764D3 /* Pods-Hurt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hurt.debug.xcconfig"; path = "Target Support Files/Pods-Hurt/Pods-Hurt.debug.xcconfig"; sourceTree = "<group>"; };
 		6AAA5A8D9493D1274A06D5C7 /* Pods-Hurt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hurt.release.xcconfig"; path = "Target Support Files/Pods-Hurt/Pods-Hurt.release.xcconfig"; sourceTree = "<group>"; };
 		6E09A50E9D8B41CFBFADEEDE /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
+		7C56388B2575688100C5430E /* Hurt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hurt-Bridging-Header.h"; sourceTree = "<group>"; };
+		7C56388C2575688200C5430E /* Swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift.swift; sourceTree = "<group>"; };
 		80A17B5AC8BF3CA9C670ED1D /* libPods-Hurt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hurt.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		811F8457239C401492440E8F /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		AA3D1AB3CED44A3AA60A28FF /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
@@ -142,12 +129,14 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				7C56388C2575688200C5430E /* Swift.swift */,
 				13B07FAE1A68108700A75B9A /* Hurt */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				36E7272131624A7393A121D9 /* Resources */,
 				77BEF283F1253462444E21B4 /* Pods */,
+				7C56388B2575688100C5430E /* Hurt-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -194,6 +183,11 @@
 			attributes = {
 				LastUpgradeCheck = 940;
 				ORGANIZATIONNAME = Facebook;
+				TargetAttributes = {
+					13B07F861A680F5B00A75B9A = {
+						LastSwiftMigration = 1220;
+					};
+				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Hurt" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -221,22 +215,6 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				2B1E274F1981413C9339EEBC /* AntDesign.ttf in Resources */,
-				D6573972FDB54048A80EEE5E /* Entypo.ttf in Resources */,
-				DD6180EF3C42443AB7228A0B /* EvilIcons.ttf in Resources */,
-				CB65489A076F4FB69722A5C5 /* Feather.ttf in Resources */,
-				3C7215F7EAC5479D9A954D6D /* FontAwesome.ttf in Resources */,
-				E3B427C8A3E5407485C7B2A2 /* FontAwesome5_Brands.ttf in Resources */,
-				FE671308CF94488DB7B6F8C4 /* FontAwesome5_Regular.ttf in Resources */,
-				FDD5CE82FE254FB1837573C3 /* FontAwesome5_Solid.ttf in Resources */,
-				B4787890BDFD4F46B97EE673 /* Fontisto.ttf in Resources */,
-				C003E75444AC4B22AEB18167 /* Foundation.ttf in Resources */,
-				D05051861D74407FA78C608E /* Ionicons.ttf in Resources */,
-				8149FE1B4917400F9BAC61A4 /* MaterialCommunityIcons.ttf in Resources */,
-				C702C23119DB450896E6F0E4 /* MaterialIcons.ttf in Resources */,
-				A1161FE716F94F76A22EB9FB /* Octicons.ttf in Resources */,
-				CA2FA77D7EEB4C9F92E5B8C9 /* SimpleLineIcons.ttf in Resources */,
-				AAFCDE0F8A4448CD80C3B80E /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				7C56388D2575688200C5430E /* Swift.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -380,11 +359,67 @@
 			baseConfigurationReference = 3981A2048D2AF4E7631764D3 /* Pods-Hurt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Hurt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/CocoaAsyncSocket\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/DoubleConversion\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/EXConstants\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/EXFileSystem\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/EXImageLoader\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/EXPermissions\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBReactNativeSpec\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Flipper\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Flipper-DoubleConversion\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Flipper-Folly\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Flipper-Glog\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Flipper-PeerTalk\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Flipper-RSocket\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FlipperKit\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Folly\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RCTTypeSafety\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNCMaskedView\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNDeviceInfo\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNFastImage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNGestureHandler\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNScreens\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNVectorIcons\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-Core\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-CoreModules\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTAnimation\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTBlob\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTImage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTLinking\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTNetwork\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTSettings\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTText\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTVibration\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-cxxreact\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-jsi\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-jsiexecutor\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-jsinspector\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ReactNativeART\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImageWebPCoder\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/UMAppLoader\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/UMCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/UMPermissionsInterface\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/UMReactNativeAdapter\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Yoga\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/YogaKit\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/glog\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/libwebp\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-safe-area-context\"",
+					"\"${PODS_ROOT}/CocoaLibEvent/lib\"",
+					"\"${PODS_ROOT}/OpenSSL-Universal/ios/lib\"",
+					"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -392,6 +427,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Hurt;
 				PRODUCT_NAME = Hurt;
+				SWIFT_OBJC_BRIDGING_HEADER = "Hurt-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -401,10 +439,59 @@
 			baseConfigurationReference = 6AAA5A8D9493D1274A06D5C7 /* Pods-Hurt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Hurt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/CocoaAsyncSocket\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/DoubleConversion\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/EXConstants\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/EXFileSystem\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/EXImageLoader\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/EXPermissions\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBReactNativeSpec\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Folly\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RCTTypeSafety\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNCMaskedView\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNDeviceInfo\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNFastImage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNGestureHandler\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNScreens\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNVectorIcons\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-Core\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-CoreModules\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTAnimation\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTBlob\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTImage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTLinking\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTNetwork\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTSettings\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTText\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTVibration\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-cxxreact\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-jsi\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-jsiexecutor\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-jsinspector\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ReactNativeART\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImageWebPCoder\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/UMAppLoader\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/UMCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/UMPermissionsInterface\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/UMReactNativeAdapter\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Yoga\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/YogaKit\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/glog\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/libwebp\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-safe-area-context\"",
+					"\"${PODS_ROOT}/CocoaLibEvent/lib\"",
+					"\"${PODS_ROOT}/OpenSSL-Universal/ios/lib\"",
+					"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -412,6 +499,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Hurt;
 				PRODUCT_NAME = Hurt;
+				SWIFT_OBJC_BRIDGING_HEADER = "Hurt-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
