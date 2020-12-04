@@ -6,12 +6,12 @@ exports[`renders correctly 1`] = `
   style={
     Array [
       Object {
-        "color": "#2f95dc",
+        "color": "#D4AF37",
         "fontSize": 20,
       },
       undefined,
       Object {
-        "fontFamily": "FontAwesome",
+        "fontFamily": "Ionicons",
         "fontStyle": "normal",
         "fontWeight": "normal",
       },
@@ -19,6 +19,6 @@ exports[`renders correctly 1`] = `
     ]
   }
 >
-  
+  
 </Text>
 `;

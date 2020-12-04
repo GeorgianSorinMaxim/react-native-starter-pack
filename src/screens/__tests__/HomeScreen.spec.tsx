@@ -11,6 +11,8 @@ describe("HomeScreen", () => {
   it(`renders the HomeScreen screen`, () => {
     const defaultProps = {
       restaurants: [],
+      appStateUpdated: jest.fn(),
+      validateToken: jest.fn(),
     };
 
     const tree = renderer.create(<HomeScreenBase {...defaultProps} />).toJSON();

@@ -2,6 +2,7 @@ import { AsyncStorage } from "react-native";
 import { createStore, applyMiddleware } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import createSagaMiddleware from "redux-saga";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 import { rootReducer } from "./reducers";
 import { rootSaga } from "./sagas";
@@ -17,15 +18,26 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 const onRehydrate = () => {};
 
 const getEnhancers = (sagaMiddleware) => {
-  const enhancers = [sagaMiddleware];
+  const allEnhancers = [sagaMiddleware];
 
-  /* global __DEV__ */
+  const enhancers = applyMiddleware(...allEnhancers);
+
+  // React Native Debugger + redux-devtools-extension setup
+  // @ts-ignore
   if (__DEV__) {
-    const { logger } = require("redux-logger");
-    enhancers.push(logger);
+    // @ts-ignore
+    const devToolsCompose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      ? // @ts-ignore
+        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      : composeWithDevTools;
+
+    return devToolsCompose({
+      realtime: true,
+      port: 8010,
+    })(enhancers);
   }
 
-  return applyMiddleware(...enhancers);
+  return enhancers;
 };
 
 export const storeWrapper = { store: null };

@@ -5,7 +5,7 @@ import { MainNavigator } from "../navigation/MainNavigator";
 import { NotLoggedInNavigator } from "../navigation/NotLoggedInNavigator";
 
 interface Props {
-  user: {
+  user?: {
     id: string;
     email: string;
   };
