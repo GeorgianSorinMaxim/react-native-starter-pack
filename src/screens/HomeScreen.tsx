@@ -1,37 +1,63 @@
 import * as React from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { AppState, FlatList, StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 
 import Colors from "../constants/Colors";
-import { BodyText, Card, Carousel } from "../components";
+import { BodyText, Card } from "../components";
 
 import { getRestaurants } from "../store/selectors";
-import { Restaurant } from "../store/types/state";
+import { University } from "../store/types/state";
 
-interface Props {
-  restaurants: Restaurant[] | null;
-}
-export class HomeScreenBase extends React.Component<Props> {
+import { actions as AppActions } from "../store/actions/app";
+import { actions as LoginActions } from "../store/actions/login";
+
+type Props = {
+  restaurants: University[] | null;
+  appStateUpdated: (prevState, newState) => void;
+  validateToken: () => void;
+};
+
+type State = {
+  appState: string;
+};
+export class HomeScreenBase extends React.Component<Props, State> {
   constructor(props) {
     super(props);
+
+    this.state = {
+      appState: AppState.currentState,
+    };
   }
 
-  renderItem = (item: Restaurant) => {
+  componentDidMount() {
+    AppState.addEventListener("change", this.handleAppStateChange);
+  }
+
+  componentWillUnmount() {
+    AppState.removeEventListener("change", this.handleAppStateChange);
+  }
+
+  handleAppStateChange = (nextAppState) => {
+    console.log(`state changes`, nextAppState);
+
+    this.props.appStateUpdated(this.state.appState, nextAppState);
+
+    if (this.state.appState.match(/inactive|background/) && nextAppState === "active") {
+      this.props.validateToken();
+    }
+
+    this.setState({ appState: nextAppState });
+  };
+
+  renderItem = (item: University) => {
     return <Card item={item} />;
   };
 
   render() {
     const restaurantsList = this.props && this.props.restaurants ? this.props.restaurants : [];
 
-    const images = [
-      "https://i2-prod.manchestereveningnews.co.uk/sport/football/football-news/article18690279.ece/ALTERNATES/s458/0_GettyImages-1254252032.jpg",
-      "https://i2-prod.manchestereveningnews.co.uk/sport/football/article18692768.ece/ALTERNATES/s458/0_GettyImages-1227788641.jpg",
-    ];
-
     return (
       <View style={styles.screenContainer}>
-        <Carousel data={images} height={200} />
-
         {restaurantsList.length > 0 ? (
           <View style={styles.listContainer}>
             <FlatList
@@ -53,21 +79,15 @@ export class HomeScreenBase extends React.Component<Props> {
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
-    paddingTop: 12,
-    paddingBottom: 32,
+    paddingVertical: 12,
     backgroundColor: Colors.white,
   },
   listContainer: {
-    margin: 12,
+    marginHorizontal: 12,
   },
   centeredText: {
     fontSize: 16,
     textAlign: "center",
-  },
-  logo: {
-    height: 50,
-    width: 100,
-    alignSelf: "center",
   },
 });
 
@@ -75,4 +95,9 @@ const mapStateToProps = (state) => ({
   restaurants: getRestaurants(state),
 });
 
-export const HomeScreen = connect(mapStateToProps, null)(HomeScreenBase);
+const mapDispatchToProps = (dispatch) => ({
+  validateToken: () => dispatch(LoginActions.validateToken()),
+  appStateUpdated: (prevState, newState) => dispatch(AppActions.appStateUpdated(prevState, newState)),
+});
+
+export const HomeScreen = connect(mapStateToProps, mapDispatchToProps)(HomeScreenBase);

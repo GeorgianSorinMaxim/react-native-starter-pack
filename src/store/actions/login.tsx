@@ -1,4 +1,3 @@
-import { Action } from "redux";
 import { FailureAction, PayloadAction } from "../types/core";
 
 export const ActionTypes = {
@@ -8,6 +7,12 @@ export const ActionTypes = {
   LOGOUT_START: "LOGOUT_START",
   LOGOUT_SUCCESS: "LOGOUT_SUCCESS",
   LOGOUT_FAILURE: "LOGOUT_FAILURE",
+  VERIFY_TOKEN_START: "VERIFY_TOKEN_START",
+  VERIFY_TOKEN_SUCCESS: "VERIFY_TOKEN_SUCCESS",
+  VERIFY_TOKEN_FAILURE: "VERIFY_TOKEN_FAILURE",
+  VALIDATE_TOKEN_START: "VALIDATE_TOKEN_START",
+  VALIDATE_TOKEN_SUCCESS: "VALIDATE_TOKEN_SUCCESS",
+  VALIDATE_TOKEN_FAILURE: "VALIDATE_TOKEN_FAILURE",
 };
 
 export const actions = {
@@ -19,16 +24,37 @@ export const actions = {
   logout: () => ({
     type: ActionTypes.LOGOUT_START,
   }),
+  validateToken: () => ({
+    type: ActionTypes.VALIDATE_TOKEN_START,
+  }),
 };
 
-// TODO: Replace any type with proper type
 export type LoginStart = PayloadAction<typeof ActionTypes.LOGIN_START, any>;
-// TODO: Replace any type with proper type
 export type LoginSuccess = PayloadAction<typeof ActionTypes.LOGIN_SUCCESS, any>;
 export type LoginFailure = FailureAction<typeof ActionTypes.LOGIN_FAILURE>;
 
-export type LogoutStart = Action<typeof ActionTypes.LOGOUT_START>;
-export type LogoutSuccess = Action<typeof ActionTypes.LOGOUT_SUCCESS>;
-export type LogoutFailure = Action<typeof ActionTypes.LOGOUT_FAILURE>;
+export type LogoutStart = PayloadAction<typeof ActionTypes.LOGOUT_START, any>;
+export type LogoutSuccess = PayloadAction<typeof ActionTypes.LOGOUT_SUCCESS, any>;
+export type LogoutFailure = FailureAction<typeof ActionTypes.LOGOUT_FAILURE>;
 
-export type LoginActions = LoginStart | LoginSuccess | LoginFailure | LogoutStart | LogoutSuccess | LogoutFailure;
+export type VerifyTokenStart = PayloadAction<typeof ActionTypes.VERIFY_TOKEN_START, any>;
+export type VerifyTokenSuccess = PayloadAction<typeof ActionTypes.VERIFY_TOKEN_SUCCESS, any>;
+export type VerifyTokenFailure = FailureAction<typeof ActionTypes.VERIFY_TOKEN_FAILURE>;
+
+export type ValidateTokenStart = PayloadAction<typeof ActionTypes.VALIDATE_TOKEN_START, any>;
+export type ValidateTokenSuccess = PayloadAction<typeof ActionTypes.VALIDATE_TOKEN_SUCCESS, any>;
+export type ValidateTokenFailure = FailureAction<typeof ActionTypes.VALIDATE_TOKEN_FAILURE>;
+
+export type LoginActions =
+  | LoginStart
+  | LoginSuccess
+  | LoginFailure
+  | LogoutStart
+  | LogoutSuccess
+  | LogoutFailure
+  | VerifyTokenStart
+  | VerifyTokenSuccess
+  | VerifyTokenFailure
+  | ValidateTokenStart
+  | ValidateTokenSuccess
+  | ValidateTokenFailure;

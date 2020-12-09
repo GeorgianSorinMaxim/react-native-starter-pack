@@ -5,7 +5,8 @@ import { NavigationProp, NavigationRoute } from "react-navigation";
 import TabBarIcon from "../components/TabBarIcon";
 import { HomeScreen } from "../screens/HomeScreen";
 import { SettingsScreen } from "../screens/SettingsScreen";
-import { HOME, SETTINGS } from "./routes";
+import { AppsScreen } from "../screens/AppsScreen";
+import { HOME, APPS, SETTINGS } from "./routes";
 
 import Colors from "../constants/Colors";
 import { isSmallScreen } from "../utils/dimensions";
@@ -49,6 +50,14 @@ const BottomTabNavigator = ({ navigation, route }: BottomTabNavigatorProps) => {
         options={{
           title: HOME,
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="home-outline" />,
+        }}
+      />
+      <BottomTab.Screen
+        name={APPS}
+        component={AppsScreen}
+        options={{
+          title: APPS,
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="phone-portrait-outline" />,
         }}
       />
       <BottomTab.Screen

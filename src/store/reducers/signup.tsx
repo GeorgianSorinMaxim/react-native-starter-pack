@@ -1,15 +1,15 @@
 import { Reducer } from "redux";
 
 import { ActionTypes, RegistrationActions } from "../actions/signup";
-import State from "../types/state";
+import { SignupState } from "../types/state";
 
 export const DEFAULT_STATE = {
   isRegistering: false,
-  registeringError: null,
-  registrationInfo: null,
+  registeringError: undefined,
+  registrationInfo: undefined,
 };
 
-export const signup: Reducer<State, RegistrationActions> = (state = DEFAULT_STATE, action) => {
+export const signup: Reducer<SignupState, RegistrationActions> = (state = DEFAULT_STATE, action) => {
   switch (action.type) {
     case ActionTypes.REGISTRATION_START:
       return {

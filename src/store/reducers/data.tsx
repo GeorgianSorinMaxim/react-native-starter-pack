@@ -1,17 +1,17 @@
 import { Reducer } from "redux";
 
 import { ActionTypes, Actions } from "../actions/data";
-import State from "../types/state";
+import { DataState } from "../types/state";
 
 export const DEFAULT_STATE = {
-  data: [],
+  universities: [],
 };
 
-export const data: Reducer<State, Actions> = (state = DEFAULT_STATE, action) => {
+export const data: Reducer<DataState, Actions> = (state = DEFAULT_STATE, action) => {
   switch (action.type) {
     case ActionTypes.DATA_FETCHED_SUCCESS:
     case ActionTypes.DATA_FETCHED_FAILURE:
-      return { ...state, data: action.payload };
+      return { ...state, universities: action.payload };
   }
   return state;
 };

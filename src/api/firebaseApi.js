@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 
-import { firebase } from "../../firebase/config";
+import { firebase } from "../../firebase";
 
 export class FirebaseApi {
   constructor() {
@@ -95,7 +95,7 @@ export class FirebaseApi {
     }
   }
 
-  async getIdToken() {
+  async getToken() {
     const { currentUser } = firebase.auth();
 
     if (currentUser) {

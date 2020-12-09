@@ -1,5 +1,5 @@
 {
   "API": {
-    "dataURL": "https://storage.googleapis.com/nandos-engineering-public/coding-challenge-rn/restaurantlist.json"
+    "dataURL": "https://raw.githubusercontent.com/GeorgianSorinMaxim/json-data/gh-pages/list-of-universities.json"
   }
 }

@@ -85,14 +85,17 @@ const styles = StyleSheet.create({
   header: {
     zIndex: 10,
     elevation: 0, // no shadow for Android
+    // @ts-ignore
     height: normalizeText(isBigScreen ? 80 : 60),
     width: "100%",
     display: "flex",
+    // @ts-ignore
     paddingBottom: isBigScreen && isIOS ? normalizeText(10) : 0,
     flexDirection: "row",
     alignItems: "center",
     borderBottomWidth: 1,
     justifyContent: "center",
+    // @ts-ignore
     paddingTop: isIOS ? (isBigScreen ? normalizeText(40) : normalizeText(10)) : 0,
   },
   leftColumn: {
@@ -111,6 +114,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   titleText: {
+    // @ts-ignore
     fontSize: normalizeText(14),
   },
   rightColumn: {

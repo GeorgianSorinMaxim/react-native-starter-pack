@@ -5,9 +5,12 @@ import { MainNavigator } from "../navigation/MainNavigator";
 import { NotLoggedInNavigator } from "../navigation/NotLoggedInNavigator";
 
 interface Props {
-  user: {
-    id: string;
-    email: string;
+  login?: {
+    isAuthenticating: boolean;
+    loginInfo: {
+      token: string;
+      expDate: string;
+    };
   };
 }
 
@@ -17,13 +20,13 @@ export class RootBase extends React.Component<Props> {
   }
 
   render() {
-    const { user } = this.props;
-    return user && user.id ? <MainNavigator /> : <NotLoggedInNavigator />;
+    const { login } = this.props;
+    return login && !login.isAuthenticating && login.loginInfo ? <MainNavigator /> : <NotLoggedInNavigator />;
   }
 }
 
 const mapStateToProps = (state) => ({
-  user: state.user,
+  login: state.login,
 });
 
 export const Root = connect(mapStateToProps, null)(RootBase);
