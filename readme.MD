@@ -60,7 +60,7 @@
 - Eslint (for TypeScript) is used in the project for checking the JS/TS errors.
 - TypeScript is used in the project.
 - react-native-vector-icons has been used to improve the UI apprerance using icons in the navigator and in other UI elements.
-  - Icons: https://ionicons.com
+  - Icons: https://infinitered.github.io/ionicons-version-3-search/
 
 ### Components
 - Button
@@ -76,10 +76,13 @@
 - Screen header with title and left / right buttons
 - Screen container
 - WebView container with `react-native-webview` and `uri-js`
-- Progress indicators and spinners with `react-native-progess`
 
-### TODO Integrations
-- Analytics (GA) and Crashlytics with `react-native-firebase`, `react-native-device-info` and `react-native-uuid`
+### TODO
+- WIP: Auto-login with token verification with `jwt-decode`
+- UI improvments for login / signup forms with `react-native-keyboard-aware-scroll-view`
+- Fetch data from Firebase Database using with `react-native-firebase`
+- Logging and tracking service: Analytics (GA) and Crashlytics with `react-native-firebase`, `react-native-device-info` and `react-native-uuid`
+- Progress indicators and spinners with `react-native-progess`
 - Use biometric authentication and store user creds in the KeyChain and KeyStore with `react-native-secure-key-store` - https://www.freecodecamp.org/news/how-to-implement-secure-biometric-authentication-on-mobile-devices-4dc518558c5c/
 - Run the app in different environments: dev, prod, uat with `react-native-config`
 - Allow to natively share urls with `react-native-share`
@@ -91,6 +94,7 @@
 - Render maps with `react-native-maps`
 - Render PDFs in-app with `react-native-pdf`
 - Ask your users to rate the app with `react-native-rate`
+- Render SVGs with `react-native-svg` and `react-native-svg-transformer`
 - Feature flagging with Firebase
 - Push notifications with Firebase / Azure
 - Local notifications
