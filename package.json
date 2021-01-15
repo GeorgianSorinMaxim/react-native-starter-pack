@@ -19,7 +19,7 @@
     "@react-native-community/art": "^1.2.0",
     "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/masked-view": "^0.1.0",
-    "@react-navigation/bottom-tabs": "^5.0.0",
+    "@react-navigation/bottom-tabs": "^5.11.3",
     "@react-navigation/native": "^5.0.0",
     "@react-navigation/stack": "^5.0.0",
     "@redux-saga/testing-utils": "^1.1.3",
