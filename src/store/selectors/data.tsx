@@ -4,10 +4,4 @@
 import { RootState } from "../types/state";
 
 export const getRestaurants = (state: RootState) =>
-  state.data &&
-  state.data.data &&
-  state.data.data.data &&
-  state.data.data.data.restaurant &&
-  state.data.data.data.restaurant.items
-    ? state.data.data.data.restaurant.items
-    : [];
+  state.data && state.data.universities ? state.data.universities : [];

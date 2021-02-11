@@ -15,17 +15,14 @@ exports[`renders correctly 1`] = `
       Object {
         "overflow": "hidden",
       },
-      Array [
-        Object {
-          "backgroundColor": "#fdfdfd",
-          "borderBottomWidth": 0,
-          "borderColor": "#ededed",
-          "borderWidth": 0.5,
-          "paddingHorizontal": 15,
-          "paddingVertical": 15,
-        },
-        false,
-      ],
+      Object {
+        "borderColor": "#BABABA",
+        "borderWidth": 0.5,
+        "marginBottom": 1,
+        "marginTop": -1,
+        "paddingHorizontal": 15,
+        "paddingVertical": 15,
+      },
     ]
   }
   underlayColor="black"
@@ -62,12 +59,12 @@ exports[`renders correctly 1`] = `
         style={
           Array [
             Object {
-              "color": "rgba(0,0,0,0.35)",
-              "fontSize": 22,
+              "color": "#D4AF37",
+              "fontSize": 18,
             },
             undefined,
             Object {
-              "fontFamily": "FontAwesome",
+              "fontFamily": "Ionicons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
@@ -75,15 +72,17 @@ exports[`renders correctly 1`] = `
           ]
         }
       >
-        
+        ?
       </Text>
     </View>
     <Text
       style={
         Object {
           "alignSelf": "flex-start",
-          "fontSize": 15,
+          "fontSize": 12,
+          "letterSpacing": 4,
           "marginTop": 1,
+          "textTransform": "uppercase",
         }
       }
     >
