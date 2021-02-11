@@ -1,7 +1,8 @@
-export type Restaurant = {
+export type University = {
   name: string;
   url: string;
-  geo: {
+  imageUrl?: string;
+  geo?: {
     address: {
       streetAddress: string;
       postalCode: string;
@@ -11,6 +12,13 @@ export type Restaurant = {
 };
 
 export type RootState = {
+  app: {
+    // App state
+    state: {
+      prevState?: string;
+      newState?: string;
+    };
+  };
   user: {
     id: string;
     email: string;
@@ -18,28 +26,53 @@ export type RootState = {
     lastName?: string;
   };
   login: {
-    isLogging: boolean;
-    loginError: null | string;
-    loginInfo: null | any;
+    isAuthenticating: boolean;
+    error?: string | null;
+    loginInfo?: any;
+    tokenValidation?: any;
+    tokenValidationError?: string | null;
   };
   signup: {
     isRegistering: boolean;
-    registeringError: null | string;
-    registrationInfo: null | any;
+    registeringError?: string | null;
+    registrationInfo?: any;
   };
   data: {
-    data: {
-      data: {
-        restaurant: {
-          items: Restaurant[] | null;
-        };
-      };
-    };
+    universities: University[];
   };
 };
 
-type State = {
-  data: Restaurant[] | [];
+export type DataState = {
+  universities: University[] | [];
 };
 
-export default State;
+export type AppState = {
+  // App state
+  state: {
+    prevState?: string;
+    newState?: string;
+  };
+};
+
+export type SignupState = {
+  isRegistering: boolean;
+  registeringError?: string | null;
+  registrationInfo?: any;
+};
+
+export type LoginState = {
+  isAuthenticating: boolean;
+  error?: string | null;
+  loginInfo?: any;
+  tokenValidation?: any;
+  tokenValidationError?: string | null;
+};
+
+export type UserState = {
+  id: string;
+  email: string;
+  firstName?: string;
+  lastName?: string;
+};
+
+export default RootState;

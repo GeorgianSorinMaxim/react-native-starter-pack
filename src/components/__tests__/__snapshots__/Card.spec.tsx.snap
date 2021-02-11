@@ -21,8 +21,9 @@ exports[`renders correctly 1`] = `
     style={
       Object {
         "alignItems": "flex-start",
-        "backgroundColor": "#CE0924",
+        "borderColor": "#D4AF37",
         "borderRadius": 6,
+        "borderWidth": 1,
         "display": "flex",
         "marginBottom": 12,
         "padding": 12,
@@ -30,12 +31,48 @@ exports[`renders correctly 1`] = `
       }
     }
   >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#f7f7f7",
+          "flexDirection": "row",
+          "height": 150,
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        allowFontScaling={false}
+        style={
+          Array [
+            Object {
+              "color": undefined,
+              "fontSize": 60,
+            },
+            Object {
+              "color": "#BABABA",
+            },
+            Object {
+              "fontFamily": "Ionicons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
     <Text
       style={
         Array [
           Object {
-            "color": "#FFF",
+            "color": "#D4AF37",
             "fontWeight": "bold",
+            "marginTop": 12,
             "overflow": "hidden",
           },
         ]
@@ -47,7 +84,7 @@ exports[`renders correctly 1`] = `
       style={
         Array [
           Object {
-            "color": "#FFF",
+            "color": "#000",
             "overflow": "hidden",
             "paddingTop": 12,
           },

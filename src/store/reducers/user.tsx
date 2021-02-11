@@ -1,11 +1,16 @@
 import { Reducer } from "redux";
 
 import { ActionTypes, LoginActions } from "../actions/login";
-import State from "../types/state";
+import { UserState } from "../types/state";
 
-export const DEFAULT_STATE = {};
+export const DEFAULT_STATE = {
+  id: "",
+  email: "",
+  firstName: undefined,
+  lastName: undefined,
+};
 
-export const user: Reducer<State, LoginActions> = (state = DEFAULT_STATE, action) => {
+export const user: Reducer<UserState, LoginActions> = (state = DEFAULT_STATE, action) => {
   switch (action.type) {
     case ActionTypes.LOGIN_SUCCESS:
       return {

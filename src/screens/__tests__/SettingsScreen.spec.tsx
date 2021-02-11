@@ -9,7 +9,22 @@ jest.mock("@react-navigation/bottom-tabs");
 
 describe("SettingsScreen", () => {
   it(`renders the SettingsScreen screen`, () => {
-    const tree = renderer.create(<SettingsScreenBase />).toJSON();
+    const defaultProps = {
+      navigation: {
+        setParams: jest.fn(),
+        navigate: jest.fn(),
+      },
+      logout: jest.fn(),
+      user: {
+        id: "123",
+        email: "test@test.com",
+        firstName: "John",
+        lastName: "Doe",
+      },
+    };
+
+    // @ts-ignore
+    const tree = renderer.create(<SettingsScreenBase {...defaultProps} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

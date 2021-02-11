@@ -16,9 +16,7 @@ export const actions = {
   }),
 };
 
-// TODO: Replace any type with proper type
 export type RegistrationStart = PayloadAction<typeof ActionTypes.REGISTRATION_START, any>;
-// TODO: Replace any type with proper type
 export type RegistrationSuccess = PayloadAction<typeof ActionTypes.REGISTRATION_SUCCESS, any>;
 export type RegistrationFailure = FailureAction<typeof ActionTypes.REGISTRATION_FAILURE>;
 
