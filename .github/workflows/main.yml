@@ -1,0 +1,42 @@
+name: Git Checks
+
+on: [push]
+
+jobs:
+  build:
+    name: Run tests, linter, TS
+    runs-on: macOS-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Install NPM dependencies
+        run: npm install
+
+      - name: Pod Install
+        working-directory: ios
+        run: pod install
+
+      # Tests
+      - name: Run unit tests
+        run: yarn test
+
+      # TS
+      - name: Strict TypeScript compilation
+        run: yarn tsc
+
+      # Run linter (ESLint and Prettier must be in `package.json`)
+      - name: Run linters
+        uses: wearerequired/lint-action@v1.9.0
+        with:
+          eslint: true
+          prettier: true
