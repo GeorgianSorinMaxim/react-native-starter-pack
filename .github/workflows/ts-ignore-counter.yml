@@ -1,0 +1,48 @@
+name: TypeScript '@ts-ignore' counter
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+      - name: Count ts-ignore on master
+        id: before
+        run: |
+          export BEFORE=`find . -type f \( -name "*.ts" -or -name "*.tsx" \) -exec grep -o "@ts-ignore" {} \; |wc -l`
+          echo "::set-output name=count::$BEFORE"
+      - uses: actions/checkout@v2
+      - name: Count ts-ignore on this commit
+        id: after
+        run: |
+          export AFTER=`find . -type f \( -name "*.ts" -or -name "*.tsx" \) -exec grep -o "@ts-ignore" {} \; |wc -l`
+          echo "::set-output name=count::$AFTER"
+      - name: Do the math
+        id: result
+        run: |
+          export BEFORE="${{ steps.before.outputs.count }}"
+          export AFTER="${{ steps.after.outputs.count }}"
+          if [[ `expr $AFTER - $BEFORE` -gt 0 ]]; then
+            export DIFF=`expr $AFTER - $BEFORE`
+            export CHANGE="(went up by $DIFF) "
+            for n in $(seq $DIFF); do export CHANGE="$CHANGE:broken_heart:"; done
+          elif [[ `expr $BEFORE - $AFTER` -gt 0 ]]; then
+            export DIFF=`expr $BEFORE - $AFTER`
+            export CHANGE="(went down by $DIFF) "
+            for n in $(seq $DIFF); do export CHANGE="$CHANGE:sparkles:"; done
+          else
+            export CHANGE="(unchanged)"
+          fi
+          echo "::set-output name=comment::**ts-ignore**'s: $AFTER $CHANGE"
+      - name: Post issue comment
+        run: |
+          jq --arg msg "${{ steps.result.outputs.comment }}" -nc '{"body": $msg}' | \
+          curl -sL  -X POST -d @- \
+            -H "Content-Type: application/json" \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$GITHUB_SHA/comments"
