@@ -24,16 +24,17 @@ jobs:
         run: pod install
 
       # Tests
-      - name: Run unit tests
-        run: yarn test
+      # - name: Run unit tests
+      #   run: yarn test
 
       # TS
       - name: Run TypeScript
         run: yarn tsc
 
-      # Run linter (ESLint and Prettier must be in `package.json`)
+      # Run linter
       - name: Run linter
-        uses: wearerequired/lint-action@v1.9.0
-        with:
-          eslint: true
-          prettier: true
+        run: yarn lint
+
+      # Run Prettier
+      - name: Run prettier
+        run: yarn prettier
