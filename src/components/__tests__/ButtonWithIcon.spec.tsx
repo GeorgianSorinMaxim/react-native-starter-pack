@@ -6,7 +6,7 @@ import ButtonWithIcon from "../ButtonWithIcon";
 it(`renders correctly`, () => {
   const defaultProps = {
     label: "Google",
-    icon: "Icon",
+    icon: "add",
     onPress: () => {},
   };
   const tree = renderer.create(<ButtonWithIcon {...defaultProps} />).toJSON();
