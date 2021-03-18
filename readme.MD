@@ -79,6 +79,7 @@
 
 ### TODO
 - WIP: Auto-login with token verification with `jwt-decode`
+- TODO: Use Hooks and functional components
 - Use AppCenter CI to build and sign the app
 - UI improvments for login / signup forms with `react-native-keyboard-aware-scroll-view`
 - Fetch data from Firebase Database using with `react-native-firebase`
