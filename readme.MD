@@ -79,6 +79,7 @@
 
 ### TODO
 - WIP: Auto-login with token verification with `jwt-decode`
+- TODO: Use Hooks and functional components
 - Use AppCenter CI to build and sign the app
 - UI improvments for login / signup forms with `react-native-keyboard-aware-scroll-view`
 - Fetch data from Firebase Database using with `react-native-firebase`
@@ -124,5 +125,19 @@
 - Improve and extend the typings (see the TODOs placed in the code) and transform networkingApi.js and useLinking.js into .tsx
 
 
-
-
+### Code quality:
+  - Re-use code whenever possible
+  - Use functional components (not class components) since Hooks allows us to use state inside functional components
+  - Run Prettier, lint and TS in all files (including tests)
+  - Use type declarations for dependencies (e.g. `react-native`)
+  - Write unit tests using `react-native-testing-library`
+  - Write E2E tests
+  - Use pre-hooks, Git checks and checks on the CI
+  - Document the app (how to get started, important architectural decisions, etc)
+  - Use PR templates and a CHANGELOG.MD
+  - Use an UAT app against multiple envs
+  - Have a logging service (GA / Bugsnag)
+  - Keep the dependencies updated
+  - Integrate Crashlytics
+  - Built a CI (Bitrise + CodePush)
+    - Fully automate release from Bitrise

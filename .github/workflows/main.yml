@@ -1,0 +1,40 @@
+name: Git Checks
+
+on: [push]
+
+jobs:
+  build:
+    name: Run tests, linter, TS
+    runs-on: macOS-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Pod Install
+        working-directory: ios
+        run: pod install
+
+      # TS
+      - name: Run TypeScript
+        run: yarn tsc
+
+      # Run linter
+      - name: Run linter
+        run: yarn lint
+
+      # Run Prettier
+      - name: Run prettier
+        run: yarn prettier
+
+      # Tests
+      - name: Run unit tests
+        run: yarn jest

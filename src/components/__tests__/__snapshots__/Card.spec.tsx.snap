@@ -21,10 +21,12 @@ exports[`renders correctly 1`] = `
     style={
       Object {
         "alignItems": "flex-start",
-        "borderColor": "#D4AF37",
+        "borderColor": "#BABABA",
         "borderRadius": 6,
         "borderWidth": 1,
         "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
         "marginBottom": 12,
         "padding": 12,
         "width": "100%",
@@ -34,65 +36,85 @@ exports[`renders correctly 1`] = `
     <View
       style={
         Object {
-          "alignItems": "center",
-          "backgroundColor": "#f7f7f7",
-          "flexDirection": "row",
-          "height": 150,
-          "justifyContent": "center",
-          "width": "100%",
+          "width": "60%",
         }
       }
     >
       <Text
-        allowFontScaling={false}
         style={
           Array [
             Object {
-              "color": undefined,
-              "fontSize": 60,
+              "color": "#000",
+              "fontWeight": "bold",
+              "marginTop": 12,
+              "overflow": "hidden",
             },
-            Object {
-              "color": "#BABABA",
-            },
-            Object {
-              "fontFamily": "Ionicons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-            Object {},
           ]
         }
       >
-        
+        Google.com
+      </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#000",
+              "overflow": "hidden",
+              "paddingTop": 12,
+            },
+          ]
+        }
+      >
+        , , 
       </Text>
     </View>
-    <Text
+    <View
       style={
-        Array [
-          Object {
-            "color": "#D4AF37",
-            "fontWeight": "bold",
-            "marginTop": 12,
-            "overflow": "hidden",
-          },
-        ]
+        Object {
+          "alignItems": "flex-end",
+          "width": "40%",
+        }
       }
     >
-      Google.com
-    </Text>
-    <Text
-      style={
-        Array [
+      <View
+        style={
           Object {
-            "color": "#000",
-            "overflow": "hidden",
-            "paddingTop": 12,
-          },
-        ]
-      }
-    >
-      , , 
-    </Text>
+            "alignItems": "center",
+            "backgroundColor": "#f7f7f7",
+            "flex": 1,
+            "height": 100,
+            "justifyContent": "center",
+            "width": 100,
+          }
+        }
+      >
+        <Text
+          allowFontScaling={false}
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 35,
+              },
+              Object {
+                "alignSelf": "center",
+                "color": "#BABABA",
+                "margin": 0,
+                "padding": 0,
+              },
+              Object {
+                "fontFamily": "Ionicons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+    </View>
   </View>
 </View>
 `;
