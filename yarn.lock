@@ -6832,9 +6832,10 @@ react-native-progress@^4.1.2:
     "@react-native-community/art" "^1.1.2"
     prop-types "^15.7.2"
 
-react-native-safe-area-context@0.6.0:
-  version "0.6.0"
-  resolved "https://registry.npmjs.org/react-native-safe-area-context/-/react-native-safe-area-context-0.6.0.tgz#f53f5a5bcafb462a8798a26b145e68946389ad60"
+react-native-safe-area-context@4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-4.1.2.tgz#2433715c568550f29ae768f8ca7b561f99b5230c"
+  integrity sha512-35hLhtJRCZW0L2zTz0Wz3d0Oh6uYUiRWa/HvoITq7IvD8GkjjM97MKHSfVhC4N9ZNMzqXDuVfYBpHHisc9Z8+Q==
 
 react-native-safe-area-view@^0.14.9:
   version "0.14.9"
