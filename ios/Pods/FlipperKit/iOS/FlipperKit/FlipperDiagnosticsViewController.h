@@ -5,7 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+#import <TargetConditionals.h>
+
 #ifdef FB_SONARKIT_ENABLED
+#if !TARGET_OS_OSX
 
 #import <UIKit/UIKit.h>
 #include "FlipperStateUpdateListener.h"
@@ -25,4 +28,5 @@
 - (void)onUpdate;
 @end
 
+#endif
 #endif

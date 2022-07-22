@@ -1,80 +1,77 @@
-import * as React from "react";
-import { AppState, FlatList, StyleSheet, View } from "react-native";
-import { connect } from "react-redux";
+import React, { useRef, useEffect, useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  AppState,
+  FlatList,
+  StyleSheet,
+  View,
+  AppStateStatus,
+} from "react-native";
 
 import Colors from "../constants/Colors";
 import { BodyText, Card } from "../components";
 
 import { getRestaurants } from "../store/selectors";
-import { University } from "../store/types/state";
+import { University } from "../store/reducers/data";
 
-import { actions as AppActions } from "../store/actions/app";
-import { actions as LoginActions } from "../store/actions/login";
+import { appActions } from "../store/actions/app";
+import { authActions } from "../store/actions/auth";
 
-type Props = {
-  restaurants: University[] | null;
-  appStateUpdated: (prevState, newState) => void;
-  validateToken: () => void;
-};
+import { StringValues } from "../constants/StringValues";
 
-type State = {
-  appState: string;
-};
-export class HomeScreenBase extends React.Component<Props, State> {
-  constructor(props) {
-    super(props);
+export const HomeScreen = () => {
+  const dispatch = useDispatch();
 
-    this.state = {
-      appState: AppState.currentState,
-    };
-  }
+  const restaurants = useSelector(getRestaurants);
 
-  componentDidMount() {
-    AppState.addEventListener("change", this.handleAppStateChange);
-  }
+  const appState = useRef(AppState.currentState);
 
-  componentWillUnmount() {
-    AppState.removeEventListener("change", this.handleAppStateChange);
-  }
-
-  handleAppStateChange = (nextAppState) => {
-    console.log(`state changes`, nextAppState);
-
-    this.props.appStateUpdated(this.state.appState, nextAppState);
-
-    if (this.state.appState.match(/inactive|background/) && nextAppState === "active") {
-      this.props.validateToken();
+  const handleAppStateChange = useCallback((nextAppState: AppStateStatus) => {
+    if (
+      appState.current.match(/inactive|background/) &&
+      nextAppState === "active"
+    ) {
+      dispatch(authActions.validateTokenStart());
     }
 
-    this.setState({ appState: nextAppState });
-  };
+    dispatch(appActions.appStateUpdated({ appState, nextAppState }));
+    appState.current = nextAppState;
+  }, []);
 
-  renderItem = (item: University) => {
+  useEffect(() => {
+    const subscription = AppState.addEventListener("change", nextAppState =>
+      handleAppStateChange(nextAppState),
+    );
+
+    return () => {
+      subscription.remove();
+    };
+  }, [handleAppStateChange]);
+
+  const renderItem = (item: University) => {
     return <Card item={item} />;
   };
 
-  render() {
-    const restaurantsList = this.props && this.props.restaurants ? this.props.restaurants : [];
-
-    return (
-      <View style={styles.screenContainer}>
-        {restaurantsList.length > 0 ? (
-          <View style={styles.listContainer}>
-            <FlatList
-              data={restaurantsList}
-              keyExtractor={({ url }) => url}
-              renderItem={({ item }) => this.renderItem(item)}
-              style={styles.listContainer}
-              showsVerticalScrollIndicator={false}
-            />
-          </View>
-        ) : (
-          <BodyText style={styles.centeredText}>No data available</BodyText>
-        )}
-      </View>
-    );
-  }
-}
+  return (
+    <View style={styles.screenContainer}>
+      {restaurants.length > 0 ? (
+        <View style={styles.listContainer}>
+          <FlatList
+            data={restaurants}
+            keyExtractor={({ url }) => url}
+            renderItem={({ item }) => renderItem(item)}
+            style={styles.listContainer}
+            showsVerticalScrollIndicator={false}
+          />
+        </View>
+      ) : (
+        <BodyText style={styles.centeredText}>
+          {StringValues.noDataAvailable}
+        </BodyText>
+      )}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   screenContainer: {
@@ -90,14 +87,3 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
-
-const mapStateToProps = (state) => ({
-  restaurants: getRestaurants(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  validateToken: () => dispatch(LoginActions.validateToken()),
-  appStateUpdated: (prevState, newState) => dispatch(AppActions.appStateUpdated(prevState, newState)),
-});
-
-export const HomeScreen = connect(mapStateToProps, mapDispatchToProps)(HomeScreenBase);

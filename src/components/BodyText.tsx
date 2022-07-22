@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Text, TextProps, StyleProp, TextStyle } from "react-native";
 
 interface Props<T> {

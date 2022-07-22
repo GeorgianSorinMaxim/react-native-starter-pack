@@ -1,16 +1,35 @@
 import { Reducer } from "redux";
 
-import { ActionTypes, Actions } from "../actions/data";
-import { DataState } from "../types/state";
+import { dataActions, DataActionTypes } from "../actions/data";
 
-export const DEFAULT_STATE = {
+export type University = {
+  name: string;
+  url: string;
+  imageUrl?: string;
+  geo?: {
+    address: {
+      streetAddress: string;
+      postalCode: string;
+      addressLocality: string;
+    };
+  };
+};
+
+export type DataState = {
+  universities: University[] | [];
+};
+
+export const DEFAULT_STATE: DataState = {
   universities: [],
 };
 
-export const data: Reducer<DataState, Actions> = (state = DEFAULT_STATE, action) => {
+export const data: Reducer<DataState, DataActionTypes> = (
+  state = DEFAULT_STATE,
+  action,
+) => {
   switch (action.type) {
-    case ActionTypes.DATA_FETCHED_SUCCESS:
-    case ActionTypes.DATA_FETCHED_FAILURE:
+    case dataActions.fetchDataSuccess.type:
+    case dataActions.fetchDataFailure.type:
       return { ...state, universities: action.payload };
   }
   return state;

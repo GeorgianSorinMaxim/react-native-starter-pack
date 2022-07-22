@@ -9,5 +9,11 @@ type IconProps = {
 };
 
 export default function TabBarIcon(props: IconProps) {
-  return <Icon size={20} name={props.name} color={props.focused ? Colors.gold : Colors.tabIconDefault} />;
+  return (
+    <Icon
+      size={20}
+      name={props.name}
+      color={props.focused ? Colors.gold : Colors.tabIconDefault}
+    />
+  );
 }

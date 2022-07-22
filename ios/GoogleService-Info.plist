@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>864491570252-osdcqvsveivffofvhjj5mr5qhigq79bn.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.864491570252-osdcqvsveivffofvhjj5mr5qhigq79bn</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAUPyBlNr8GcTtemspFZ23Y1BDFLzYRn0E</string>
+	<key>GCM_SENDER_ID</key>
+	<string>864491570252</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.app.Hurt</string>
+	<key>PROJECT_ID</key>
+	<string>reactnative-43696</string>
+	<key>STORAGE_BUCKET</key>
+	<string>reactnative-43696.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:864491570252:ios:6217f0f5fb532df700e0e9</string>
+	<key>DATABASE_URL</key>
+	<string>https://reactnative-43696.firebaseio.com</string>
+</dict>
+</plist>

@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { StyleProp, StyleSheet, Text, TextInput, TextStyle, View, ViewStyle } from "react-native";
+import {
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextInput,
+  TextStyle,
+  View,
+  ViewStyle,
+} from "react-native";
 
 import Colors from "../constants/Colors";
 
@@ -27,7 +35,15 @@ export default class TextAreaWithLabel extends Component<Props, State> {
   onBlur = () => this.setState({ isFocused: false });
 
   render() {
-    const { label, value, required, maxLength, numberOfLines, style, ...props } = this.props;
+    const {
+      label,
+      value,
+      required,
+      maxLength,
+      numberOfLines,
+      style,
+      ...props
+    } = this.props;
     const { isFocused } = this.state;
 
     const isSmallLabel = isFocused || value === "";
@@ -46,7 +62,9 @@ export default class TextAreaWithLabel extends Component<Props, State> {
       <View style={style}>
         <Text style={labelStyle}>{label}</Text>
 
-        {required && value === "" ? <Text style={styles.requiredLabelStyle}>Required</Text> : null}
+        {required && value === "" ? (
+          <Text style={styles.requiredLabelStyle}>Required</Text>
+        ) : null}
 
         {maxLength ? (
           <Text style={styles.maxLength}>
@@ -60,7 +78,12 @@ export default class TextAreaWithLabel extends Component<Props, State> {
           numberOfLines={numberOfLines}
           scrollEnabled={false}
           defaultValue={value}
-          style={[styles.textareaInput, required && value === "" ? { borderBottomColor: Colors.required } : null]}
+          style={[
+            styles.textareaInput,
+            required && value === ""
+              ? { borderBottomColor: Colors.required }
+              : null,
+          ]}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
           maxLength={maxLength}

@@ -1,18 +1,27 @@
 import { Reducer } from "redux";
 
-import { ActionTypes, AppActions } from "../actions/app";
-import { AppState } from "../types/state";
+import { appActions, AppActionTypes } from "../actions/app";
 
-export const DEFAULT_STATE = {
+export type AppState = {
+  state: {
+    prevState?: string;
+    newState?: string;
+  };
+};
+
+export const DEFAULT_STATE: AppState = {
   state: {
     prevState: undefined,
     newState: "active",
   },
 };
 
-export const app: Reducer<AppState, AppActions> = (state = DEFAULT_STATE, action) => {
+export const app: Reducer<AppState, AppActionTypes> = (
+  state = DEFAULT_STATE,
+  action,
+) => {
   switch (action.type) {
-    case ActionTypes.GET_APP_STATE:
+    case appActions.appStateUpdated.type:
       return {
         ...state,
         state: {

@@ -1,5 +1,15 @@
 import React, { Component } from "react";
-import { Modal, Picker, StyleProp, StyleSheet, Text, TextInput, TouchableOpacity, View, ViewStyle } from "react-native";
+import {
+  Modal,
+  Picker,
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from "react-native";
 
 import { PhoneNumberPrefix } from "../components";
 import Colors from "../constants/Colors";
@@ -68,15 +78,28 @@ class Dropdown extends Component<Props, State> {
     }
   };
 
-  renderPickerData = (item: PickerElement, index: number) => <Picker.Item label={item.key} value={index} key={index} />;
+  renderPickerData = (item: PickerElement, index: number) => (
+    <Picker.Item label={item.key} value={index} key={index} />
+  );
 
   render() {
-    const { pickerData, countryCodePicker, placeholder, value, style, styleInput, styleArrow, required } = this.props;
+    const {
+      pickerData,
+      countryCodePicker,
+      placeholder,
+      value,
+      style,
+      styleInput,
+      styleArrow,
+      required,
+    } = this.props;
     const { renderPicker, itemIndex } = this.state;
 
     return (
       <View>
-        <TouchableOpacity onPress={this.showPicker} style={[styles.container, style]}>
+        <TouchableOpacity
+          onPress={this.showPicker}
+          style={[styles.container, style]}>
           <View pointerEvents={"none"}>
             <TextInput
               placeholder={placeholder}
@@ -84,8 +107,12 @@ class Dropdown extends Component<Props, State> {
               style={[
                 styleInput,
                 styles.textInput,
-                value ? { fontSize: 20, color: Colors.black } : { fontSize: 16, color: Colors.grey },
-                required && !value ? { borderBottomColor: Colors.required } : null,
+                value
+                  ? { fontSize: 20, color: Colors.black }
+                  : { fontSize: 16, color: Colors.grey },
+                required && !value
+                  ? { borderBottomColor: Colors.required }
+                  : null,
               ]}
             />
           </View>
@@ -99,11 +126,17 @@ class Dropdown extends Component<Props, State> {
             <View style={styles.contentContainer}>
               <View style={[styles.picker, { backgroundColor: Colors.white }]}>
                 <View style={{ backgroundColor: Colors.lightGrey }}>
-                  <TouchableOpacity onPress={this.onValueChange} style={styles.button}>
-                    <Text style={[styles.buttonText, { color: Colors.blue }]}>Done</Text>
+                  <TouchableOpacity
+                    onPress={this.onValueChange}
+                    style={styles.button}>
+                    <Text style={[styles.buttonText, { color: Colors.blue }]}>
+                      Done
+                    </Text>
                   </TouchableOpacity>
                 </View>
-                <Picker selectedValue={itemIndex} onValueChange={this.setDropdownValue}>
+                <Picker
+                  selectedValue={itemIndex}
+                  onValueChange={this.setDropdownValue}>
                   {pickerData.map(this.renderPickerData)}
                 </Picker>
               </View>
@@ -114,7 +147,9 @@ class Dropdown extends Component<Props, State> {
         {countryCodePicker && renderPicker ? (
           <Modal animationType="slide" visible transparent>
             <View style={styles.contentContainer}>
-              <PhoneNumberPrefix onValueChange={this.onCountryCodeValueChange} />
+              <PhoneNumberPrefix
+                onValueChange={this.onCountryCodeValueChange}
+              />
             </View>
           </Modal>
         ) : null}

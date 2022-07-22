@@ -73,36 +73,51 @@
 - Custom dropdown
 - Divider for elements
 - Multi-purpose modal
-- Screen header with title and left / right buttons
 - Screen container
 - WebView container with `react-native-webview` and `uri-js`
 
-### TODO
-- WIP: Auto-login with token verification with `jwt-decode`
-- Use AppCenter CI to build and sign the app
-- UI improvments for login / signup forms with `react-native-keyboard-aware-scroll-view`
-- Fetch data from Firebase Database using with `react-native-firebase`
-- Logging and tracking service: Analytics (GA) and Crashlytics with `react-native-firebase`, `react-native-device-info` and `react-native-uuid`
-- Progress indicators and spinners with `react-native-progess`
-- Use biometric authentication and store user creds in the KeyChain and KeyStore with `react-native-secure-key-store` - https://www.freecodecamp.org/news/how-to-implement-secure-biometric-authentication-on-mobile-devices-4dc518558c5c/
+### Changelog
+- DONE in July 2022
+  - Upgraded `react`, `react-native` & other dependencies
+  - Enabled Hermes
+  - Refactored `/screens` and `/components` to use hooks
+  - Added `react-native-firebase`
+
+### WIP features and improvments
+- Add logger service
+- Make TS rules strict (e.g. turn on rules like `noImplicitAny`, no `@ts-ignroe` or `: any` types) and fix any arrising TS issues
+  - Improve and extend the types (see the TODOs placed in the code) and transform `networkingApi.js`, `useLinking.js` into `.ts`
+- Create a design system with small component for Text, Heading, Subheading, Divider, Loader, etc
+- Use Hooks and functional components
+- Home screen: needs to be refactored
+- Login / Regiser screen: Add image on background like on Harrods's app and validation
+  - UI improvments with `react-native-keyboard-aware-scroll-view`
+- Add screens to showcase `WebViewInModal` & other currently unused components
+- Progress indicators and spinners with `react-native-progress`
+- Add feature flagging + A/B testing capabilities with Firebase Remote Config + Firebase Realtime Database using with `react-native-firebase`
 - Run the app in different environments: dev, prod, uat with `react-native-config`
-- Allow to natively share urls with `react-native-share`
-- Internationalization with i18n (`react-native-localize`, `i18n-js`)
+- Render SVGs with `react-native-svg` and `react-native-svg-transformer`
 - Animate UI elements with `react-native-reanimated`
+- Ask your users to rate the app with `react-native-rate`
+- Add push notifications with Firebase / Azure / Iterable
+- Replace `Jest` with `react-native-testing-library` and write tests (e.g. for /components, networkingApi.js and for the navigator)
+- Build a CI with AppCenter CI to build and sign the app
+- Add CodePush for over-the-air updates
+- Add logging and tracking service: Bugsnag, Analytics (GA) and Crashlytics with `react-native-firebase`, `react-native-device-info` and `react-native-uuid`
+- Add `pre-commit` hooks
+- Auto-login with token verification with `jwt-decode`
+- Use biometric authentication and store user creds in the KeyChain and KeyStore with `react-native-secure-key-store`
+- Allow to natively share urls with `react-native-share`
 - Create gradients with `react-native-linear-gradient`
-- Display various graph with `victory-native`
 - Take pictures with `react-native-camera`
 - Render maps with `react-native-maps`
 - Render PDFs in-app with `react-native-pdf`
-- Ask your users to rate the app with `react-native-rate`
-- Render SVGs with `react-native-svg` and `react-native-svg-transformer`
-- Feature flagging with Firebase
-- Push notifications with Firebase / Azure
+- Internationalization with i18n (`react-native-localize`, `i18n-js`)
+- Display various graph with `victory-native`
 - Local notifications
-- SPIKE Apollo Client
-  - Manage manage the local data using Apollo Client (with apollo-link-state).
-  - Access the Apollo cache with apollo-cache-inmemory.
-
+- Spike Apollo Client
+  - Manage manage the local data using Apollo Client (with apollo-link-state)
+  - Access the Apollo cache with apollo-cache-inmemory
 
 ### TODOs before going live
 - Manual test the app on multiple devices on both platforms (or use AWS Device Farm).
@@ -114,15 +129,20 @@
 - Fix bugs and re-test the app.
 - Release the first verion of the app.
 
-### TODOs:
-- Cleanup home page
-- Add a loader component for the initial fetch by using a loading flag in Redux that's initially set to true. Once the data is fetch the flag is set to false. While the flag is true, render the loader, otherwise render the data or the placeholder
-
-- Login / Regiser: Add image on background like on Harrod's app and validation
-- WebViewInModal & other unused components
-- Write and improve tests (e.g. for /components, networkingApi.js and for the navigator)
-- Improve and extend the typings (see the TODOs placed in the code) and transform networkingApi.js and useLinking.js into .tsx
-
-
-
-
+### Code quality:
+  - Re-use code whenever possible
+  - Use functional components (not class components) since Hooks allows us to use state inside functional components
+  - Have strict TS rules
+  - Run Prettier, lint and TS in all files (including tests)
+  - Use type declarations for dependencies (e.g. `react-native`)
+  - Write unit tests using `react-native-testing-library`
+  - Write E2E tests
+  - Use pre-hooks, Git checks and checks on the CI
+  - Document the app (how to get started, important architectural decisions, etc)
+  - Use PR templates and a CHANGELOG.MD
+  - Use an UAT app against multiple envs
+  - Have a logging service (GA / Bugsnag)
+  - Keep the dependencies updated
+  - Integrate Crashlytics
+  - Built a CI (Bitrise + CodePush)
+    - Fully automate release from Bitrise

@@ -5,6 +5,8 @@ import BottomTabNavigator from "./BottomTabNavigator";
 
 import Colors from "../constants/Colors";
 
+import { ScreenNames } from "./ScreenNames";
+
 const Stack = createStackNavigator();
 
 const headerOptions = {
@@ -22,7 +24,11 @@ const headerOptions = {
 export const MainNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={BottomTabNavigator} options={headerOptions} />
+      <Stack.Screen
+        name={ScreenNames.HOME}
+        component={BottomTabNavigator}
+        options={headerOptions}
+      />
     </Stack.Navigator>
   );
 };

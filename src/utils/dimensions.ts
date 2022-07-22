@@ -52,7 +52,7 @@ export const normalizeText = (size: number) => {
   // Android font scaling
   if (pixelRatio >= 3.5) {
     if (width <= 360) {
-      return SVGPathSegLinetoHorizontalRel;
+      return size;
     }
 
     if (height < 667) {

@@ -14,13 +14,25 @@ export default class OptionSwitch extends Component<Props> {
     const { value, required, onValueChange } = this.props;
 
     return (
-      <View style={[styles.container, required ? { borderBottomColor: Colors.required, borderBottomWidth: 1 } : null]}>
+      <View
+        style={[
+          styles.container,
+          required
+            ? { borderBottomColor: Colors.required, borderBottomWidth: 1 }
+            : null,
+        ]}>
         <TouchableOpacity onPress={() => onValueChange(true)}>
-          <Text style={[styles.labelStyle, value === true ? styles.active : null]}>Yes</Text>
+          <Text
+            style={[styles.labelStyle, value === true ? styles.active : null]}>
+            Yes
+          </Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => onValueChange(false)}>
-          <Text style={[styles.labelStyle, value === false ? styles.active : null]}>No</Text>
+          <Text
+            style={[styles.labelStyle, value === false ? styles.active : null]}>
+            No
+          </Text>
         </TouchableOpacity>
       </View>
     );

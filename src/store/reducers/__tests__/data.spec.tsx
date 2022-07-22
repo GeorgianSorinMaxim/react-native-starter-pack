@@ -9,7 +9,6 @@ describe("Data reducer", () => {
     });
 
     expect(state).toEqual({
-      data: [],
       universities: [],
     });
   });
@@ -22,7 +21,7 @@ describe("Data reducer", () => {
       payload,
     });
 
-    expect(state).toEqual({ data: [], universities: ["mock"] });
+    expect(state).toEqual({ universities: ["mock"] });
   });
 
   it("DATA_FETCHED_FAILURE", () => {
@@ -33,6 +32,6 @@ describe("Data reducer", () => {
       payload,
     });
 
-    expect(state).toEqual({ data: [], universities: [] });
+    expect(state).toEqual({ universities: [] });
   });
 });

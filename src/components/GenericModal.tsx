@@ -1,5 +1,14 @@
 import React, { Component, ReactNode } from "react";
-import { Modal, StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from "react-native";
+import {
+  Modal,
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from "react-native";
 
 import Colors from "../constants/Colors";
 
@@ -38,25 +47,53 @@ class GenericModal extends Component<Props> {
     return (
       <Modal visible transparent>
         <View style={styles.modalBackground}>
-          <View style={[modalStyle || styles.modalContainer, { backgroundColor: Colors.white }]}>
-            <Text style={[styles.modalHeader, titleStyle || { color: Colors.blue }]}>{title}</Text>
+          <View
+            style={[
+              modalStyle || styles.modalContainer,
+              { backgroundColor: Colors.white },
+            ]}>
+            <Text
+              style={[
+                styles.modalHeader,
+                titleStyle || { color: Colors.blue },
+              ]}>
+              {title}
+            </Text>
 
-            {body ? <Text style={[styles.body, bodyStyle || { color: Colors.black }]}>{body}</Text> : null}
+            {body ? (
+              <Text style={[styles.body, bodyStyle || { color: Colors.black }]}>
+                {body}
+              </Text>
+            ) : null}
 
             {children || null}
 
             <View style={[secondaryButton ? styles.buttonsRow : null]}>
               {secondaryButton ? (
-                <TouchableOpacity onPress={secondaryButton.onPress} style={buttonShapeStyle || styles.callToAction}>
+                <TouchableOpacity
+                  onPress={secondaryButton.onPress}
+                  style={buttonShapeStyle || styles.callToAction}>
                   <Text
-                    style={[styles.modalButton, secondaryButton.style ? secondaryButton.style : { color: Colors.grey }]}
-                  >
+                    style={[
+                      styles.modalButton,
+                      secondaryButton.style
+                        ? secondaryButton.style
+                        : { color: Colors.grey },
+                    ]}>
                     {secondaryButton.title}
                   </Text>
                 </TouchableOpacity>
               ) : null}
-              <TouchableOpacity onPress={primaryButton.onPress} style={buttonShapeStyle || styles.callToAction}>
-                <Text style={[styles.modalButton, primaryButton.style ? primaryButton.style : { color: Colors.grey }]}>
+              <TouchableOpacity
+                onPress={primaryButton.onPress}
+                style={buttonShapeStyle || styles.callToAction}>
+                <Text
+                  style={[
+                    styles.modalButton,
+                    primaryButton.style
+                      ? primaryButton.style
+                      : { color: Colors.grey },
+                  ]}>
                   {primaryButton.title}
                 </Text>
               </TouchableOpacity>

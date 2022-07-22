@@ -1,16 +1,19 @@
-import { PayloadAction } from "../types/core";
+import {
+  actionCreatorWithPayload,
+  payloadType,
+} from "./action-creator-factories";
 
 export const ActionTypes = {
   GET_APP_STATE: "GET_APP_STATE",
 };
 
-export const actions = {
-  appStateUpdated: (prevState, newState) => ({
-    type: ActionTypes.GET_APP_STATE,
-    payload: { prevState, newState },
-  }),
+export const appActions = {
+  appStateUpdated: actionCreatorWithPayload(
+    ActionTypes.GET_APP_STATE,
+    payloadType<{ prevState: string; newState: string }>(),
+  ),
 };
 
-export type GetAppState = PayloadAction<typeof ActionTypes.GET_APP_STATE, any>;
+export type GetAppState = ReturnType<typeof appActions.appStateUpdated>;
 
-export type AppActions = GetAppState;
+export type AppActionTypes = GetAppState;

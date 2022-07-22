@@ -1,5 +1,11 @@
-import React, { Component } from "react";
-import { Dimensions, FlatList, NativeSyntheticEvent, StyleSheet, View } from "react-native";
+import React, { useState } from "react";
+import {
+  Dimensions,
+  FlatList,
+  NativeSyntheticEvent,
+  StyleSheet,
+  View,
+} from "react-native";
 import FastImage from "react-native-fast-image";
 
 import Icon from "react-native-vector-icons/Ionicons";
@@ -9,10 +15,6 @@ interface Props {
   data: string[];
   height: number;
 }
-
-type State = {
-  visibleItem: number;
-};
 
 type CarouselImage = {
   index: number;
@@ -31,29 +33,24 @@ const ImagePlaceholder = (props: ImageHeight) => (
   </View>
 );
 
-class Carousel extends Component<Props, State> {
-  state = {
-    visibleItem: 0,
-  };
+export const Carousel = ({ data, height }: Props) => {
+  const [visibleItem, setVisibleItem] = useState<number>(0);
 
-  handleScroll = (e: NativeSyntheticEvent<any>) => {
-    const { data } = this.props;
+  const handleScroll = (e: NativeSyntheticEvent<any>) => {
     const contentOffset = e.nativeEvent.contentOffset;
     const viewSize = e.nativeEvent.layoutMeasurement;
 
     const itemNumFromOffset = Math.floor(contentOffset.x / viewSize.width);
     const itemNum = Math.min(Math.max(0, itemNumFromOffset), data.length - 1);
 
-    this.setState({
-      visibleItem: itemNum,
-    });
+    setVisibleItem(itemNum);
   };
 
-  renderItem = ({ item }: CarouselImage) => {
+  const renderItem = ({ item }: CarouselImage) => {
     return item ? (
       <View style={styles.elementContainer}>
         <FastImage
-          style={[styles.image, { height: this.props.height }]}
+          style={[styles.image, { height: height }]}
           source={{
             uri: item,
             priority: FastImage.priority.high,
@@ -62,46 +59,46 @@ class Carousel extends Component<Props, State> {
         />
       </View>
     ) : (
-      <ImagePlaceholder height={this.props.height} />
+      <ImagePlaceholder height={height} />
     );
   };
 
-  renderCurrentItemIndicators = () => {
-    const { data } = this.props;
-    const textInputComponents = data.map((item, index) => (
-      <View key={index} style={[styles.dot, this.state.visibleItem !== index ? styles.inactive : null]} />
+  const renderCurrentItemIndicators = () => {
+    const textInputComponents = data.map((_item, index: number) => (
+      <View
+        key={index}
+        style={[styles.dot, visibleItem !== index ? styles.inactive : null]}
+      />
     ));
 
     return textInputComponents;
   };
 
-  render = () => {
-    const { data } = this.props;
+  if (!data) {
+    <ImagePlaceholder height={height} />;
+  }
 
-    if (!data) {
-      <ImagePlaceholder height={this.props.height} />;
-    }
-
-    return (
-      <View>
-        <FlatList
-          horizontal
-          data={data}
-          pagingEnabled
-          keyExtractor={keyExtractor}
-          renderItem={this.renderItem}
-          scrollEnabled={data.length > 1}
-          showsHorizontalScrollIndicator={false}
-          onScrollToIndexFailed={() => {}}
-          onScroll={this.handleScroll}
-        />
-        {data.length > 0 ? (
-          <View style={styles.currentItemIndicatorContainer}>{this.renderCurrentItemIndicators()}</View>
-        ) : null}
-      </View>
-    );
-  };
-}
+  return (
+    <View>
+      <FlatList
+        horizontal
+        data={data}
+        pagingEnabled
+        keyExtractor={keyExtractor}
+        renderItem={renderItem}
+        scrollEnabled={data.length > 1}
+        showsHorizontalScrollIndicator={false}
+        onScrollToIndexFailed={() => {}}
+        onScroll={handleScroll}
+      />
+      {data.length > 0 ? (
+        <View style={styles.currentItemIndicatorContainer}>
+          {renderCurrentItemIndicators()}
+        </View>
+      ) : null}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   elementContainer: {

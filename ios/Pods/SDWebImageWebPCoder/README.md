@@ -14,10 +14,11 @@ SDWebImageWebPCoder supports both WebP decoding and encoding, for Static WebP or
 
 ## Requirements
 
-+ iOS 8
-+ macOS 10.10
-+ tvOS 9.0
-+ watchOS 2.0
+- iOS 9.0
+- macOS 10.11
+- tvOS 9.0
+- watchOS 2.0
+- Xcode 11.0
 
 ## Installation
 
@@ -55,7 +56,7 @@ let package = Package(
 
 Before using SDWebImage to load WebP images, you need to register the WebP Coder to your coders manager. This step is recommended to be done after your App launch (like AppDelegate method).
 
-+ Objective-C
+- Objective-C
 
 ```objective-c
 // Add coder
@@ -63,7 +64,7 @@ SDImageWebPCoder *webPCoder = [SDImageWebPCoder sharedCoder];
 [[SDImageCodersManager sharedManager] addCoder:webPCoder];
 ```
 
-+ Swift
+- Swift
 
 ```swift
 // Add coder
@@ -75,13 +76,13 @@ SDImageCodersManager.shared.addCoder(WebPCoder)
 
 Some of image server provider may try to detect the client supported format, by default, SDWebImage use `image/*,*/*;q=0.8` for [Accept](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept). You can modify it with the `image/webp` as well.
 
-+ Objective-C
+- Objective-C
 
 ```objective-c
 [[SDWebImageDownloader sharedDownloader] setValue:@"image/webp,image/*,*/*;q=0.8" forHTTPHeaderField:@"Accept"];
 ```
 
-+ Swift
+- Swift
 
 ```swift
 SDWebImageDownloader.shared.setValue("image/webp,image/*,*/*;q=0.8", forHTTPHeaderField:"Accept")
@@ -89,7 +90,7 @@ SDWebImageDownloader.shared.setValue("image/webp,image/*,*/*;q=0.8", forHTTPHead
 
 ### Loading
 
-+ Objective-C
+- Objective-C
 
 ```objective-c
 // WebP online image loading
@@ -98,7 +99,7 @@ UIImageView *imageView;
 [imageView sd_setImageWithURL:webpURL];
 ```
 
-+ Swift
+- Swift
 
 ```swift
 // WebP online image loading
@@ -109,7 +110,7 @@ imageView.sd_setImage(with: webpURL)
 
 ### Progressive Animation Loading (0.5.0+)
 
-+ Objective-C
+- Objective-C
 
 ```objective-c
 // WebP progressive loading for animated image
@@ -119,7 +120,7 @@ imageView.shouldIncrementalLoad = YES;
 [imageView sd_setImageWithURL:webpURL placeholderImage:nil options:SDWebImageProgressiveLoad];
 ```
 
-+ Swift
+- Swift
 
 ```swift
 // WebP progressive loading for animated image
@@ -131,7 +132,7 @@ imageView.sd_setImage(with: webpURL, placeholderImage: nil, options: [.progressi
 
 ### Decoding
 
-+ Objective-C
+- Objective-C
 
 ```objective-c
 // WebP image decoding
@@ -139,7 +140,7 @@ NSData *webpData;
 UIImage *image = [[SDImageWebPCoder sharedCoder] decodedImageWithData:webpData options:nil];
 ```
 
-+ Swift
+- Swift
 
 ```swift
 // WebP image decoding
@@ -149,7 +150,7 @@ let image = SDImageWebPCoder.shared.decodedImage(with: data, options: nil)
 
 ### Thumbnail Decoding (0.4.0+)
 
-+ Objective-C
+- Objective-C
 
 ```objective-c
 // WebP thumbnail image decoding
@@ -158,7 +159,7 @@ CGSize thumbnailSize = CGSizeMake(300, 300);
 UIImage *thumbnailImage = [[SDImageWebPCoder sharedCoder] decodedImageWithData:webpData options:@{SDImageCoderDecodeThumbnailPixelSize : @(thumbnailSize}];
 ```
 
-+ Swift
+- Swift
 
 ```swift
 // WebP thumbnail image decoding
@@ -169,7 +170,7 @@ let image = SDImageWebPCoder.shared.decodedImage(with: data, options: [.decodeTh
 
 ### Encoding
 
-+ Objective-c
+- Objective-c
 
 ```objective-c
 // WebP image encoding
@@ -178,21 +179,64 @@ NSData *webpData = [[SDImageWebPCoder sharedCoder] encodedDataWithImage:image fo
 // Encode Quality
 NSData *lossyWebpData = [[SDImageWebPCoder sharedCoder] encodedDataWithImage:image format:SDImageFormatWebP options:@{SDImageCoderEncodeCompressionQuality : @(0.1)}]; // [0, 1] compression quality
 NSData *limitedWebpData = [[SDImageWebPCoder sharedCoder] encodedDataWithImage:image format:SDImageFormatWebP options:@{SDImageCoderEncodeMaxFileSize : @(1024 * 10)}]; // v0.6.0 feature, limit output file size <= 10KB
-NSData *thumbnailWebpData = [[SDImageWebPCoder sharedCoder] encodedDataWithImage:image format:SDImageFormatWebP options:@{SDImageCoderEncodeMaxPixelSize : @(CGSizeMake(200, 200)}]; // v0.6.1 feature, encoding max pixel size
 ```
 
-+ Swift
+- Swift
 
 ```swift
 // WebP image encoding
 let image: UIImage
 let webpData = SDImageWebPCoder.shared.encodedData(with: image, format: .webP, options: nil)
+// Encode Quality
 let lossyWebpData = SDImageWebPCoder.shared.encodedData(with: image, format: .webP, options: [.encodeCompressionQuality: 0.1]) // [0, 1] compression quality
 let limitedWebpData = SDImageWebPCoder.shared.encodedData(with: image, format: .webP, options: [.encodeMaxFileSize: 1024 * 10]) // v0.6.0 feature, limit output file size <= 10KB
+```
+
+### Thumbnail Encoding (0.6.1+)
+
+- Objective-C
+
+```objective-c
+// WebP image thumbnail encoding
+UIImage *image;
+NSData *thumbnailWebpData = [[SDImageWebPCoder sharedCoder] encodedDataWithImage:image format:SDImageFormatWebP options:@{SDImageCoderEncodeMaxPixelSize : @(CGSizeMake(200, 200)}]; // v0.6.1 feature, encoding max pixel size
+```
+
+- Swift
+
+```swift
+// WebP image thumbnail encoding
+let image: UIImage
 let thumbnailWebpData = SDImageWebPCoder.shared.encodedData(with: image, format: .webP, options: [.encodeMaxPixelSize: CGSize(width: 200, height: 200)]) // v0.6.1 feature, encoding max pixel size
 ```
 
 See more documentation in [SDWebImage Wiki - Coders](https://github.com/SDWebImage/SDWebImage/wiki/Advanced-Usage#custom-coder-420)
+
+### Advanced WebP codec options (0.8+)
+
+The WebP codec [libwebp](https://developers.google.com/speed/webp/docs/api) we use, supports some advanced control options for encoding/decoding. You can pass them to libwebp by using the wrapper top level API:
+
+- Objective-C
+
+```objective-c
+UIImage *image;
+SDImageCoderOptions *options = @{SDImageCoderEncodeWebPMethod: @(0), SDImageCoderEncodeWebPAlphaCompression: @(100)};
+NSData *data = [SDImageWebPCoder.sharedCoder encodedDataWithImage:image format:SDImageFormatWebP options:options];
+// Will translate into:
+// config->method = 0;
+// config->alpha_quality = 100;
+```
+
+- Swift
+
+```swift
+let image: UIImage
+let options = [.encodeWebPMethod: 0, .encodeWebPAlphaCompression: 100]
+let data = SDImageWebPCoder.shared.encodedData(with: image, format: .webP, options: options)
+// Will translate into:
+// config->method = 0;
+// config->alpha_quality = 100;
+```
 
 ## Example
 
@@ -214,5 +258,3 @@ These WebP images are from [WebP Gallery](https://developers.google.com/speed/we
 ## License
 
 SDWebImageWebPCoder is available under the MIT license. See [the LICENSE file](https://github.com/SDWebImage/SDWebImageWebPCoder/blob/master/LICENSE) for more info.
-
-

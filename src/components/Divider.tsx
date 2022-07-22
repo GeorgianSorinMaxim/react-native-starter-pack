@@ -10,7 +10,10 @@ interface OwnProps {
 type Props = ViewProps & OwnProps;
 
 const Divider: FC<Props> = ({ margin, ...props }) => (
-  <View {...props} style={[styles.container, margin ? { marginVertical: margin } : null]} />
+  <View
+    {...props}
+    style={[styles.container, margin ? { marginVertical: margin } : null]}
+  />
 );
 
 const styles = StyleSheet.create({

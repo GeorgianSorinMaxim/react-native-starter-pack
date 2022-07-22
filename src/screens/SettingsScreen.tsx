@@ -1,46 +1,40 @@
-import * as React from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Linking, View, StyleSheet } from "react-native";
-import { NavigationInjectedProps } from "react-navigation";
 import DeviceInfo from "react-native-device-info";
 import uuid from "react-native-uuid";
 
-import { BodyText, ButtonWithIcon, Divider, Title, Screen } from "../components";
+import {
+  BodyText,
+  ButtonWithIcon,
+  Divider,
+  Title,
+  Screen,
+} from "../components";
 import Colors from "../constants/Colors";
 
-import { actions as LoginActions } from "../store/actions/login";
+import { authActions } from "../store/actions/auth";
 import { getUser } from "../store/selectors";
 
 import { contact } from "../utils/contact";
 
-type OwnProps = {
-  logout: () => void;
-  user: {
-    id: string;
-    email: string;
-    firstName?: string;
-    lastName?: string;
-  };
-};
-type Props = OwnProps & NavigationInjectedProps;
+import { StringValues } from "../constants/StringValues";
 
-export class SettingsScreenBase extends React.Component<Props> {
-  state = {
-    bundleId: "",
-    buildNumber: "",
-    version: "",
-    readableVersion: "",
-    systemName: "",
-    ip: "",
-    osVersion: "",
-    uuid: "",
-  };
+export const SettingsScreen = () => {
+  const dispatch = useDispatch();
 
-  async componentDidMount() {
-    await this.getDeviceData();
-  }
+  const user = useSelector(getUser);
 
-  getDeviceData = async () => {
+  const [bundleId, setBundleId] = useState<string>("");
+  const [buildNumber, setBuildNumber] = useState<string>("");
+  const [version, setVersion] = useState<string>("");
+  const [readableVersion, setReadableVersion] = useState<string>("");
+  const [systemName, setSystemName] = useState<string>("");
+  const [ip, setIp] = useState<string>("");
+  const [osVersion, setOsVersion] = useState<string>("");
+  const [uuidValue, setUuid] = useState<string>("");
+
+  const getDeviceData = async () => {
     try {
       const bundleId = await DeviceInfo.getBundleId();
       const buildNumber = await DeviceInfo.getBuildNumber();
@@ -49,31 +43,31 @@ export class SettingsScreenBase extends React.Component<Props> {
       const systemName = await DeviceInfo.getSystemName();
       const ip = await DeviceInfo.getIpAddress();
       const osVersion = await DeviceInfo.getSystemVersion();
-      const id = uuid.v1();
+      const uuidVal = uuid.v1();
 
-      this.setState({
-        bundleId,
-        buildNumber,
-        version,
-        readableVersion,
-        systemName,
-        ip,
-        osVersion,
-        uuid: id,
-      });
-    } catch (e) {
-      return console.log("** getDeviceData error");
+      setBundleId(bundleId);
+      setBuildNumber(buildNumber);
+      setVersion(version);
+      setReadableVersion(readableVersion);
+      setSystemName(systemName);
+      setIp(ip);
+      setOsVersion(osVersion);
+      setUuid(uuidVal.toString());
+    } catch (err) {
+      return console.log("getDeviceData error:", err);
     }
   };
 
-  onLogout = () => {
-    this.props.logout();
+  useEffect(() => {
+    getDeviceData();
+  }, []);
+
+  const onLogout = () => {
+    dispatch(authActions.logoutStart());
   };
 
-  onContact = () => {
-    const { bundleId, buildNumber, version, systemName, ip, osVersion, uuid } = this.state;
-
-    const EMAIL = "georgian.maxim@gmail.com";
+  const onContact = () => {
+    const EMAIL = "hey@devxldn.com";
     const SUBJECT = "I have a question or concern:";
     const BODY = `Please write your question or concern below:\n
       \n\n\n
@@ -84,52 +78,68 @@ export class SettingsScreenBase extends React.Component<Props> {
       System: ${systemName} \n
       OS: ${osVersion} \n
       IP: ${ip} \n
-      UUID: ${uuid} \n
+      UUID: ${uuidValue} \n
     `;
     contact(EMAIL, SUBJECT, BODY);
   };
 
-  render() {
-    return (
-      <Screen noHorizontalPadding={true}>
-        <View style={styles.container}>
-          <Title label="Your details" />
-          <Divider />
-          <View style={styles.bodyContainer}>
-            {this.props.user.firstName && this.props.user.lastName ? (
-              <View style={styles.textContainer}>
-                <BodyText style={styles.headerText}>Name</BodyText>
-                <BodyText style={styles.contentText}>
-                  {this.props.user.firstName} {this.props.user.lastName}
-                </BodyText>
-              </View>
-            ) : null}
+  const onTermsPress = () => {
+    try {
+      Linking.openURL("http://www.devxldn.com");
+    } catch (err) {
+      console.log("Linking error: ", err);
+    }
+  };
+
+  return (
+    <Screen noHorizontalPadding={true}>
+      <View style={styles.container}>
+        <Title label={StringValues.yourDetails} />
+        <Divider />
+        <View style={styles.bodyContainer}>
+          {user?.lastName ? (
             <View style={styles.textContainer}>
-              <BodyText style={styles.headerText}>Email</BodyText>
-              <BodyText style={styles.contentText}>{this.props.user.email}</BodyText>
+              <BodyText style={styles.headerText}>Name</BodyText>
+              <BodyText style={styles.contentText}>
+                {user?.firstName} {user?.lastName}
+              </BodyText>
             </View>
-            <View style={styles.textContainer}>
-              <BodyText style={styles.headerText}>App version</BodyText>
-              <BodyText style={styles.contentText}>{this.state.readableVersion}</BodyText>
-            </View>
-            <View style={styles.textContainer}>
-              <BodyText style={styles.headerText}>UUID</BodyText>
-              <BodyText style={styles.contentText}>{this.state.uuid}</BodyText>
-            </View>
+          ) : null}
+          <View style={styles.textContainer}>
+            <BodyText style={styles.headerText}>{StringValues.email}</BodyText>
+            <BodyText style={styles.contentText}>{user?.email}</BodyText>
+          </View>
+          <View style={styles.textContainer}>
+            <BodyText style={styles.headerText}>
+              {StringValues.appVersion}
+            </BodyText>
+            <BodyText style={styles.contentText}>{readableVersion}</BodyText>
+          </View>
+          <View style={styles.textContainer}>
+            <BodyText style={styles.headerText}>{StringValues.uuid}</BodyText>
+            <BodyText style={styles.contentText}>{uuidValue}</BodyText>
           </View>
         </View>
+      </View>
 
-        <ButtonWithIcon
-          icon="link"
-          label="Terms & Conditions"
-          onPress={() => Linking.openURL("http://www.devxldn.com")}
-        />
-        <ButtonWithIcon icon="mail-outline" label="Contact" onPress={this.onContact} />
-        <ButtonWithIcon icon="log-out-outline" label="Logout" onPress={this.onLogout} />
-      </Screen>
-    );
-  }
-}
+      <ButtonWithIcon
+        icon="link"
+        label={StringValues.termsAndConditions}
+        onPress={onTermsPress}
+      />
+      <ButtonWithIcon
+        icon="mail-outline"
+        label={StringValues.contact}
+        onPress={onContact}
+      />
+      <ButtonWithIcon
+        icon="log-out-outline"
+        label={StringValues.logout}
+        onPress={onLogout}
+      />
+    </Screen>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -150,13 +160,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-
-const mapStateToProps = (state) => ({
-  user: getUser(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  logout: () => dispatch(LoginActions.logout()),
-});
-
-export const SettingsScreen = connect(mapStateToProps, mapDispatchToProps)(SettingsScreenBase);

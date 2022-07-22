@@ -1,5 +1,11 @@
 import React, { FC } from "react";
-import { Alert, Linking, StyleSheet, Text, TouchableOpacity } from "react-native";
+import {
+  Alert,
+  Linking,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 
 import Colors from "../constants/Colors";
 
@@ -8,7 +14,10 @@ type Props = {
   url: string;
 };
 
-const openUrl = (url: string) => Linking.openURL(url).catch(() => Alert.alert(`Error:, ${url} could not be opened!`));
+const openUrl = (url: string) =>
+  Linking.openURL(url).catch(() =>
+    Alert.alert(`Error:, ${url} could not be opened!`),
+  );
 
 const HyperLink: FC<Props> = ({ text, url }) => (
   <TouchableOpacity style={styles.linkContainer} onPress={() => openUrl(url)}>

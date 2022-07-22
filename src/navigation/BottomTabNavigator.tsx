@@ -6,13 +6,13 @@ import TabBarIcon from "../components/TabBarIcon";
 import { HomeScreen } from "../screens/HomeScreen";
 import { SettingsScreen } from "../screens/SettingsScreen";
 import { AppsScreen } from "../screens/AppsScreen";
-import { HOME, APPS, SETTINGS } from "./routes";
+import { ScreenNames } from "./ScreenNames";
 
 import Colors from "../constants/Colors";
 import { isSmallScreen } from "../utils/dimensions";
 
 const BottomTab = createBottomTabNavigator();
-const INITIAL_ROUTE_NAME = HOME;
+const INITIAL_ROUTE_NAME = ScreenNames.HOME;
 
 type BottomTabNavigatorProps = {
   navigation: NavigationProp<any>;
@@ -42,30 +42,35 @@ const BottomTabNavigator = ({ navigation, route }: BottomTabNavigatorProps) => {
           paddingTop: 10,
           paddingBottom: isSmallScreen ? 20 : 40,
         },
-      }}
-    >
+      }}>
       <BottomTab.Screen
-        name={HOME}
+        name={ScreenNames.HOME}
         component={HomeScreen}
         options={{
-          title: HOME,
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="home-outline" />,
+          title: ScreenNames.HOME,
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} name="home-outline" />
+          ),
         }}
       />
       <BottomTab.Screen
-        name={APPS}
+        name={ScreenNames.APPS}
         component={AppsScreen}
         options={{
-          title: APPS,
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="phone-portrait-outline" />,
+          title: ScreenNames.APPS,
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} name="phone-portrait-outline" />
+          ),
         }}
       />
       <BottomTab.Screen
-        name={SETTINGS}
+        name={ScreenNames.SETTINGS}
         component={SettingsScreen}
         options={{
-          title: SETTINGS,
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="settings-outline" />,
+          title: ScreenNames.SETTINGS,
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} name="settings-outline" />
+          ),
         }}
       />
     </BottomTab.Navigator>
@@ -73,13 +78,15 @@ const BottomTabNavigator = ({ navigation, route }: BottomTabNavigatorProps) => {
 };
 
 const getHeaderTitle = (route: Route) => {
-  const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
+  const routeName =
+    route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
 
   switch (routeName) {
-    case HOME:
-      return HOME;
-    case SETTINGS:
-      return SETTINGS;
+    default:
+    case ScreenNames.HOME:
+      return ScreenNames.HOME;
+    case ScreenNames.SETTINGS:
+      return ScreenNames.SETTINGS;
   }
 };
 

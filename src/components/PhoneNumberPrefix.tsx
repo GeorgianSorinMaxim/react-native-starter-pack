@@ -19,7 +19,7 @@ interface Props {
   onValueChange: (itemValue: CountryCodeValueType) => void;
 }
 
-const initialIndex = data.findIndex((obj) => obj.code === "GB");
+const initialIndex = data.findIndex(obj => obj.code === "GB");
 
 class PhoneNumberPrefix extends Component<Props, State> {
   state = {
@@ -31,7 +31,11 @@ class PhoneNumberPrefix extends Component<Props, State> {
   };
 
   renderPickerData = (item: CountryCodeValueType, index: number) => (
-    <Picker.Item label={`${item.name} (${item.dialCode})`} value={index} key={index} />
+    <Picker.Item
+      label={`${item.name} (${item.dialCode})`}
+      value={index}
+      key={index}
+    />
   );
 
   render() {
@@ -42,11 +46,19 @@ class PhoneNumberPrefix extends Component<Props, State> {
     return (
       <View style={[styles.picker, { backgroundColor: Colors.white }]}>
         <View style={{ backgroundColor: Colors.lightGrey }}>
-          <TouchableOpacity onPress={() => onValueChange(itemValue)} style={styles.button}>
-            <Text style={[styles.buttonText, { color: Colors.blue }]}>Done</Text>
+          <TouchableOpacity
+            onPress={() => onValueChange(itemValue)}
+            style={styles.button}>
+            <Text style={[styles.buttonText, { color: Colors.blue }]}>
+              Done
+            </Text>
           </TouchableOpacity>
         </View>
-        <Picker selectedValue={itemIndex} onValueChange={(itemIndex) => this.setSelectedValue(itemIndex)}>
+        <Picker
+          selectedValue={itemIndex}
+          onValueChange={(itemIndex: number) =>
+            this.setSelectedValue(itemIndex)
+          }>
           {data.map(this.renderPickerData)}
         </Picker>
       </View>

@@ -24,7 +24,9 @@ describe("SettingsScreen", () => {
     };
 
     // @ts-ignore
-    const tree = renderer.create(<SettingsScreenBase {...defaultProps} />).toJSON();
+    const tree = renderer
+      .create(<SettingsScreenBase {...defaultProps} />)
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

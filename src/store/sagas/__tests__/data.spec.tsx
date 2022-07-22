@@ -26,7 +26,9 @@ describe("Data sagas", () => {
 
     it("should dispatch DATA_FETCHED_SUCCESS", () => {
       // @ts-ignore used because an action is accepted as a parameter
-      const generator = cloneableGenerator(data.fetchData)(ActionTypes.DATA_FETCHED_SUCCESS);
+      const generator = cloneableGenerator(data.fetchData)(
+        ActionTypes.DATA_FETCHED_SUCCESS,
+      );
 
       let next = generator.next();
       next = generator.next({ success: true, payload: { data: ["mock"] } });

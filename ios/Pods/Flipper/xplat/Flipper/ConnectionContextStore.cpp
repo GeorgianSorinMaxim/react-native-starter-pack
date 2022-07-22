@@ -8,18 +8,26 @@
 #include "ConnectionContextStore.h"
 #include <folly/json.h>
 #include <folly/portability/SysStat.h>
-#include <stdio.h>
+#include <openssl/err.h>
+#include <openssl/pem.h>
+#include <openssl/pkcs12.h>
+#include <openssl/x509.h>
 #include <fstream>
 #include <iostream>
+#include <sstream>
+#include <stdexcept>
+#include <utility>
 #include "CertificateUtils.h"
 #include "Log.h"
-
-using namespace facebook::flipper;
+namespace facebook {
+namespace flipper {
 
 static constexpr auto CSR_FILE_NAME = "app.csr";
 static constexpr auto FLIPPER_CA_FILE_NAME = "sonarCA.crt";
 static constexpr auto CLIENT_CERT_FILE_NAME = "device.crt";
 static constexpr auto PRIVATE_KEY_FILE = "privateKey.pem";
+static constexpr auto CERTIFICATE_FILE_NAME = "device.p12";
+static constexpr auto CERTIFICATE_PASSWORD = "fl1pp3r";
 static constexpr auto CONNECTION_CONFIG_FILE = "connection_config.json";
 
 bool fileExists(std::string fileName);
@@ -36,8 +44,10 @@ bool ConnectionContextStore::hasRequiredFiles() {
       loadStringFromFile(absoluteFilePath(CLIENT_CERT_FILE_NAME));
   std::string privateKey =
       loadStringFromFile(absoluteFilePath(PRIVATE_KEY_FILE));
+  std::string config =
+      loadStringFromFile(absoluteFilePath(CONNECTION_CONFIG_FILE));
 
-  if (caCert == "" || clientCert == "" || privateKey == "") {
+  if (caCert == "" || clientCert == "" || privateKey == "" || config == "") {
     return false;
   }
   return true;
@@ -57,7 +67,7 @@ std::string ConnectionContextStore::getCertificateSigningRequest() {
 
   // Clean all state and generate a new one
   resetState();
-  bool success = generateCertSigningRequest(
+  bool success = facebook::flipper::generateCertSigningRequest(
       deviceData_.appId.c_str(),
       absoluteFilePath(CSR_FILE_NAME).c_str(),
       absoluteFilePath(PRIVATE_KEY_FILE).c_str());
@@ -69,7 +79,7 @@ std::string ConnectionContextStore::getCertificateSigningRequest() {
   return csr;
 }
 
-std::shared_ptr<SSLContext> ConnectionContextStore::getSSLContext() {
+std::shared_ptr<folly::SSLContext> ConnectionContextStore::getSSLContext() {
   std::shared_ptr<folly::SSLContext> sslContext =
       std::make_shared<folly::SSLContext>();
   sslContext->loadTrustedCertificates(
@@ -113,6 +123,10 @@ std::string ConnectionContextStore::getCertificateDirectoryPath() {
   return absoluteFilePath("");
 }
 
+std::string ConnectionContextStore::getCACertificatePath() {
+  return absoluteFilePath(FLIPPER_CA_FILE_NAME);
+}
+
 bool ConnectionContextStore::resetState() {
   // Clear in-memory state
   csr = "";
@@ -124,11 +138,13 @@ bool ConnectionContextStore::resetState() {
     int ret = mkdir(dirPath.c_str(), S_IRUSR | S_IWUSR | S_IXUSR);
     return ret == 0;
   } else if (info.st_mode & S_IFDIR) {
-    for (auto file : {CSR_FILE_NAME,
-                      FLIPPER_CA_FILE_NAME,
-                      CLIENT_CERT_FILE_NAME,
-                      PRIVATE_KEY_FILE,
-                      CONNECTION_CONFIG_FILE}) {
+    for (auto file :
+         {CSR_FILE_NAME,
+          FLIPPER_CA_FILE_NAME,
+          CLIENT_CERT_FILE_NAME,
+          PRIVATE_KEY_FILE,
+          CONNECTION_CONFIG_FILE,
+          CERTIFICATE_FILE_NAME}) {
       std::remove(absoluteFilePath(file).c_str());
     }
     return true;
@@ -136,6 +152,30 @@ bool ConnectionContextStore::resetState() {
     log("ERROR: Flipper path exists but is not a directory: " + dirPath);
     return false;
   }
+}
+
+std::pair<std::string, std::string> ConnectionContextStore::getCertificate() {
+  auto cacertFilepath = absoluteFilePath(FLIPPER_CA_FILE_NAME);
+  auto certFilepath = absoluteFilePath(CLIENT_CERT_FILE_NAME);
+  auto keyFilepath = absoluteFilePath(PRIVATE_KEY_FILE);
+  auto certificate_path = absoluteFilePath(CERTIFICATE_FILE_NAME);
+
+  if (fileExists(certificate_path.c_str())) {
+    std::remove(certificate_path.c_str());
+  }
+
+  if (!facebook::flipper::generateCertPKCS12(
+          cacertFilepath.c_str(),
+          certFilepath.c_str(),
+          keyFilepath.c_str(),
+          certificate_path.c_str(),
+          CERTIFICATE_FILE_NAME,
+          CERTIFICATE_PASSWORD)) {
+    log("ERROR: Unable to genereate certificate pkcs#12");
+    return std::make_pair("", "");
+  }
+
+  return std::make_pair(certificate_path, std::string(CERTIFICATE_PASSWORD));
 }
 
 std::string loadStringFromFile(std::string fileName) {
@@ -164,3 +204,6 @@ bool fileExists(std::string fileName) {
   struct stat buffer;
   return stat(fileName.c_str(), &buffer) == 0;
 }
+
+} // namespace flipper
+} // namespace facebook

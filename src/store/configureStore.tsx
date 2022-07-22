@@ -1,5 +1,5 @@
-import { AsyncStorage } from "react-native";
-import { createStore, applyMiddleware } from "redux";
+import AsyncStorage from "@react-native-community/async-storage";
+import { createStore, applyMiddleware, Middleware } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import createSagaMiddleware from "redux-saga";
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -11,24 +11,21 @@ const persistConfig = {
   key: "root",
   version: 0,
   storage: AsyncStorage,
-  blacklist: ["login", "signup"],
+  blacklist: ["auth"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const onRehydrate = () => {};
 
-const getEnhancers = (sagaMiddleware) => {
+const getEnhancers = (sagaMiddleware: Middleware<any, any, any>) => {
   const allEnhancers = [sagaMiddleware];
 
   const enhancers = applyMiddleware(...allEnhancers);
 
   // React Native Debugger + redux-devtools-extension setup
-  // @ts-ignore
   if (__DEV__) {
-    // @ts-ignore
     const devToolsCompose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-      ? // @ts-ignore
-        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
       : composeWithDevTools;
 
     return devToolsCompose({
@@ -42,17 +39,14 @@ const getEnhancers = (sagaMiddleware) => {
 
 export const storeWrapper = { store: null };
 
-// @ts-ignore
 export const configureStore = () => {
   const sagaMiddleware = createSagaMiddleware();
 
   const store = createStore(persistedReducer, getEnhancers(sagaMiddleware));
-  // @ts-ignore
   const persistor = persistStore(store, null, () => onRehydrate(store));
 
   sagaMiddleware.run(rootSaga);
 
-  // @ts-ignore
   storeWrapper.store = store;
 
   return { store, persistor };

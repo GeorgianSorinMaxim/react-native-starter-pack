@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Hurt</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">JTqdPJxGpcqkxtpG9ovzEqD0LnJksa46vOveD</string>
 </resources>

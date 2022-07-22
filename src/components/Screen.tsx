@@ -5,12 +5,20 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import Colors from "../constants/Colors";
 
 type Props = {
+  children: React.ReactNode;
   noHorizontalPadding?: boolean;
 };
 
 const Screen: FC<Props> = ({ children, noHorizontalPadding }) => (
-  <View style={[noHorizontalPadding ? styles.noHorizontalPaddingContainer : styles.container]}>
-    <KeyboardAwareScrollView style={styles.keyboardAwareScrollView} keyboardShouldPersistTaps="always">
+  <View
+    style={[
+      noHorizontalPadding
+        ? styles.noHorizontalPaddingContainer
+        : styles.container,
+    ]}>
+    <KeyboardAwareScrollView
+      style={styles.keyboardAwareScrollView}
+      keyboardShouldPersistTaps="always">
       {children}
     </KeyboardAwareScrollView>
   </View>

@@ -1,94 +1,105 @@
-import * as React from "react";
-import { connect } from "react-redux";
-import { View, StyleSheet } from "react-native";
-import { NavigationInjectedProps } from "react-navigation";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
+import { Alert, View, StyleSheet } from "react-native";
 import * as Progress from "react-native-progress";
 
-import { Button, InputWithLabel, NavigationLink, Screen, Title } from "../components";
+import {
+  Button,
+  InputWithLabel,
+  NavigationLink,
+  Screen,
+  Title,
+} from "../components";
 import Colors from "../constants/Colors";
 
-import { actions as LoginActions } from "../store/actions/login";
+import { authActions } from "../store/actions/auth";
 import { getLoginStatus, getLoginError } from "../store/selectors";
 
-interface OwnProps {
-  isLogging: boolean;
-  error?: string;
-  login: (email: string, password: string) => void;
-}
+import { ScreenNames } from "../navigation/ScreenNames";
 
-interface State {
-  password: string;
-  email: string;
-}
+import { StringValues } from "../constants/StringValues";
 
-type Props = OwnProps & NavigationInjectedProps;
+export const LoginScreen = () => {
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
 
-export class LoginScreenBase extends React.Component<Props, State> {
-  constructor(props) {
-    super(props);
+  const [password, setPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
 
-    this.state = {
-      password: "",
-      email: "",
-    };
-  }
+  const isSubmitting: boolean = useSelector(getLoginStatus);
+  const error: string | null = useSelector(getLoginError);
 
-  componentDidUpdate(prevProps) {
-    if (this.props.isLogging !== prevProps.isLogging && this.props.isLogging === false) {
-      this.setState({ password: "", email: "" });
+  useEffect(() => {
+    if (isSubmitting === false && !error) {
+      setPassword("");
+      setEmail("");
     }
-  }
+  }, [isSubmitting, error]);
 
-  onRegistrationLinkPress = () => {
-    this.props.navigation.navigate("Registration");
+  const onRegistrationLinkPress = () => {
+    navigation.navigate(ScreenNames.REGISTRATION);
   };
 
-  onLoginPress = () => {
-    const { email, password } = this.state;
+  const onEmailChange = (value: string) => {
+    setEmail(value);
+  };
 
+  const onPasswordChange = (value: string) => {
+    setPassword(value);
+  };
+
+  const onLoginPress = () => {
     if (email === "" || password === "") {
-      alert("Please input your email and password");
+      Alert.alert(StringValues.inputEmailAndPassword);
       return;
     }
 
-    this.props.login(email, password);
+    dispatch(authActions.loginStart({ email, password }));
   };
 
-  render() {
-    const { password, email } = this.state;
-    const { isLogging } = this.props;
+  return (
+    <Screen>
+      <View style={styles.titleContainer}>
+        <Title label={StringValues.login} />
+      </View>
 
-    return (
-      <Screen>
-        <View style={styles.titleContainer}>
-          <Title label="Login" />
-        </View>
+      <InputWithLabel
+        hideLabelWhenFocused={true}
+        value={email}
+        onChangeText={onEmailChange}
+        label={StringValues.email}
+      />
+      <InputWithLabel
+        hideLabelWhenFocused={true}
+        value={password}
+        onChangeText={onPasswordChange}
+        label={StringValues.password}
+        secureTextEntry
+      />
 
-        <InputWithLabel
-          hideLabelWhenFocused={true}
-          value={email}
-          onChangeText={(value) => this.setState({ email: value })}
-          label="Email"
+      <Button
+        disabled={isSubmitting}
+        title={StringValues.login.toUpperCase()}
+        onPress={onLoginPress}
+      />
+
+      <NavigationLink
+        text={StringValues.createAccount}
+        onPress={onRegistrationLinkPress}
+      />
+
+      {isSubmitting ? (
+        <Progress.Circle
+          size={24}
+          indeterminate={true}
+          color={Colors.gold}
+          style={styles.loader}
         />
-        <InputWithLabel
-          hideLabelWhenFocused={true}
-          value={password}
-          onChangeText={(value) => this.setState({ password: value })}
-          label="Password"
-          secureTextEntry
-        />
-
-        <Button disabled={isLogging} title={"LOGIN"} onPress={() => this.onLoginPress()} />
-
-        <NavigationLink text="New? Create account" onPress={this.onRegistrationLinkPress} />
-
-        {isLogging ? (
-          <Progress.Circle size={24} indeterminate={true} color={Colors.gold} style={styles.loader} />
-        ) : null}
-      </Screen>
-    );
-  }
-}
+      ) : null}
+    </Screen>
+  );
+};
 
 const styles = StyleSheet.create({
   titleContainer: {
@@ -100,14 +111,3 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
 });
-
-const mapStateToProps = (state) => ({
-  isLogging: getLoginStatus(state),
-  error: getLoginError(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  login: (email, password) => dispatch(LoginActions.login(email, password)),
-});
-
-export const LoginScreen = connect(mapStateToProps, mapDispatchToProps)(LoginScreenBase);

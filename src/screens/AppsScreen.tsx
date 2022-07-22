@@ -4,19 +4,15 @@ import { StyleSheet, View } from "react-native";
 import Colors from "../constants/Colors";
 import { Carousel } from "../components";
 
-interface Props {}
+export const AppsScreen = () => {
+  const images = ["", ""];
 
-export class AppsScreen extends React.Component<Props> {
-  render() {
-    const images = ["", ""];
-
-    return (
-      <View style={styles.screenContainer}>
-        <Carousel data={images} height={200} />
-      </View>
-    );
-  }
-}
+  return (
+    <View style={styles.screenContainer}>
+      <Carousel data={images} height={200} />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   screenContainer: {
@@ -26,5 +22,3 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
 });
-
-export default AppsScreen;

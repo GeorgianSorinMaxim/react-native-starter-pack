@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { StyleProp, StyleSheet, Text, TextInput, TextStyle, View, ViewStyle } from "react-native";
+import {
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextInput,
+  TextStyle,
+  View,
+  ViewStyle,
+} from "react-native";
 import Colors from "../constants/Colors";
 
 interface State {
@@ -46,7 +54,9 @@ export default class InputWithLabel extends Component<Props, State> {
     } = this.props;
     const { isFocused } = this.state;
 
-    const keyboardType = this.props.keyboardType ? this.props.keyboardType : "default";
+    const keyboardType = this.props.keyboardType
+      ? this.props.keyboardType
+      : "default";
 
     const isEmpty = !value || value.length === 0;
 
@@ -64,10 +74,14 @@ export default class InputWithLabel extends Component<Props, State> {
 
     return (
       <View style={style}>
-        {hideLabelWhenFocused ? <Text style={styles.outsideLabel}>{label}</Text> : null}
+        {hideLabelWhenFocused ? (
+          <Text style={styles.outsideLabel}>{label}</Text>
+        ) : null}
         {!hideLabelWhenFocused ? <Text style={labelStyle}>{label}</Text> : null}
 
-        {showRequired ? <Text style={styles.requiredLabelStyle}>Required</Text> : null}
+        {showRequired ? (
+          <Text style={styles.requiredLabelStyle}>Required</Text>
+        ) : null}
 
         {error ? <Text style={styles.requiredLabelStyle}>{error}</Text> : null}
 

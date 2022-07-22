@@ -1,35 +1,38 @@
 import { put, all, call, takeEvery } from "redux-saga/effects";
+import Config from "react-native-config";
 
-import { ActionTypes } from "../actions/data";
+import { dataActions } from "../actions/data";
 
 import { _doGet } from "../../api/networkingApi";
 
-import config from "../../../config/config.json";
+import { University } from "../reducers/data";
 
-export const getData = async (url: string) => {
+type Response = {
+  payload: University[];
+  success?: boolean;
+};
+
+export const getData = async (url: string): Promise<unknown> => {
   return _doGet(url);
 };
 
 export const fetchData = function* () {
   try {
-    const fetchData = yield call(getData, config.API.dataURL);
+    const fetchData: Response = yield call(getData, Config.API_URL);
 
     if (fetchData && fetchData.success) {
-      yield put({
-        type: ActionTypes.DATA_FETCHED_SUCCESS,
-        payload: fetchData.payload,
-      });
+      yield put(dataActions.fetchDataSuccess(fetchData.payload));
     } else {
-      yield put({
-        type: ActionTypes.DATA_FETCHED_FAILURE,
-        payload: [],
-      });
+      yield put(dataActions.fetchDataFailure([]));
     }
   } catch (error) {
-    console.log("-- fetchData:", error);
+    console.log("fetchData error:", error);
   }
 };
 
-export function* data() {
-  yield all([call(fetchData), takeEvery(ActionTypes.DATA_FETCHED_START, fetchData)]);
+export function* dataSaga() {
+  yield all([
+    call(fetchData),
+    takeEvery(dataActions.fetchDataStart.type, fetchData),
+  ]);
 }

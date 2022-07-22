@@ -8,17 +8,24 @@
 #if FB_SONARKIT_ENABLED
 
 #import "FlipperClient.h"
+#import <Flipper/FlipperCertificateProvider.h>
 #import <Flipper/FlipperClient.h>
-#import <UIKit/UIKit.h>
+#import <Flipper/FlipperSocketProvider.h>
 #include <folly/io/async/EventBase.h>
 #include <folly/io/async/ScopedEventBaseThread.h>
+#include <memory>
 #import "FlipperClient+Testing.h"
 #import "FlipperCppWrapperPlugin.h"
+#import "FlipperKitCertificateProvider.h"
+#import "FlipperWebSocket.h"
 #import "SKEnvironmentVariables.h"
 #include "SKStateUpdateCPPWrapper.h"
 
+#if !TARGET_OS_OSX
+#import <UIKit/UIKit.h>
 #if !TARGET_OS_SIMULATOR
 #import <FKPortForwarding/FKPortForwardingServer.h>
+#endif
 #endif
 
 using WrapperPlugin = facebook::flipper::FlipperCppWrapperPlugin;
@@ -27,7 +34,8 @@ using WrapperPlugin = facebook::flipper::FlipperCppWrapperPlugin;
   facebook::flipper::FlipperClient* _cppClient;
   folly::ScopedEventBaseThread sonarThread;
   folly::ScopedEventBaseThread connectionThread;
-#if !TARGET_OS_SIMULATOR
+  id<FlipperKitCertificateProvider> _certProvider;
+#if !TARGET_OS_OSX && !TARGET_OS_SIMULATOR
   FKPortForwardingServer* _secureServer;
   FKPortForwardingServer* _insecureServer;
 #endif
@@ -46,20 +54,15 @@ using WrapperPlugin = facebook::flipper::FlipperCppWrapperPlugin;
   });
   return sharedClient;
 }
-
 - (instancetype)init {
   if (self = [super init]) {
-    UIDevice* device = [UIDevice currentDevice];
-    NSString* deviceName = [device name];
     NSBundle* bundle = [NSBundle mainBundle];
     NSString* appName =
         [bundle objectForInfoDictionaryKey:(NSString*)kCFBundleNameKey];
     NSString* appId = [bundle bundleIdentifier];
     NSString* privateAppDirectory = NSSearchPathForDirectoriesInDomains(
         NSApplicationSupportDirectory, NSUserDomainMask, YES)[0];
-
     NSFileManager* manager = [NSFileManager defaultManager];
-
     if ([manager fileExistsAtPath:privateAppDirectory isDirectory:NULL] == NO &&
         ![manager createDirectoryAtPath:privateAppDirectory
             withIntermediateDirectories:YES
@@ -68,10 +71,19 @@ using WrapperPlugin = facebook::flipper::FlipperCppWrapperPlugin;
       return nil;
     }
 
+    NSString* deviceOS;
+    NSString* deviceName;
+#if !TARGET_OS_OSX
+    deviceOS = @"iOS";
+    deviceName = [[UIDevice currentDevice] name];
 #if TARGET_OS_SIMULATOR
     deviceName = [NSString stringWithFormat:@"%@ %@",
                                             [[UIDevice currentDevice] model],
                                             @"Simulator"];
+#endif
+#else
+    deviceOS = @"MacOS";
+    deviceName = [[NSHost currentHost] localizedName];
 #endif
 
     static const std::string UNKNOWN = std::string("unknown");
@@ -79,7 +91,7 @@ using WrapperPlugin = facebook::flipper::FlipperCppWrapperPlugin;
       facebook::flipper::FlipperClient::init(
           {{
                "localhost",
-               "iOS",
+               [deviceOS UTF8String],
                [deviceName UTF8String],
                UNKNOWN,
                [appName UTF8String] ?: UNKNOWN,
@@ -89,14 +101,34 @@ using WrapperPlugin = facebook::flipper::FlipperCppWrapperPlugin;
            sonarThread.getEventBase(),
            connectionThread.getEventBase(),
            [SKEnvironmentVariables getInsecurePort],
-           [SKEnvironmentVariables getSecurePort]});
+           [SKEnvironmentVariables getSecurePort],
+           [SKEnvironmentVariables getAltInsecurePort],
+           [SKEnvironmentVariables getAltSecurePort]});
       _cppClient = facebook::flipper::FlipperClient::instance();
+
+      // To switch to a websocket provider, uncomment the line below.
+      facebook::flipper::FlipperSocketProvider::setDefaultProvider(
+          std::make_unique<facebook::flipper::FlipperWebSocketProvider>());
+
     } catch (const std::system_error& e) {
       // Probably ran out of disk space.
       return nil;
     }
   }
   return self;
+}
+
+- (void)setCertificateProvider:(id<FlipperKitCertificateProvider>)provider {
+  _certProvider = provider;
+  std::shared_ptr<facebook::flipper::FlipperCertificateProvider>* prov =
+      static_cast<
+          std::shared_ptr<facebook::flipper::FlipperCertificateProvider>*>(
+          [provider getCPPCertificateProvider]);
+  _cppClient->setCertificateProvider(*prov);
+}
+
+- (id<FlipperKitCertificateProvider>)getCertificateProvider {
+  return _certProvider;
 }
 
 - (void)refreshPlugins {
@@ -120,7 +152,7 @@ using WrapperPlugin = facebook::flipper::FlipperCppWrapperPlugin;
 }
 
 - (void)start {
-#if !TARGET_OS_SIMULATOR
+#if !TARGET_OS_OSX && !TARGET_OS_SIMULATOR
   _secureServer = [FKPortForwardingServer new];
   [_secureServer forwardConnectionsFromPort:8088];
   [_secureServer listenForMultiplexingChannelOnPort:8078];
@@ -133,7 +165,7 @@ using WrapperPlugin = facebook::flipper::FlipperCppWrapperPlugin;
 
 - (void)stop {
   _cppClient->stop();
-#if !TARGET_OS_SIMULATOR
+#if !TARGET_OS_OSX && !TARGET_OS_SIMULATOR
   [_secureServer close];
   _secureServer = nil;
   [_insecureServer close];
