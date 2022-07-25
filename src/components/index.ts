@@ -1,5 +1,5 @@
 export { BodyText } from "./BodyText";
-export { Card } from "./Card";
+export { Article } from "./Article";
 export { Carousel } from "./Carousel";
 export { Button } from "./Button";
 export { HyperLink } from "./HyperLink";

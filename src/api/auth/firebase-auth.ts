@@ -94,7 +94,7 @@ export const register = async (
           Alert.alert("Your user has been created");
           return data;
         })
-        .catch((error) => {
+        .catch(error => {
           Alert.alert(error);
           return error;
         });

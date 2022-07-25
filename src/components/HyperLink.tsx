@@ -16,8 +16,7 @@ type Props = {
 
 const openUrl = (url: string) =>
   Linking.openURL(url).catch(() =>
-    Alert.alert(`Error:, ${url} could not be opened!`),
-  );
+    Alert.alert(`Error:, ${url} could not be opened!`));
 
 export const HyperLink = ({ text, url }: Props) => (
   <TouchableOpacity style={styles.linkContainer} onPress={() => openUrl(url)}>

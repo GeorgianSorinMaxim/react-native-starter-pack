@@ -16,14 +16,18 @@ export const _doPost = async (url: string, body: string) => {
     });
 };
 
-export const _doGet = async (url: string, payload?: unknown): Promise<unknown> => {
-  const headers = {
+export const _doGet = async (
+  url: string,
+  headers?: object,
+  payload?: unknown,
+): Promise<unknown> => {
+  const requestHeaders = {
     "Content-Type": "application/json",
   };
 
   const options: RequestInit = {
     method: "GET",
-    headers: new Headers(headers),
+    headers: new Headers({ ...requestHeaders, ...headers }),
     mode: "cors",
     credentials: "include" as RequestCredentials_,
   };

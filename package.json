@@ -8,6 +8,7 @@
     "lint-fix": "eslint --fix \"**/*.js\"",
     "prettier": "prettier -c \"./src/**/*.{js,ts,tsx}\"",
     "prettier:fix": "yarn prettier --write",
+    "clean-up": "yarn prettier --write && yarn tsc && yarn lint --fix",
     "codePushIos": "appcenter codepush release-react -a Hurt/Hurt-iOS --plist-file ios/MindfulChef/Info.plist --description \"$(git log HEAD~1..HEAD)\"",
     "codePushAndroid": "appcenter codepush release-react -a Hurt/Hurt-Android --description \"$(git log HEAD~1..HEAD)\""
   },

@@ -1,3 +1,5 @@
-declare module 'react-native-config' {
-  export const API_URL: string;
+declare module "react-native-config" {
+  export const UNIVERSITIES_API_URL: string;
+  export const NEWSCATCHER_API_URL: string;
+  export const NEWSCATCHER_API_KEY: string;
 }

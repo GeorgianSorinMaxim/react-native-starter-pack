@@ -63,7 +63,7 @@ export const onLogin = function* (action: LoginStart) {
     if (userPayload && userPayload.user.uid) {
       yield put(authActions.loginSuccess({ user: userPayload }));
 
-      yield put(dataActions.fetchDataStart());
+      yield put(dataActions.fetchArticlesStart());
 
       navigate(ScreenNames.TABS, { screen: ScreenNames.HOME });
     } else {

@@ -9,10 +9,10 @@ import {
 } from "react-native";
 
 import { Colors } from "../constants/Colors";
-import { BodyText, Card } from "../components";
+import { BodyText, Article } from "../components";
 
-import { getRestaurants } from "../store/selectors";
-import { University } from "../store/reducers/data";
+import { getNewsArticles } from "../store/selectors";
+import { NewsArticle } from "../store/reducers/data";
 
 import { appActions } from "../store/actions/app";
 import { authActions } from "../store/actions/auth";
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
 export const HomeScreen = () => {
   const dispatch = useDispatch();
 
-  const restaurants = useSelector(getRestaurants);
+  const restaurants = useSelector(getNewsArticles);
 
   const appState = useRef(AppState.currentState);
 
@@ -60,15 +60,14 @@ export const HomeScreen = () => {
 
   useEffect(() => {
     const subscription = AppState.addEventListener("change", nextAppState =>
-      handleAppStateChange(nextAppState),
-    );
+      handleAppStateChange(nextAppState));
 
     return () => {
       subscription.remove();
     };
   }, [handleAppStateChange]);
 
-  const renderItem = (item: University) => <Card item={item} />;
+  const renderItem = (item: NewsArticle) => <Article item={item} />;
 
   return (
     <View style={styles.screenContainer}>
@@ -76,7 +75,7 @@ export const HomeScreen = () => {
         <View style={styles.listContainer}>
           <FlatList
             data={restaurants}
-            keyExtractor={({ url }) => url}
+            keyExtractor={({ _id }) => _id}
             renderItem={({ item }) => renderItem(item)}
             style={styles.listContainer}
             showsVerticalScrollIndicator={false}

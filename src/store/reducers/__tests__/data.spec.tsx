@@ -2,36 +2,36 @@ import { dataActions } from "../../actions/data";
 import { data, University } from "../data";
 
 describe("Data reducer", () => {
-  it("default", () => {
+  it("fetch - start", () => {
     const state = data(undefined, {
-      type: dataActions.fetchDataFailure.type,
-      payload: [],
+      type: dataActions.fetchUniversitiesStart.type,
     });
 
     expect(state).toEqual({
+      news: [],
       universities: [],
     });
   });
 
-  it("DATA_FETCHED_SUCCESS", () => {
+  it("fetch - success", () => {
     const payload: University[] = [{ name: "mock", url: "mock" }];
 
     const state = data(undefined, {
-      type: dataActions.fetchDataSuccess.type,
+      type: dataActions.fetchUniversitiesSuccess.type,
       payload,
     });
 
-    expect(state).toEqual({ universities: [{ name: "mock", url: "mock" }] });
+    expect(state).toEqual({
+      universities: [{ name: "mock", url: "mock" }],
+      news: [],
+    });
   });
 
-  it("DATA_FETCHED_FAILURE", () => {
-    const payload: [] = [];
-
+  it("fetch - failure", () => {
     const state = data(undefined, {
-      type: dataActions.fetchDataFailure.type,
-      payload,
+      type: dataActions.fetchUniversitiesFailure.type,
     });
 
-    expect(state).toEqual({ universities: [] });
+    expect(state).toEqual({ universities: [], news: [] });
   });
 });

@@ -1,41 +1,71 @@
-import { put, all, call, takeEvery } from "redux-saga/effects";
+import { put, all, call } from "redux-saga/effects";
 import Config from "react-native-config";
 
 import { dataActions } from "../actions/data";
 
 import { _doGet } from "../../api/networkingApi";
 
-import { University } from "../reducers/data";
+import { NewsArticle, University } from "../reducers/data";
 
-type Response = {
+type NewsResponse = {
+  payload: {
+    articles: NewsArticle[];
+  };
+  success?: boolean;
+};
+
+type UniversitiesResponse = {
   payload: University[];
   success?: boolean;
+};
+
+export const fetchNewsArticles = async (url: string): Promise<unknown> => {
+  const headers = {
+    "x-api-key": Config.NEWSCATCHER_API_KEY,
+  };
+
+  return _doGet(url, headers);
 };
 
 export const fetchUniversitiesData = async (url: string): Promise<unknown> =>
   _doGet(url);
 
-export const onFetchData = function* () {
+export const onFetchNewsArticles = function* () {
   try {
-    const fetchData: Response = yield call(
-      fetchUniversitiesData,
-      Config.API_URL,
+    const fetchData: NewsResponse = yield call(
+      fetchNewsArticles,
+      Config.NEWSCATCHER_API_URL,
     );
 
     if (fetchData && fetchData.success) {
-      yield put(dataActions.fetchDataSuccess(fetchData.payload));
+      yield put(dataActions.fetchArticlesSuccess(fetchData.payload.articles));
     } else {
-      yield put(dataActions.fetchDataFailure([]));
+      yield put(dataActions.fetchArticlesFailure());
     }
   } catch (error) {
-    console.log("onFetchData error:", error);
-    yield put(dataActions.fetchDataFailure([]));
+    console.log("onFetchNewsArticles error:", error);
+    yield put(dataActions.fetchArticlesFailure());
+  }
+};
+
+export const onFetchUniversityList = function* () {
+  try {
+    const fetchData: UniversitiesResponse = yield call(
+      fetchUniversitiesData,
+      Config.UNIVERSITIES_API_URL,
+    );
+
+    if (fetchData && fetchData.success) {
+      yield put(dataActions.fetchUniversitiesSuccess(fetchData.payload));
+    } else {
+      yield put(dataActions.fetchUniversitiesFailure());
+    }
+  } catch (error) {
+    console.log("onFetchUniversityList error:", error);
+    yield put(dataActions.fetchUniversitiesFailure());
   }
 };
 
 export function* dataSaga() {
-  yield all([
-    call(onFetchData),
-    takeEvery(dataActions.fetchDataStart.type, onFetchData),
-  ]);
+  yield all([call(onFetchNewsArticles), call(onFetchUniversityList)]);
 }

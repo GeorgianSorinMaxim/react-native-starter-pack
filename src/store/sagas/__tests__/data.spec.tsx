@@ -1,17 +1,17 @@
 import { cloneableGenerator } from "@redux-saga/testing-utils";
 
 import { dataActions } from "../../actions/data";
-import { onFetchData } from "../data";
+import { onFetchUniversityList } from "../data";
 
 jest.mock("react-native-config");
 
 describe("Data sagas", () => {
   describe("fetchData", () => {
-    it("should dispatch DATA_FETCHED_FAILURE", () => {
-      const action = dataActions.fetchDataFailure([]);
+    it("should dispatch UNIVERSITIES_FETCH_FAILURE", () => {
+      const action = dataActions.fetchUniversitiesFailure();
 
       // @ts-ignore
-      const generator = cloneableGenerator(onFetchData)(action);
+      const generator = cloneableGenerator(onFetchUniversityList)(action);
 
       generator.next();
 
@@ -20,8 +20,7 @@ describe("Data sagas", () => {
         combinator: false,
         payload: {
           action: {
-            payload: [],
-            type: "DATA_FETCHED_FAILURE",
+            type: "UNIVERSITIES_FETCH_FAILURE",
           },
           channel: undefined,
         },
@@ -29,13 +28,13 @@ describe("Data sagas", () => {
       });
     });
 
-    it("should dispatch DATA_FETCHED_SUCCESS", () => {
-      const action = dataActions.fetchDataFailure([
+    it("should dispatch UNIVERSITIES_FETCH_SUCCESS", () => {
+      const action = dataActions.fetchUniversitiesSuccess([
         { name: "mock", url: "mock" },
       ]);
 
       // @ts-ignore
-      const generator = cloneableGenerator(onFetchData)(action);
+      const generator = cloneableGenerator(onFetchUniversityList)(action);
 
       let next = generator.next();
       next = generator.next({
@@ -49,7 +48,7 @@ describe("Data sagas", () => {
         payload: {
           action: {
             payload: { data: [{ name: "mock", url: "mock" }] },
-            type: "DATA_FETCHED_SUCCESS",
+            type: "UNIVERSITIES_FETCH_SUCCESS",
           },
           channel: undefined,
         },
