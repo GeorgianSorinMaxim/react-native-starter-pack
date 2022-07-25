@@ -4,17 +4,24 @@ import AsyncStorage from "@react-native-community/async-storage";
 import jwt_decode from "jwt-decode";
 import { DateTime } from "luxon";
 
-import { LoginStart, SignupStart, authActions } from "../actions/auth";
+import {
+  LoginStart,
+  SignupStart,
+  FetchUserDetailsStart,
+  authActions,
+} from "../actions/auth";
 import { dataActions } from "../actions/data";
 
 import {
   login,
   logout,
   register,
+  getUser,
   getToken,
 } from "../../api/auth/firebase-auth";
 
 import { navigate } from "../../navigation/RootNavigation";
+import { ScreenNames } from "../../navigation/ScreenNames";
 
 const onError = () => {
   // Remove the local storage items
@@ -56,9 +63,9 @@ export const onLogin = function* (action: LoginStart) {
     if (userPayload && userPayload.user.uid) {
       yield put(authActions.loginSuccess({ user: userPayload }));
 
-      yield put({
-        type: dataActions.fetchDataStart.type,
-      });
+      yield put(dataActions.fetchDataStart());
+
+      navigate(ScreenNames.TABS, { screen: ScreenNames.HOME });
     } else {
       yield put(authActions.loginFailure());
     }
@@ -72,8 +79,6 @@ export const onRegister = function* (action: SignupStart) {
     payload: { firstName, lastName, email, password },
   } = action;
 
-  console.log(firstName, lastName, email, password);
-
   try {
     const res: Awaited<ReturnType<typeof register>> = yield call(
       register,
@@ -85,7 +90,7 @@ export const onRegister = function* (action: SignupStart) {
 
     if (res && res.id) {
       yield put(authActions.signupSuccess(res));
-      yield call(navigate, "Login", {});
+      navigate(ScreenNames.LOGIN);
     } else {
       yield put(authActions.signupFailure());
     }
@@ -136,8 +141,8 @@ export const onVerifyToken = function* () {
 
         if (minutes > 0) {
           // Auto-redirect if the token is valid
-          yield put(authActions.verifyTokenSuccess({ token, expDate }));
-          // RootNavigation.push("Tabs", { screen: "Calendar" });
+          yield put(authActions.verifyTokenSuccess());
+          // yield put(authActions.fetchUserDetailsStart());
         } else {
           console.log("onVerifyToken - Token expired!");
           onError();
@@ -178,7 +183,8 @@ export const onValidateToken = function* () {
         const { minutes } = diff;
 
         if (minutes > 0) {
-          yield put(authActions.verifyTokenSuccess({ token, expDate }));
+          yield put(authActions.verifyTokenSuccess());
+          // yield put(authActions.fetchUserDetailsStart());
         } else {
           console.log("Token expired!");
           onError();
@@ -199,8 +205,29 @@ export const onValidateToken = function* () {
     }
   } catch (error) {
     console.log("AsyncStorage.getItem error:", error);
-
     yield put(authActions.verifyTokenFailure());
+  }
+};
+
+export const onFetchUser = function* (action: FetchUserDetailsStart) {
+  const {
+    payload: { userId },
+  } = action;
+
+  try {
+    const userPayload: Awaited<ReturnType<typeof getUser>> = yield call(
+      getUser,
+      userId,
+    );
+
+    if (userPayload) {
+      yield put(authActions.signupSuccess(userPayload));
+    } else {
+      yield put(authActions.fetchUserDetailsFailure());
+    }
+  } catch (error) {
+    console.log("onFetchUser error:", error);
+    yield put(authActions.fetchUserDetailsFailure());
   }
 };
 
@@ -214,5 +241,6 @@ export function* authSaga() {
     takeEvery(authActions.logoutStart.type, onLogout),
     // Validate token at app state change
     takeEvery(authActions.validateTokenStart.type, onValidateToken),
+    takeEvery(authActions.fetchUserDetailsStart.type, onFetchUser),
   ]);
 }

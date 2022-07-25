@@ -2,7 +2,6 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { createStore, applyMiddleware, Middleware } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import createSagaMiddleware from "redux-saga";
-import { composeWithDevTools } from "redux-devtools-extension";
 
 import { rootReducer } from "./reducers";
 import { rootSaga } from "./sagas";
@@ -14,40 +13,28 @@ const persistConfig = {
   blacklist: ["auth"],
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-const onRehydrate = () => {};
+const getMiddleware = (sagaMiddleware: Middleware) => {
+  const allMiddleware = [sagaMiddleware];
 
-const getEnhancers = (sagaMiddleware: Middleware<any, any, any>) => {
-  const allEnhancers = [sagaMiddleware];
-
-  const enhancers = applyMiddleware(...allEnhancers);
-
-  // React Native Debugger + redux-devtools-extension setup
-  if (__DEV__) {
-    const devToolsCompose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-      : composeWithDevTools;
-
-    return devToolsCompose({
-      realtime: true,
-      port: 8010,
-    })(enhancers);
+  if (__DEV__ && !process.env.JEST_WORKER_ID) {
+    const createDebugger = require("redux-flipper").default;
+    allMiddleware.push(createDebugger());
   }
 
-  return enhancers;
+  return applyMiddleware(...allMiddleware);
 };
 
-export const storeWrapper = { store: null };
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const configureStore = () => {
   const sagaMiddleware = createSagaMiddleware();
 
-  const store = createStore(persistedReducer, getEnhancers(sagaMiddleware));
-  const persistor = persistStore(store, null, () => onRehydrate(store));
+  const middleware = getMiddleware(sagaMiddleware);
+
+  const store = createStore(persistedReducer, middleware);
+  const persistor = persistStore(store, null);
 
   sagaMiddleware.run(rootSaga);
-
-  storeWrapper.store = store;
 
   return { store, persistor };
 };

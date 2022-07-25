@@ -1,16 +1,21 @@
 import { cloneableGenerator } from "@redux-saga/testing-utils";
 
-import { ActionTypes } from "../../actions/data";
-import * as data from "../data";
+import { dataActions } from "../../actions/data";
+import { onFetchData } from "../data";
+
+jest.mock("react-native-config");
 
 describe("Data sagas", () => {
   describe("fetchData", () => {
     it("should dispatch DATA_FETCHED_FAILURE", () => {
-      const generator = cloneableGenerator(data.fetchData)();
+      const action = dataActions.fetchDataFailure([]);
+
+      // @ts-ignore
+      const generator = cloneableGenerator(onFetchData)(action);
 
       generator.next();
 
-      expect(generator.next({ payload: { data: ["mock"] } }).value).toEqual({
+      expect(generator.next({ payload: { data: [] } }).value).toEqual({
         "@@redux-saga/IO": true,
         combinator: false,
         payload: {
@@ -25,20 +30,25 @@ describe("Data sagas", () => {
     });
 
     it("should dispatch DATA_FETCHED_SUCCESS", () => {
-      // @ts-ignore used because an action is accepted as a parameter
-      const generator = cloneableGenerator(data.fetchData)(
-        ActionTypes.DATA_FETCHED_SUCCESS,
-      );
+      const action = dataActions.fetchDataFailure([
+        { name: "mock", url: "mock" },
+      ]);
+
+      // @ts-ignore
+      const generator = cloneableGenerator(onFetchData)(action);
 
       let next = generator.next();
-      next = generator.next({ success: true, payload: { data: ["mock"] } });
+      next = generator.next({
+        success: true,
+        payload: { data: [{ name: "mock", url: "mock" }] },
+      });
 
       expect(next.value).toEqual({
         "@@redux-saga/IO": true,
         combinator: false,
         payload: {
           action: {
-            payload: { data: ["mock"] },
+            payload: { data: [{ name: "mock", url: "mock" }] },
             type: "DATA_FETCHED_SUCCESS",
           },
           channel: undefined,

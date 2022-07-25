@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import {
   StyleProp,
   StyleSheet,
@@ -11,88 +11,74 @@ import {
 
 import Colors from "../constants/Colors";
 
-interface State {
-  isFocused: boolean;
-}
-
 interface Props {
   value: string;
   numberOfLines: number;
   label?: string;
   required?: boolean;
   maxLength?: number;
-  onChangeText: (value: string) => void;
   style?: StyleProp<ViewStyle>;
 }
 
-export default class TextAreaWithLabel extends Component<Props, State> {
-  state = {
-    isFocused: false,
+export const TextAreaWithLabel = ({
+  value,
+  numberOfLines,
+  label,
+  required,
+  maxLength,
+  style,
+}: Props) => {
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+
+  const onFocus = () => setIsFocused(true);
+
+  const onBlur = () => setIsFocused(false);
+
+  const isSmallLabel = isFocused || value === "";
+
+  const labelStyle: TextStyle = {
+    position: "absolute",
+    left: 10,
+    color: Colors.grey,
+    zIndex: 10,
+    elevation: 9,
+    top: isSmallLabel ? 4 : 14,
+    fontSize: isSmallLabel ? 12 : 16,
   };
 
-  onFocus = () => this.setState({ isFocused: true });
+  return (
+    <View style={style}>
+      <Text style={labelStyle}>{label}</Text>
 
-  onBlur = () => this.setState({ isFocused: false });
+      {required && value === "" ? (
+        <Text style={styles.requiredLabelStyle}>Required</Text>
+      ) : null}
 
-  render() {
-    const {
-      label,
-      value,
-      required,
-      maxLength,
-      numberOfLines,
-      style,
-      ...props
-    } = this.props;
-    const { isFocused } = this.state;
+      {maxLength ? (
+        <Text style={styles.maxLength}>
+          {value.length}/{maxLength}
+        </Text>
+      ) : null}
 
-    const isSmallLabel = isFocused || value === "";
-
-    const labelStyle: TextStyle = {
-      position: "absolute",
-      left: 10,
-      color: Colors.grey,
-      zIndex: 10,
-      elevation: 9,
-      top: isSmallLabel ? 4 : 14,
-      fontSize: isSmallLabel ? 12 : 16,
-    };
-
-    return (
-      <View style={style}>
-        <Text style={labelStyle}>{label}</Text>
-
-        {required && value === "" ? (
-          <Text style={styles.requiredLabelStyle}>Required</Text>
-        ) : null}
-
-        {maxLength ? (
-          <Text style={styles.maxLength}>
-            {value.length}/{maxLength}
-          </Text>
-        ) : null}
-
-        <TextInput
-          {...props}
-          multiline
-          numberOfLines={numberOfLines}
-          scrollEnabled={false}
-          defaultValue={value}
-          style={[
-            styles.textareaInput,
-            required && value === ""
-              ? { borderBottomColor: Colors.required }
-              : null,
-          ]}
-          onFocus={this.onFocus}
-          onBlur={this.onBlur}
-          maxLength={maxLength}
-          autoCapitalize="none"
-        />
-      </View>
-    );
-  }
-}
+      <TextInput
+        multiline
+        numberOfLines={numberOfLines}
+        scrollEnabled={false}
+        defaultValue={value}
+        style={[
+          styles.textareaInput,
+          required && value === ""
+            ? { borderBottomColor: Colors.required }
+            : null,
+        ]}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        maxLength={maxLength}
+        autoCapitalize="none"
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   textareaInput: {

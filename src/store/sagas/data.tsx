@@ -12,13 +12,16 @@ type Response = {
   success?: boolean;
 };
 
-export const getData = async (url: string): Promise<unknown> => {
+export const fetchUniversitiesData = async (url: string): Promise<unknown> => {
   return _doGet(url);
 };
 
-export const fetchData = function* () {
+export const onFetchData = function* () {
   try {
-    const fetchData: Response = yield call(getData, Config.API_URL);
+    const fetchData: Response = yield call(
+      fetchUniversitiesData,
+      Config.API_URL,
+    );
 
     if (fetchData && fetchData.success) {
       yield put(dataActions.fetchDataSuccess(fetchData.payload));
@@ -26,13 +29,14 @@ export const fetchData = function* () {
       yield put(dataActions.fetchDataFailure([]));
     }
   } catch (error) {
-    console.log("fetchData error:", error);
+    console.log("onFetchData error:", error);
+    yield put(dataActions.fetchDataFailure([]));
   }
 };
 
 export function* dataSaga() {
   yield all([
-    call(fetchData),
-    takeEvery(dataActions.fetchDataStart.type, fetchData),
+    call(onFetchData),
+    takeEvery(dataActions.fetchDataStart.type, onFetchData),
   ]);
 }

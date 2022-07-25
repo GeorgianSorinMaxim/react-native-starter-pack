@@ -1,41 +1,44 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
+import React from "react";
+import {
+  CommonActions,
+  StackActions,
+  NavigationContainerRef,
+  PartialState,
+  NavigationState,
+} from "@react-navigation/native";
 
-import { MainNavigator } from "./MainNavigator";
-import { NotLoggedInNavigator } from "./NotLoggedInNavigator";
-import { getLoginStatus, getUser } from "../store/selectors";
+import { NavigatorStackParamList } from "./AppNavigator";
 
-import { authActions } from "../store/actions/auth";
+export const navigationRef =
+  React.createRef<NavigationContainerRef<NavigatorStackParamList>>();
 
-export const RootNavigation = () => {
-  const dispatch = useDispatch();
-  const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
+export function push(name: string, params?: Object) {
+  navigationRef.current?.dispatch(StackActions.push(name, params));
+}
 
-  const onAuthStateChanged = (user: FirebaseAuthTypes.User | null) => {
-    if (user) {
-      dispatch(authActions.loginSuccess({ user: user }));
-      setUser(user);
-    }
-    if (initializing) setInitializing(false);
-  };
+export function replace(name: string, params?: Object) {
+  navigationRef.current?.dispatch(StackActions.replace(name, params));
+}
 
-  useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber;
-  }, []);
+export function navigate(
+  screen: keyof NavigatorStackParamList,
+  params?: undefined | Object,
+) {
+  navigationRef.current?.navigate(screen, params);
+}
 
-  const isAuthenticating = useSelector(getLoginStatus);
-  const loginUser = useSelector(getUser);
+export function goBack() {
+  navigationRef.current?.goBack();
+}
 
-  const isLoggedIn = user || (!isAuthenticating && loginUser);
+export function setParams(params: Object) {
+  navigationRef.current?.dispatch(CommonActions.setParams({ ...params }));
+}
 
-  return isLoggedIn ? <MainNavigator /> : <NotLoggedInNavigator />;
-};
+export function reset(state: PartialState<NavigationState> | NavigationState) {
+  navigationRef.current?.reset(state);
+}
 
-export const navigationRef: React.RefObject<any> = React.createRef();
-
-export function navigate(name: string, params: any) {
-  navigationRef.current?.navigate(name, params);
+export function getCurrentRoute() {
+  return navigationRef.current?.getCurrentRoute();
 }

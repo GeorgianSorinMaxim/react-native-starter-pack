@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import {
   Alert,
   Linking,
@@ -19,7 +19,7 @@ const openUrl = (url: string) =>
     Alert.alert(`Error:, ${url} could not be opened!`),
   );
 
-const HyperLink: FC<Props> = ({ text, url }) => (
+export const HyperLink = ({ text, url }: Props) => (
   <TouchableOpacity style={styles.linkContainer} onPress={() => openUrl(url)}>
     <Text style={styles.linkText}>{text}</Text>
   </TouchableOpacity>
@@ -35,5 +35,3 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
   },
 });
-
-export default HyperLink;

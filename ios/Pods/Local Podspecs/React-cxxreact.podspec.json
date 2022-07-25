@@ -21,15 +21,35 @@
   },
   "header_dir": "cxxreact",
   "dependencies": {
-    "boost": ["1.76.0"],
-    "DoubleConversion": [],
-    "RCT-Folly": ["2021.06.28.00-v2"],
-    "glog": [],
-    "React-jsinspector": ["0.69.1"],
-    "React-callinvoker": ["0.69.1"],
-    "React-runtimeexecutor": ["0.69.1"],
-    "React-perflogger": ["0.69.1"],
-    "React-jsi": ["0.69.1"],
-    "React-logger": ["0.69.1"]
+    "boost": [
+      "1.76.0"
+    ],
+    "DoubleConversion": [
+
+    ],
+    "RCT-Folly": [
+      "2021.06.28.00-v2"
+    ],
+    "glog": [
+
+    ],
+    "React-jsinspector": [
+      "0.69.1"
+    ],
+    "React-callinvoker": [
+      "0.69.1"
+    ],
+    "React-runtimeexecutor": [
+      "0.69.1"
+    ],
+    "React-perflogger": [
+      "0.69.1"
+    ],
+    "React-jsi": [
+      "0.69.1"
+    ],
+    "React-logger": [
+      "0.69.1"
+    ]
   }
 }

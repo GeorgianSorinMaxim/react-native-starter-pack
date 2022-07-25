@@ -34,7 +34,12 @@ export const HomeScreen = () => {
       dispatch(authActions.validateTokenStart());
     }
 
-    dispatch(appActions.appStateUpdated({ appState, nextAppState }));
+    dispatch(
+      appActions.appStateUpdated({
+        prevState: appState.current,
+        newState: nextAppState,
+      }),
+    );
     appState.current = nextAppState;
   }, []);
 

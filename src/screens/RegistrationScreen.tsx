@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { Alert, View, StyleSheet } from "react-native";
 import * as Progress from "react-native-progress";
 
@@ -20,12 +21,18 @@ import {
 } from "../store/selectors";
 
 import { ScreenNames } from "../navigation/ScreenNames";
+import { NavigatorStackParamList } from "../navigation/AppNavigator";
 
 import { StringValues } from "../constants/StringValues";
 
+type RegistrationScreenProp = StackNavigationProp<
+  NavigatorStackParamList,
+  typeof ScreenNames.REGISTRATION
+>;
+
 export const RegistrationScreen = () => {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
+  const navigation = useNavigation<RegistrationScreenProp>();
 
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
@@ -34,7 +41,7 @@ export const RegistrationScreen = () => {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 
   const isRegistering: boolean = useSelector(getRegistrationStatus);
-  const error: string | null = useSelector(getRegistrationError);
+  const error: boolean | null = useSelector(getRegistrationError);
 
   useEffect(() => {
     if (isRegistering === false && !error) {

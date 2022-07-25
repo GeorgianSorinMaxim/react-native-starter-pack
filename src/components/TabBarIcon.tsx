@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 
 import Colors from "../constants/Colors";
@@ -8,12 +8,12 @@ type IconProps = {
   focused: boolean;
 };
 
-export default function TabBarIcon(props: IconProps) {
+export const TabBarIcon = ({ name, focused }: IconProps) => {
   return (
     <Icon
       size={20}
-      name={props.name}
-      color={props.focused ? Colors.gold : Colors.tabIconDefault}
+      name={name}
+      color={focused ? Colors.gold : Colors.tabIconDefault}
     />
   );
-}
+};

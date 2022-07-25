@@ -4,21 +4,17 @@ import {
   payloadType,
 } from "./action-creator-factories";
 
-export const ActionTypes = {
-  DATA_FETCHED_START: "DATA_FETCHED_START",
-  DATA_FETCHED_SUCCESS: "DATA_FETCHED_SUCCESS",
-  DATA_FETCHED_FAILURE: "DATA_FETCHED_FAILURE",
-};
+import { University } from "../reducers/data";
 
 export const dataActions = {
-  fetchDataStart: actionCreator(ActionTypes.DATA_FETCHED_START),
+  fetchDataStart: actionCreator("DATA_FETCHED_START"),
   fetchDataSuccess: actionCreatorWithPayload(
-    ActionTypes.DATA_FETCHED_SUCCESS,
-    payloadType<any>(),
+    "DATA_FETCHED_SUCCESS",
+    payloadType<University[]>(),
   ),
   fetchDataFailure: actionCreatorWithPayload(
-    ActionTypes.DATA_FETCHED_FAILURE,
-    payloadType<any>(),
+    "DATA_FETCHED_FAILURE",
+    payloadType<University[]>(),
   ),
 };
 

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { StyleSheet, Text, View, ViewProps } from "react-native";
 
 import Colors from "../constants/Colors";
@@ -9,7 +9,7 @@ interface OwnProps {
 
 type Props = ViewProps & OwnProps;
 
-const Title: FC<Props> = ({ label }) => (
+export const Title = ({ label }: Props) => (
   <View style={styles.container}>
     <Text style={styles.title}>{label}</Text>
   </View>
@@ -25,5 +25,3 @@ const styles = StyleSheet.create({
     color: Colors.gold,
   },
 });
-
-export default Title;

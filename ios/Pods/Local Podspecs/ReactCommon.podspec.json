@@ -21,7 +21,9 @@
     "CLANG_CXX_LANGUAGE_STANDARD": "c++17"
   },
   "dependencies": {
-    "React-logger": ["0.69.1"]
+    "React-logger": [
+      "0.69.1"
+    ]
   },
   "subspecs": [
     {
@@ -31,15 +33,33 @@
     {
       "name": "turbomodule",
       "dependencies": {
-        "React-bridging": ["0.69.1"],
-        "React-callinvoker": ["0.69.1"],
-        "React-perflogger": ["0.69.1"],
-        "React-Core": ["0.69.1"],
-        "React-cxxreact": ["0.69.1"],
-        "React-jsi": ["0.69.1"],
-        "RCT-Folly": ["2021.06.28.00-v2"],
-        "DoubleConversion": [],
-        "glog": []
+        "React-bridging": [
+          "0.69.1"
+        ],
+        "React-callinvoker": [
+          "0.69.1"
+        ],
+        "React-perflogger": [
+          "0.69.1"
+        ],
+        "React-Core": [
+          "0.69.1"
+        ],
+        "React-cxxreact": [
+          "0.69.1"
+        ],
+        "React-jsi": [
+          "0.69.1"
+        ],
+        "RCT-Folly": [
+          "2021.06.28.00-v2"
+        ],
+        "DoubleConversion": [
+
+        ],
+        "glog": [
+
+        ]
       },
       "subspecs": [
         {
@@ -56,7 +76,9 @@
             "react/nativemodule/samples/platform/ios/**/*.{mm,cpp,h}"
           ],
           "dependencies": {
-            "ReactCommon/turbomodule/core": ["0.69.1"]
+            "ReactCommon/turbomodule/core": [
+              "0.69.1"
+            ]
           }
         }
       ]

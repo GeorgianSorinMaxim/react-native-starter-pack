@@ -6,6 +6,6 @@ interface Props<T> {
   style?: StyleProp<TextStyle>;
 }
 
-export default function BodyText<T>(props: Props<T> & TextProps) {
+export const BodyText = (props: Props<any> & TextProps) => {
   return <Text {...props} style={[props.style]} />;
-}
+};

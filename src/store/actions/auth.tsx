@@ -1,6 +1,3 @@
-import { DateTime } from "luxon";
-import { FirebaseAuthTypes } from "@react-native-firebase/auth";
-
 import {
   actionCreator,
   actionCreatorWithPayload,
@@ -10,36 +7,18 @@ import {
 import { UserPayload } from "../../api/auth/firebase-auth";
 import { NewUserData } from "../../api/auth/firebase-auth";
 
-export const ActionTypes = {
-  LOGIN_START: "LOGIN_START",
-  LOGIN_SUCCESS: "LOGIN_SUCCESS",
-  LOGIN_FAILURE: "LOGIN_FAILURE",
-  SIGNUP_START: "SIGNUP_START",
-  SIGNUP_SUCCESS: "SIGNUP_SUCCESS",
-  SIGNUP_FAILURE: "SIGNUP_FAILURE",
-  LOGOUT_START: "LOGOUT_START",
-  LOGOUT_SUCCESS: "LOGOUT_SUCCESS",
-  LOGOUT_FAILURE: "LOGOUT_FAILURE",
-  VERIFY_TOKEN_START: "VERIFY_TOKEN_START",
-  VERIFY_TOKEN_SUCCESS: "VERIFY_TOKEN_SUCCESS",
-  VERIFY_TOKEN_FAILURE: "VERIFY_TOKEN_FAILURE",
-  VALIDATE_TOKEN_START: "VALIDATE_TOKEN_START",
-  VALIDATE_TOKEN_SUCCESS: "VALIDATE_TOKEN_SUCCESS",
-  VALIDATE_TOKEN_FAILURE: "VALIDATE_TOKEN_FAILURE",
-};
-
 export const authActions = {
   loginStart: actionCreatorWithPayload(
-    ActionTypes.LOGIN_START,
+    "LOGIN_START",
     payloadType<{ email: string; password: string }>(),
   ),
   loginSuccess: actionCreatorWithPayload(
-    ActionTypes.LOGIN_SUCCESS,
-    payloadType<{ user: UserPayload | FirebaseAuthTypes.User }>(),
+    "LOGIN_SUCCESS",
+    payloadType<{ user: UserPayload }>(),
   ),
-  loginFailure: actionCreator(ActionTypes.LOGIN_FAILURE),
+  loginFailure: actionCreator("LOGIN_FAILURE"),
   signupStart: actionCreatorWithPayload(
-    ActionTypes.SIGNUP_START,
+    "SIGNUP_START",
     payloadType<{
       firstName: string;
       lastName: string;
@@ -48,25 +27,28 @@ export const authActions = {
     }>(),
   ),
   signupSuccess: actionCreatorWithPayload(
-    ActionTypes.SIGNUP_SUCCESS,
+    "SIGNUP_SUCCESS",
     payloadType<NewUserData>(),
   ),
-  signupFailure: actionCreator(ActionTypes.SIGNUP_FAILURE),
-  logoutStart: actionCreator(ActionTypes.LOGOUT_START),
-  logoutSuccess: actionCreator(ActionTypes.LOGOUT_SUCCESS),
-  logoutFailure: actionCreator(ActionTypes.LOGOUT_FAILURE),
-  validateTokenStart: actionCreator(ActionTypes.VALIDATE_TOKEN_START),
-  validateTokenSuccess: actionCreatorWithPayload(
-    ActionTypes.VALIDATE_TOKEN_SUCCESS,
-    payloadType<{ token: string; expDate: DateTime }>(),
+  signupFailure: actionCreator("SIGNUP_FAILURE"),
+  logoutStart: actionCreator("LOGOUT_START"),
+  logoutSuccess: actionCreator("LOGOUT_SUCCESS"),
+  logoutFailure: actionCreator("LOGOUT_FAILURE"),
+  validateTokenStart: actionCreator("VALIDATE_TOKEN_START"),
+  validateTokenSuccess: actionCreator("VALIDATE_TOKEN_SUCCESS"),
+  validateTokenFailure: actionCreator("VALIDATE_TOKEN_FAILURE"),
+  verifyTokenStart: actionCreator("VERIFY_TOKEN_START"),
+  verifyTokenSuccess: actionCreator("VERIFY_TOKEN_SUCCESS"),
+  verifyTokenFailure: actionCreator("VERIFY_TOKEN_FAILURE"),
+  fetchUserDetailsStart: actionCreatorWithPayload(
+    "FETCH_USER_DETAILS_START",
+    payloadType<{ userId: string }>(),
   ),
-  validateTokenFailure: actionCreator(ActionTypes.VALIDATE_TOKEN_FAILURE),
-  verifyTokenStart: actionCreator(ActionTypes.VERIFY_TOKEN_START),
-  verifyTokenSuccess: actionCreatorWithPayload(
-    ActionTypes.VERIFY_TOKEN_SUCCESS,
-    payloadType<{ token: string; expDate: DateTime }>(),
+  fetchUserDetailsSuccess: actionCreatorWithPayload(
+    "FETCH_USER_DETAILS_SUCCESS",
+    payloadType<NewUserData>(),
   ),
-  verifyTokenFailure: actionCreator(ActionTypes.VERIFY_TOKEN_FAILURE),
+  fetchUserDetailsFailure: actionCreator("FETCH_USER_DETAILS_FAILURE"),
 };
 
 export type LoginStart = ReturnType<typeof authActions.loginStart>;
@@ -77,14 +59,12 @@ export type LogoutStart = ReturnType<typeof authActions.logoutStart>;
 export type LogoutSuccess = ReturnType<typeof authActions.logoutSuccess>;
 export type LogoutFailure = ReturnType<typeof authActions.logoutFailure>;
 
-export type VerifyTokenStart = ReturnType<
-  typeof authActions.validateTokenStart
->;
+export type VerifyTokenStart = ReturnType<typeof authActions.verifyTokenStart>;
 export type VerifyTokenSuccess = ReturnType<
-  typeof authActions.validateTokenSuccess
+  typeof authActions.verifyTokenSuccess
 >;
 export type VerifyTokenFailure = ReturnType<
-  typeof authActions.validateTokenFailure
+  typeof authActions.verifyTokenFailure
 >;
 
 export type ValidateTokenStart = ReturnType<
@@ -101,6 +81,16 @@ export type SignupStart = ReturnType<typeof authActions.signupStart>;
 export type SignupSuccess = ReturnType<typeof authActions.signupSuccess>;
 export type SignupFailure = ReturnType<typeof authActions.signupFailure>;
 
+export type FetchUserDetailsStart = ReturnType<
+  typeof authActions.fetchUserDetailsStart
+>;
+export type FetchUserDetailsSuccess = ReturnType<
+  typeof authActions.fetchUserDetailsSuccess
+>;
+export type FetchUserDetailsFailure = ReturnType<
+  typeof authActions.fetchUserDetailsFailure
+>;
+
 export type AuthActionTypes =
   | LoginStart
   | LoginSuccess
@@ -116,4 +106,7 @@ export type AuthActionTypes =
   | ValidateTokenFailure
   | SignupStart
   | SignupSuccess
-  | SignupFailure;
+  | SignupFailure
+  | FetchUserDetailsStart
+  | FetchUserDetailsSuccess
+  | FetchUserDetailsFailure;

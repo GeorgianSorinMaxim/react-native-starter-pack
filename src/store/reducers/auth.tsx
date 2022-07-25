@@ -1,5 +1,4 @@
 import { Reducer } from "redux";
-import { FirebaseAuthTypes } from "@react-native-firebase/auth";
 
 import { authActions, AuthActionTypes } from "../actions/auth";
 
@@ -11,25 +10,19 @@ export type User = {
 };
 
 export type AuthState = {
-  isAuthenticating: boolean;
-  error?: string | null;
-  tokenValidation?: any;
-  tokenValidationError?: string | null;
-  isRegistering: boolean;
-  registeringError?: string | null;
-  registrationInfo?: any;
-  user: User | FirebaseAuthTypes.User | null;
+  isLoginInProgress: boolean;
+  loginError?: boolean;
+  isRegistrationInProgress: boolean;
+  registeringError?: boolean;
+  user: User | null;
 };
 
 export const DEFAULT_STATE: AuthState = {
-  isAuthenticating: false,
-  error: null,
+  isLoginInProgress: false,
+  loginError: false,
   user: null,
-  tokenValidation: null,
-  tokenValidationError: null,
-  isRegistering: false,
+  isRegistrationInProgress: false,
   registeringError: undefined,
-  registrationInfo: undefined,
 };
 
 export const auth: Reducer<AuthState, AuthActionTypes> = (
@@ -40,98 +33,100 @@ export const auth: Reducer<AuthState, AuthActionTypes> = (
     case authActions.loginStart.type:
       return {
         ...state,
-        isAuthenticating: true,
-        error: null,
+        isLoginInProgress: true,
+        loginError: false,
         user: null,
       };
     case authActions.loginSuccess.type:
       return {
         ...state,
-        isAuthenticating: false,
-        error: null,
-        user: action.payload,
+        isLoginInProgress: false,
+        loginError: false,
+        user: null,
       };
     case authActions.loginFailure.type:
       return {
         ...state,
-        isAuthenticating: false,
+        isLoginInProgress: false,
+        loginError: true,
         user: null,
-        error: action.payload,
       };
     case authActions.signupStart.type:
       return {
         ...state,
-        isRegistering: true,
-        registeringError: null,
-        registrationInfo: null,
+        isRegistrationInProgress: true,
+        registeringError: false,
+        user: null,
       };
     case authActions.signupSuccess.type:
       return {
         ...state,
-        isRegistering: false,
-        registeringError: null,
-        registrationInfo: action.payload,
+        isRegistrationInProgress: false,
+        registeringError: false,
+        user: action.payload,
       };
     case authActions.signupFailure.type:
       return {
         ...state,
-        isRegistering: false,
-        registeringError: action.payload,
-        registrationInfo: null,
+        isRegistrationInProgress: false,
+        registeringError: true,
+        user: null,
       };
     case authActions.logoutStart.type:
       return {
         ...state,
-        isAuthenticating: false,
-        error: null,
+        isLoginInProgress: true,
         user: null,
       };
     case authActions.logoutSuccess.type:
       return {
         ...state,
-        isAuthenticating: false,
-        error: null,
-        user: null,
+        isLoginInProgress: false,
+        loginError: false,
       };
     case authActions.logoutFailure.type:
       return {
         ...state,
-        isAuthenticating: false,
-        user: null,
-        error: null,
+        isLoginInProgress: false,
+        loginError: true,
       };
     case authActions.verifyTokenStart.type:
       return {
         ...state,
-        isAuthenticating: true,
-        error: null,
-        user: null,
+        isLoginInProgress: true,
+        loginError: false,
       };
     case authActions.verifyTokenSuccess.type:
-      return {
-        ...state,
-        isAuthenticating: false,
-        error: null,
-        user: action.payload,
-      };
-    case authActions.verifyTokenFailure.type:
-      return {
-        ...state,
-        isAuthenticating: false,
-        user: null,
-        error: action.payload,
-      };
     case authActions.validateTokenSuccess.type:
       return {
         ...state,
-        isAuthenticating: false,
-        tokenValidation: action.payload,
+        isLoginInProgress: false,
+        loginError: false,
+      };
+    case authActions.verifyTokenFailure.type:
+    case authActions.validateTokenFailure.type:
+      return {
+        ...state,
+        isLoginInProgress: false,
+        loginError: true,
+      };
+    case authActions.fetchUserDetailsStart.type:
+      return {
+        ...state,
+        loginError: false,
+        user: null,
+      };
+    case authActions.fetchUserDetailsSuccess.type:
+      return {
+        ...state,
+        loginError: false,
+        user: action.payload,
       };
     case authActions.validateTokenFailure.type:
       return {
         ...state,
-        isAuthenticating: false,
-        tokenValidationError: action.payload,
+        loginError: true,
+        user: null,
       };
   }
   return state;

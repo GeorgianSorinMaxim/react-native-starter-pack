@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
 import Colors from "../constants/Colors";
@@ -8,7 +8,7 @@ type Props = {
   onPress: () => void;
 };
 
-const NavigationLink: FC<Props> = ({ text, onPress }) => (
+export const NavigationLink = ({ text, onPress }: Props) => (
   <TouchableOpacity style={styles.linkContainer} onPress={onPress}>
     <Text style={styles.linkText}>{text}</Text>
   </TouchableOpacity>
@@ -24,5 +24,3 @@ const styles = StyleSheet.create({
     color: Colors.gold,
   },
 });
-
-export default NavigationLink;

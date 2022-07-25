@@ -101,14 +101,18 @@ export const SettingsScreen = () => {
             <View style={styles.textContainer}>
               <BodyText style={styles.headerText}>Name</BodyText>
               <BodyText style={styles.contentText}>
-                {user?.firstName} {user?.lastName}
+                {user?.firstName} {user.lastName}
               </BodyText>
             </View>
           ) : null}
-          <View style={styles.textContainer}>
-            <BodyText style={styles.headerText}>{StringValues.email}</BodyText>
-            <BodyText style={styles.contentText}>{user?.email}</BodyText>
-          </View>
+          {user?.email ? (
+            <View style={styles.textContainer}>
+              <BodyText style={styles.headerText}>
+                {StringValues.email}
+              </BodyText>
+              <BodyText style={styles.contentText}>{user.email}</BodyText>
+            </View>
+          ) : null}
           <View style={styles.textContainer}>
             <BodyText style={styles.headerText}>
               {StringValues.appVersion}

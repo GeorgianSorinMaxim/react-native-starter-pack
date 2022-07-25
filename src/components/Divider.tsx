@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { StyleSheet, View, ViewProps } from "react-native";
 
 import Colors from "../constants/Colors";
@@ -9,7 +9,7 @@ interface OwnProps {
 
 type Props = ViewProps & OwnProps;
 
-const Divider: FC<Props> = ({ margin, ...props }) => (
+export const Divider = ({ margin, ...props }: Props) => (
   <View
     {...props}
     style={[styles.container, margin ? { marginVertical: margin } : null]}
@@ -25,5 +25,3 @@ const styles = StyleSheet.create({
     borderColor: Colors.gold,
   },
 });
-
-export default Divider;

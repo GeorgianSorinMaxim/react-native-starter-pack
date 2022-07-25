@@ -1,4 +1,4 @@
-import React, { Component, ReactNode } from "react";
+import React from "react";
 import {
   Modal,
   StyleProp,
@@ -26,84 +26,79 @@ interface Props {
   bodyStyle?: StyleProp<TextStyle>;
   buttonShapeStyle?: StyleProp<ViewStyle>;
   titleStyle?: StyleProp<TextStyle>;
-  children?: ReactNode;
+  children?: React.ReactNode;
   modalStyle?: StyleProp<ViewStyle>;
 }
 
-class GenericModal extends Component<Props> {
-  render() {
-    const {
-      title,
-      body,
-      bodyStyle,
-      buttonShapeStyle,
-      modalStyle,
-      primaryButton,
-      secondaryButton,
-      titleStyle,
-      children,
-    } = this.props;
+export const GenericModal = (props: Props) => {
+  const {
+    title,
+    body,
+    bodyStyle,
+    buttonShapeStyle,
+    modalStyle,
+    primaryButton,
+    secondaryButton,
+    titleStyle,
+    children,
+  } = props;
 
-    return (
-      <Modal visible transparent>
-        <View style={styles.modalBackground}>
-          <View
-            style={[
-              modalStyle || styles.modalContainer,
-              { backgroundColor: Colors.white },
-            ]}>
-            <Text
-              style={[
-                styles.modalHeader,
-                titleStyle || { color: Colors.blue },
-              ]}>
-              {title}
+  return (
+    <Modal visible transparent>
+      <View style={styles.modalBackground}>
+        <View
+          style={[
+            modalStyle || styles.modalContainer,
+            { backgroundColor: Colors.white },
+          ]}>
+          <Text
+            style={[styles.modalHeader, titleStyle || { color: Colors.blue }]}>
+            {title}
+          </Text>
+
+          {body ? (
+            <Text style={[styles.body, bodyStyle || { color: Colors.black }]}>
+              {body}
             </Text>
+          ) : null}
 
-            {body ? (
-              <Text style={[styles.body, bodyStyle || { color: Colors.black }]}>
-                {body}
-              </Text>
-            ) : null}
+          {children || null}
 
-            {children || null}
-
-            <View style={[secondaryButton ? styles.buttonsRow : null]}>
-              {secondaryButton ? (
-                <TouchableOpacity
-                  onPress={secondaryButton.onPress}
-                  style={buttonShapeStyle || styles.callToAction}>
-                  <Text
-                    style={[
-                      styles.modalButton,
-                      secondaryButton.style
-                        ? secondaryButton.style
-                        : { color: Colors.grey },
-                    ]}>
-                    {secondaryButton.title}
-                  </Text>
-                </TouchableOpacity>
-              ) : null}
+          <View style={[secondaryButton ? styles.buttonsRow : null]}>
+            {secondaryButton ? (
               <TouchableOpacity
-                onPress={primaryButton.onPress}
+                onPress={secondaryButton.onPress}
                 style={buttonShapeStyle || styles.callToAction}>
                 <Text
                   style={[
                     styles.modalButton,
-                    primaryButton.style
-                      ? primaryButton.style
+                    secondaryButton.style
+                      ? secondaryButton.style
                       : { color: Colors.grey },
                   ]}>
-                  {primaryButton.title}
+                  {secondaryButton.title}
                 </Text>
               </TouchableOpacity>
-            </View>
+            ) : null}
+            <TouchableOpacity
+              onPress={primaryButton.onPress}
+              style={buttonShapeStyle || styles.callToAction}>
+              <Text
+                style={[
+                  styles.modalButton,
+                  primaryButton.style
+                    ? primaryButton.style
+                    : { color: Colors.grey },
+                ]}>
+                {primaryButton.title}
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
-      </Modal>
-    );
-  }
-}
+      </View>
+    </Modal>
+  );
+};
 
 const styles = StyleSheet.create({
   modalBackground: {
@@ -147,5 +142,3 @@ const styles = StyleSheet.create({
     marginVertical: 12,
   },
 });
-
-export default GenericModal;

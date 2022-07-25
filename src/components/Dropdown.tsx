@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import {
   Modal,
-  Picker,
   StyleProp,
   StyleSheet,
   Text,
@@ -10,6 +9,7 @@ import {
   View,
   ViewStyle,
 } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 
 import { PhoneNumberPrefix } from "../components";
 import Colors from "../constants/Colors";
@@ -24,14 +24,14 @@ interface CountryCodeValueType {
 
 interface PickerElement {
   key: string;
-  value: any;
+  value: string;
 }
 
 interface Props {
   onValueSelected?: (item: PickerElement) => void;
   onCountryCodeValueSelected?: (item: CountryCodeValueType) => void;
   countryCodePicker?: boolean;
-  pickerData?: any[];
+  pickerData?: PickerElement[];
   placeholder?: string;
   style?: StyleProp<ViewStyle>;
   styleInput?: StyleProp<ViewStyle>;
@@ -40,29 +40,22 @@ interface Props {
   required?: boolean;
 }
 
-interface State {
-  itemIndex: number;
-  renderPicker: boolean;
-}
+export const Dropdown = (props: Props) => {
+  const [itemIndex, setItemIndex] = useState<number>(0);
+  const [renderPicker, setRenderPicker] = useState<boolean>(false);
 
-class Dropdown extends Component<Props, State> {
-  state = {
-    itemIndex: 0,
-    renderPicker: false,
+  const showPicker = () => {
+    setRenderPicker(true);
   };
 
-  showPicker = () => {
-    this.setState({ renderPicker: true });
+  const setDropdownValue = (itemIndex: number) => {
+    setItemIndex(itemIndex);
   };
 
-  setDropdownValue = (itemIndex: number) => {
-    this.setState({ itemIndex });
-  };
+  const onValueChange = () => {
+    setRenderPicker(false);
 
-  onValueChange = () => {
-    this.setState({ renderPicker: false });
-    const { pickerData, onValueSelected } = this.props;
-    const { itemIndex } = this.state;
+    const { pickerData, onValueSelected } = props;
 
     if (pickerData && onValueSelected) {
       const selectedPickerValue = pickerData[itemIndex];
@@ -70,93 +63,88 @@ class Dropdown extends Component<Props, State> {
     }
   };
 
-  onCountryCodeValueChange = (selectedPickerValue: CountryCodeValueType) => {
-    this.setState({ renderPicker: false });
-    const { onCountryCodeValueSelected } = this.props;
+  const onCountryCodeValueChange = (
+    selectedPickerValue: CountryCodeValueType,
+  ) => {
+    setRenderPicker(false);
+
+    const { onCountryCodeValueSelected } = props;
+
     if (onCountryCodeValueSelected) {
       onCountryCodeValueSelected(selectedPickerValue);
     }
   };
 
-  renderPickerData = (item: PickerElement, index: number) => (
+  const renderPickerData = (item: PickerElement, index: number) => (
     <Picker.Item label={item.key} value={index} key={index} />
   );
 
-  render() {
-    const {
-      pickerData,
-      countryCodePicker,
-      placeholder,
-      value,
-      style,
-      styleInput,
-      styleArrow,
-      required,
-    } = this.props;
-    const { renderPicker, itemIndex } = this.state;
+  const {
+    pickerData,
+    countryCodePicker,
+    placeholder,
+    value,
+    style,
+    styleInput,
+    styleArrow,
+    required,
+  } = props;
 
-    return (
-      <View>
-        <TouchableOpacity
-          onPress={this.showPicker}
-          style={[styles.container, style]}>
-          <View pointerEvents={"none"}>
-            <TextInput
-              placeholder={placeholder}
-              value={value}
-              style={[
-                styleInput,
-                styles.textInput,
-                value
-                  ? { fontSize: 20, color: Colors.black }
-                  : { fontSize: 16, color: Colors.grey },
-                required && !value
-                  ? { borderBottomColor: Colors.required }
-                  : null,
-              ]}
-            />
-          </View>
-          <View style={[styles.dropdownArrow, styleArrow]}>
-            <Icon name="chevron-down" size={22} color="rgba(0,0,0,0.35)" />
-          </View>
-        </TouchableOpacity>
+  return (
+    <View>
+      <TouchableOpacity onPress={showPicker} style={[styles.container, style]}>
+        <View pointerEvents={"none"}>
+          <TextInput
+            placeholder={placeholder}
+            value={value}
+            style={[
+              styleInput,
+              styles.textInput,
+              value
+                ? { fontSize: 20, color: Colors.black }
+                : { fontSize: 16, color: Colors.grey },
+              required && !value
+                ? { borderBottomColor: Colors.required }
+                : null,
+            ]}
+          />
+        </View>
+        <View style={[styles.dropdownArrow, styleArrow]}>
+          <Icon name="chevron-down" size={22} color="rgba(0,0,0,0.35)" />
+        </View>
+      </TouchableOpacity>
 
-        {pickerData && renderPicker ? (
-          <Modal animationType="slide" visible transparent>
-            <View style={styles.contentContainer}>
-              <View style={[styles.picker, { backgroundColor: Colors.white }]}>
-                <View style={{ backgroundColor: Colors.lightGrey }}>
-                  <TouchableOpacity
-                    onPress={this.onValueChange}
-                    style={styles.button}>
-                    <Text style={[styles.buttonText, { color: Colors.blue }]}>
-                      Done
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-                <Picker
-                  selectedValue={itemIndex}
-                  onValueChange={this.setDropdownValue}>
-                  {pickerData.map(this.renderPickerData)}
-                </Picker>
+      {pickerData && renderPicker ? (
+        <Modal animationType="slide" visible transparent>
+          <View style={styles.contentContainer}>
+            <View style={[styles.picker, { backgroundColor: Colors.white }]}>
+              <View style={{ backgroundColor: Colors.lightGrey }}>
+                <TouchableOpacity onPress={onValueChange} style={styles.button}>
+                  <Text style={[styles.buttonText, { color: Colors.blue }]}>
+                    Done
+                  </Text>
+                </TouchableOpacity>
               </View>
+              <Picker
+                selectedValue={itemIndex}
+                onValueChange={setDropdownValue}>
+                {pickerData.map(renderPickerData)}
+              </Picker>
             </View>
-          </Modal>
-        ) : null}
+          </View>
+        </Modal>
+      ) : null}
 
-        {countryCodePicker && renderPicker ? (
-          <Modal animationType="slide" visible transparent>
-            <View style={styles.contentContainer}>
-              <PhoneNumberPrefix
-                onValueChange={this.onCountryCodeValueChange}
-              />
-            </View>
-          </Modal>
-        ) : null}
-      </View>
-    );
-  }
-}
+      {countryCodePicker && renderPicker ? (
+        <Modal animationType="slide" visible transparent>
+          <View style={styles.contentContainer}>
+            <PhoneNumberPrefix onValueChange={onCountryCodeValueChange} />
+          </View>
+        </Modal>
+      ) : null}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -200,5 +188,3 @@ const styles = StyleSheet.create({
     padding: 12,
   },
 });
-
-export default Dropdown;

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { StyleSheet, View } from "react-native";
 
 import Colors from "../constants/Colors";
@@ -9,7 +9,7 @@ interface Props {
   size?: number;
 }
 
-const ImagePlaceholder: FC<Props> = (props: Props) => {
+export const ImagePlaceholder = (props: Props) => {
   return (
     <View style={styles.container}>
       <Icon size={props.size || 35} name="image-outline" style={styles.icon} />
@@ -33,5 +33,3 @@ const styles = StyleSheet.create({
     color: Colors.grey,
   },
 });
-
-export default ImagePlaceholder;
