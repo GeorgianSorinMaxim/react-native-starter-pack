@@ -58,7 +58,7 @@
     "react-native-screens": "3.15.0",
     "react-native-secure-key-store": "^2.0.9",
     "react-native-share": "^7.6.6",
-    "react-native-svg": "^12.4.0",
+    "react-native-svg": "^12.4.1",
     "react-native-uuid": "^2.0.1",
     "react-native-vector-icons": "^9.2.0",
     "react-redux": "^8.0.2",
