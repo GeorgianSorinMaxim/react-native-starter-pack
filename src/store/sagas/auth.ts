@@ -18,13 +18,13 @@ import {
   register,
   getUser,
   getToken,
+  deleteUser,
 } from "../../api/auth/firebase-auth";
 
 import { navigate } from "../../navigation/RootNavigation";
 import { ScreenNames } from "../../navigation/ScreenNames";
 
 const onError = () => {
-  // Remove the local storage items
   try {
     AsyncStorage.removeItem("token");
   } catch (error) {
@@ -34,6 +34,15 @@ const onError = () => {
   Alert.alert(
     "Session expired",
     "Please login again",
+    [{ text: "OK", onPress: () => {} }],
+    { cancelable: false },
+  );
+};
+
+const onLoginFailed = () => {
+  Alert.alert(
+    "Login failed",
+    "Please try to login again",
     [{ text: "OK", onPress: () => {} }],
     { cancelable: false },
   );
@@ -62,15 +71,20 @@ export const onLogin = function* (action: LoginStart) {
 
     if (userPayload && userPayload.user.uid) {
       yield put(authActions.loginSuccess({ user: userPayload }));
-
+      yield put(
+        authActions.fetchUserDetailsStart({ userId: userPayload.user.uid }),
+      );
       yield put(dataActions.fetchArticlesStart());
 
       navigate(ScreenNames.TABS, { screen: ScreenNames.HOME });
     } else {
       yield put(authActions.loginFailure());
+      onLoginFailed();
     }
   } catch (error) {
     console.log("onLogin error:", error);
+    yield put(authActions.loginFailure());
+    onLoginFailed();
   }
 };
 
@@ -90,7 +104,7 @@ export const onRegister = function* (action: SignupStart) {
 
     if (res && res.id) {
       yield put(authActions.signupSuccess(res));
-      navigate(ScreenNames.LOGIN);
+      navigate(ScreenNames.HOME);
     } else {
       yield put(authActions.signupFailure());
     }
@@ -101,7 +115,7 @@ export const onRegister = function* (action: SignupStart) {
 
 export const onLogout = function* () {
   try {
-    const res: Awaited<ReturnType<typeof logout>> = yield logout();
+    const res: Awaited<ReturnType<typeof logout>> = yield call(logout);
 
     try {
       yield AsyncStorage.removeItem("token");
@@ -115,8 +129,8 @@ export const onLogout = function* () {
       yield put(authActions.logoutFailure());
     }
 
-    // Navigate to the login screen
-    yield call(navigate, "Login", {});
+    // Navigate to the LOGIN screen
+    yield call(navigate, ScreenNames.LOGIN);
   } catch (error) {
     console.log("onLogout error:", error);
   }
@@ -182,15 +196,28 @@ export const onFetchUser = function* (action: FetchUserDetailsStart) {
   }
 };
 
+export const onDeleteUser = function* () {
+  try {
+    const res: Awaited<ReturnType<typeof deleteUser>> = yield call(deleteUser);
+
+    if (res) {
+      yield put(authActions.deleteAccountSuccess());
+    } else {
+      yield put(authActions.deleteAccountFailure());
+    }
+  } catch (error) {
+    console.log("onDeleteUser error:", error);
+    yield put(authActions.deleteAccountFailure());
+  }
+};
+
 export function* authSaga() {
   yield all([
-    // Verify token at app startup
     takeEvery(authActions.loginStart.type, onLogin),
     takeEvery(authActions.signupStart.type, onRegister),
-    takeEvery(authActions.loginFailure.type, onLogout),
     takeEvery(authActions.logoutStart.type, onLogout),
-    // Validate token at app state change
     takeEvery(authActions.validateTokenStart.type, onValidateToken),
     takeEvery(authActions.fetchUserDetailsStart.type, onFetchUser),
+    takeEvery(authActions.deleteAccountStart.type, onDeleteUser),
   ]);
 }

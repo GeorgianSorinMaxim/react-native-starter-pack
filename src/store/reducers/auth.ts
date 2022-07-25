@@ -83,12 +83,14 @@ export const auth: Reducer<AuthState, AuthActionTypes> = (
         ...state,
         isLoginInProgress: false,
         loginError: false,
+        user: null,
       };
     case authActions.logoutFailure.type:
       return {
         ...state,
         isLoginInProgress: false,
         loginError: true,
+        user: null,
       };
     case authActions.validateTokenStart.type:
       return {

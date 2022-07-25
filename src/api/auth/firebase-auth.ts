@@ -56,7 +56,10 @@ export const logout = (): Promise<boolean> => {
   return auth()
     .signOut()
     .then(() => true)
-    .catch(_error => false);
+    .catch(error => {
+      console.log("Logout error: ", error);
+      return false;
+    });
 };
 
 export const register = async (
@@ -139,4 +142,16 @@ export const getUser = async (userId: string) => {
 
   const user = doc.data() as NewUserData;
   return user;
+};
+
+export const deleteUser = async () => {
+  const { currentUser } = auth();
+
+  try {
+    await currentUser?.delete();
+    return true;
+  } catch (error) {
+    console.log("deleteUser error", error);
+    return false;
+  }
 };

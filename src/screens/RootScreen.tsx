@@ -29,6 +29,8 @@ export const RootScreen = () => {
     if (user) {
       dispatch(authActions.fetchUserDetailsStart({ userId: user.uid }));
       setUser(user);
+    } else {
+      setUser(null);
     }
     if (initializing) setInitializing(false);
   };

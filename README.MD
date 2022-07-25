@@ -80,6 +80,7 @@
 
 - DONE in July 2022
 
+  - Add auto-login with token verification with `jwt-decode`
   - Upgraded `react`, `react-native` & other dependencies
   - Enabled Hermes
   - Refactored `/screens` and `/components` to use hooks and functional components
@@ -92,21 +93,21 @@
 ### WIP features and improvements
 
 - Add logging and tracking service: Bugsnag, Analytics (GA) and Crashlytics with `react-native-firebase`, `react-native-device-info` and `react-native-uuid`
-- Create a design system with small component for Text, Heading, Subheading, Divider, Loader, etc
 - Login / Register screen: Add image on background like on Harrods's app and validation
   - UI improvements with `react-native-keyboard-aware-scroll-view`
-- Add feature flagging + A/B testing capabilities with Firebase Remote Config + Firebase Realtime Database using with `react-native-firebase`
+- Create a design system with small components for Text, Heading, Subheading, Divider, Loader, etc
 - Run the app in different environments: dev, prod, uat with `react-native-config`
+- Add feature flagging + A/B testing capabilities with Firebase Remote Config + Firebase Realtime Database using with `react-native-firebase`
 - Render SVGs with `react-native-svg` and `react-native-svg-transformer`
-- Animate UI elements with `react-native-reanimated`
-- Ask your users to rate the app with `react-native-rate`
 - Add push notifications with Firebase / Azure / Iterable
 - Replace `Jest` with `react-native-testing-library` and write tests (e.g. for /components, networkingApi.js and for the navigator)
 - Build a CI with AppCenter CI to build and sign the app
 - Add CodePush for over-the-air updates
 - Add `pre-commit` hooks
-- Auto-login with token verification with `jwt-decode`
+
 - Use biometric authentication and store user credentials in the KeyChain and KeyStore with `react-native-secure-key-store`
+- Animate UI elements with `react-native-reanimated`
+- Ask your users to rate the app with `react-native-rate`
 - Allow to natively share urls with `react-native-share`
 - Create gradients with `react-native-linear-gradient`
 - Take pictures with `react-native-camera`

@@ -16,8 +16,10 @@ export enum StringValues {
   alreadyHaveAccount = "Already have an account? Login",
   contact = "Contact",
   logout = "Logout",
+  deleteAccount = "Delete account",
   appVersion = "App version",
   uuid = "UUID",
   termsAndConditions = "Terms & Conditions",
   yourDetails = "Your details",
+  myAccount = "My account",
 }

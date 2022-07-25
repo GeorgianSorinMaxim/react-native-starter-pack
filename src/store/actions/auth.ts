@@ -45,6 +45,9 @@ export const authActions = {
     payloadType<NewUserData>(),
   ),
   fetchUserDetailsFailure: actionCreator("FETCH_USER_DETAILS_FAILURE"),
+  deleteAccountStart: actionCreator("DELETE_ACCOUNT_START"),
+  deleteAccountSuccess: actionCreator("DELETE_ACCOUNT_SUCCESS"),
+  deleteAccountFailure: actionCreator("DELETE_ACCOUNT_FAILURE"),
 };
 
 export type LoginStart = ReturnType<typeof authActions.loginStart>;
@@ -79,6 +82,16 @@ export type FetchUserDetailsFailure = ReturnType<
   typeof authActions.fetchUserDetailsFailure
 >;
 
+export type DeleteAccountStart = ReturnType<
+  typeof authActions.deleteAccountStart
+>;
+export type DeleteAccountSuccess = ReturnType<
+  typeof authActions.deleteAccountSuccess
+>;
+export type DeleteAccountFailure = ReturnType<
+  typeof authActions.deleteAccountFailure
+>;
+
 export type AuthActionTypes =
   | LoginStart
   | LoginSuccess
@@ -94,4 +107,7 @@ export type AuthActionTypes =
   | SignupFailure
   | FetchUserDetailsStart
   | FetchUserDetailsSuccess
-  | FetchUserDetailsFailure;
+  | FetchUserDetailsFailure
+  | DeleteAccountStart
+  | DeleteAccountSuccess
+  | DeleteAccountFailure;
