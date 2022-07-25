@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { Alert, View, StyleSheet } from "react-native";
 import * as Progress from "react-native-progress";
 
@@ -11,24 +12,41 @@ import {
   Screen,
   Title,
 } from "../components";
-import Colors from "../constants/Colors";
+import { Colors } from "../constants/Colors";
 
 import { authActions } from "../store/actions/auth";
 import { getLoginStatus, getLoginError } from "../store/selectors";
 
 import { ScreenNames } from "../navigation/ScreenNames";
+import { NavigatorStackParamList } from "../navigation/AppNavigator";
 
 import { StringValues } from "../constants/StringValues";
 
+type LoginScreenProp = StackNavigationProp<
+  NavigatorStackParamList,
+  typeof ScreenNames.LOGIN
+>;
+
+const styles = StyleSheet.create({
+  titleContainer: {
+    paddingTop: 100,
+    paddingBottom: 12,
+  },
+  loader: {
+    paddingVertical: 24,
+    alignSelf: "center",
+  },
+});
+
 export const LoginScreen = () => {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
+  const navigation = useNavigation<LoginScreenProp>();
 
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
 
   const isSubmitting: boolean = useSelector(getLoginStatus);
-  const error: string | null = useSelector(getLoginError);
+  const error: boolean | null = useSelector(getLoginError);
 
   useEffect(() => {
     if (isSubmitting === false && !error) {
@@ -65,13 +83,13 @@ export const LoginScreen = () => {
       </View>
 
       <InputWithLabel
-        hideLabelWhenFocused={true}
+        hideLabelWhenFocused
         value={email}
         onChangeText={onEmailChange}
         label={StringValues.email}
       />
       <InputWithLabel
-        hideLabelWhenFocused={true}
+        hideLabelWhenFocused
         value={password}
         onChangeText={onPasswordChange}
         label={StringValues.password}
@@ -92,7 +110,7 @@ export const LoginScreen = () => {
       {isSubmitting ? (
         <Progress.Circle
           size={24}
-          indeterminate={true}
+          indeterminate
           color={Colors.gold}
           style={styles.loader}
         />
@@ -100,14 +118,3 @@ export const LoginScreen = () => {
     </Screen>
   );
 };
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    paddingTop: 100,
-    paddingBottom: 12,
-  },
-  loader: {
-    paddingVertical: 24,
-    alignSelf: "center",
-  },
-});

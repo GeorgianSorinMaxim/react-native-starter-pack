@@ -15,7 +15,6 @@
 - Install the `git` client
 - Clone the project
 
-
 ### Install the app
 
 `$ yarn`
@@ -63,6 +62,7 @@
   - Icons: https://infinitered.github.io/ionicons-version-3-search/
 
 ### Components
+
 - Button
 - Button link with icons
 - Navigation link
@@ -77,23 +77,24 @@
 - WebView container with `react-native-webview` and `uri-js`
 
 ### Changelog
+
 - DONE in July 2022
+
   - Upgraded `react`, `react-native` & other dependencies
   - Enabled Hermes
-  - Refactored `/screens` and `/components` to use hooks
+  - Refactored `/screens` and `/components` to use hooks and functional components
   - Added `react-native-firebase`
+  - Made the TS rules strict (e.g. turn on rules like `noImplicitAny`, no `@ts-ignroe` or `: any` types) and fixed all TS issues
+  - Improved and extended the types and transformed `networkingApi.js` into `.ts`
+  - Added progress indicators and spinners with `react-native-progress`
+  - Added `react-native-config`
 
-### WIP features and improvments
-- Add logger service
-- Make TS rules strict (e.g. turn on rules like `noImplicitAny`, no `@ts-ignroe` or `: any` types) and fix any arrising TS issues
-  - Improve and extend the types (see the TODOs placed in the code) and transform `networkingApi.js`, `useLinking.js` into `.ts`
+### WIP features and improvements
+
+- Add logging and tracking service: Bugsnag, Analytics (GA) and Crashlytics with `react-native-firebase`, `react-native-device-info` and `react-native-uuid`
 - Create a design system with small component for Text, Heading, Subheading, Divider, Loader, etc
-- Use Hooks and functional components
-- Home screen: needs to be refactored
-- Login / Regiser screen: Add image on background like on Harrods's app and validation
-  - UI improvments with `react-native-keyboard-aware-scroll-view`
-- Add screens to showcase `WebViewInModal` & other currently unused components
-- Progress indicators and spinners with `react-native-progress`
+- Login / Register screen: Add image on background like on Harrods's app and validation
+  - UI improvements with `react-native-keyboard-aware-scroll-view`
 - Add feature flagging + A/B testing capabilities with Firebase Remote Config + Firebase Realtime Database using with `react-native-firebase`
 - Run the app in different environments: dev, prod, uat with `react-native-config`
 - Render SVGs with `react-native-svg` and `react-native-svg-transformer`
@@ -103,10 +104,9 @@
 - Replace `Jest` with `react-native-testing-library` and write tests (e.g. for /components, networkingApi.js and for the navigator)
 - Build a CI with AppCenter CI to build and sign the app
 - Add CodePush for over-the-air updates
-- Add logging and tracking service: Bugsnag, Analytics (GA) and Crashlytics with `react-native-firebase`, `react-native-device-info` and `react-native-uuid`
 - Add `pre-commit` hooks
 - Auto-login with token verification with `jwt-decode`
-- Use biometric authentication and store user creds in the KeyChain and KeyStore with `react-native-secure-key-store`
+- Use biometric authentication and store user credentials in the KeyChain and KeyStore with `react-native-secure-key-store`
 - Allow to natively share urls with `react-native-share`
 - Create gradients with `react-native-linear-gradient`
 - Take pictures with `react-native-camera`
@@ -120,6 +120,7 @@
   - Access the Apollo cache with apollo-cache-inmemory
 
 ### TODOs before going live
+
 - Manual test the app on multiple devices on both platforms (or use AWS Device Farm).
 - Create the app in Play Store and App Store.
 - Create signing certificates for iOS.
@@ -130,19 +131,20 @@
 - Release the first verion of the app.
 
 ### Code quality:
-  - Re-use code whenever possible
-  - Use functional components (not class components) since Hooks allows us to use state inside functional components
-  - Have strict TS rules
-  - Run Prettier, lint and TS in all files (including tests)
-  - Use type declarations for dependencies (e.g. `react-native`)
-  - Write unit tests using `react-native-testing-library`
-  - Write E2E tests
-  - Use pre-hooks, Git checks and checks on the CI
-  - Document the app (how to get started, important architectural decisions, etc)
-  - Use PR templates and a CHANGELOG.MD
-  - Use an UAT app against multiple envs
-  - Have a logging service (GA / Bugsnag)
-  - Keep the dependencies updated
-  - Integrate Crashlytics
-  - Built a CI (Bitrise + CodePush)
-    - Fully automate release from Bitrise
+
+- Re-use code whenever possible
+- Use functional components (not class components) since Hooks allows us to use state inside functional components
+- Have strict TS rules
+- Run Prettier, lint and TS in all files (including tests)
+- Use type declarations for dependencies (e.g. `react-native`)
+- Write unit tests using `react-native-testing-library`
+- Write E2E tests
+- Use pre-hooks, Git checks and checks on the CI
+- Document the app (how to get started, important architectural decisions, etc)
+- Use PR templates and a CHANGELOG.MD
+- Use an UAT app against multiple envs
+- Have a logging service (GA / Bugsnag)
+- Keep the dependencies updated
+- Integrate Crashlytics
+- Built a CI (Bitrise + CodePush)
+  - Fully automate release from Bitrise

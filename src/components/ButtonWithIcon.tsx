@@ -3,15 +3,15 @@ import { StyleSheet, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { RectButton } from "react-native-gesture-handler";
 
-import Colors from "../constants/Colors";
+import { Colors } from "../constants/Colors";
 
-type ButtonWithIconProps = {
+type Props = {
   label: string;
   icon: string;
   onPress: () => void;
 };
 
-const ButtonWithIcon = ({ label, icon, onPress }: ButtonWithIconProps) => {
+export const ButtonWithIcon = ({ label, icon, onPress }: Props) => {
   return (
     <RectButton style={styles.option} onPress={onPress}>
       <View style={styles.buttonContainer}>
@@ -47,5 +47,3 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
   },
 });
-
-export default ButtonWithIcon;

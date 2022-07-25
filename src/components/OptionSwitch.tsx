@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-import Colors from "../constants/Colors";
+import { Colors } from "../constants/Colors";
 
 interface Props {
   value: boolean | null;
@@ -9,35 +9,27 @@ interface Props {
   required?: boolean;
 }
 
-export default class OptionSwitch extends Component<Props> {
-  render() {
-    const { value, required, onValueChange } = this.props;
+export const OptionSwitch = ({ value, onValueChange, required }: Props) => (
+  <View
+    style={[
+      styles.container,
+      required
+        ? { borderBottomColor: Colors.required, borderBottomWidth: 1 }
+        : null,
+    ]}>
+    <TouchableOpacity onPress={() => onValueChange(true)}>
+      <Text style={[styles.labelStyle, value === true ? styles.active : null]}>
+        Yes
+      </Text>
+    </TouchableOpacity>
 
-    return (
-      <View
-        style={[
-          styles.container,
-          required
-            ? { borderBottomColor: Colors.required, borderBottomWidth: 1 }
-            : null,
-        ]}>
-        <TouchableOpacity onPress={() => onValueChange(true)}>
-          <Text
-            style={[styles.labelStyle, value === true ? styles.active : null]}>
-            Yes
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => onValueChange(false)}>
-          <Text
-            style={[styles.labelStyle, value === false ? styles.active : null]}>
-            No
-          </Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-}
+    <TouchableOpacity onPress={() => onValueChange(false)}>
+      <Text style={[styles.labelStyle, value === false ? styles.active : null]}>
+        No
+      </Text>
+    </TouchableOpacity>
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {

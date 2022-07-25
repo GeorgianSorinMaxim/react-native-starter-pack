@@ -2,7 +2,7 @@ const blue = "#2f95dc";
 const red = "#CE0924";
 const gold = "#D4AF37";
 
-export default {
+export const Colors = {
   red,
   blue,
   gold,

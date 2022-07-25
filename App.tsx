@@ -1,37 +1,62 @@
 import React from "react";
-import { Platform, StatusBar, StyleSheet, View, Text } from "react-native";
+import {
+  Platform,
+  StatusBar,
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  LogBox,
+} from "react-native";
 import { Provider } from "react-redux";
 
-import { StringValues } from "./src/constants/StringValues";
+import { Loader } from "./src/components";
 
 // Persistor
 import { PersistGate } from "redux-persist/integration/react";
 
 // Navigation
 import { NavigationContainer } from "@react-navigation/native";
-import { RootNavigation, navigationRef } from "./src/navigation/RootNavigation";
+import { RootStack } from "./src/navigation/AppNavigator";
+import { navigationRef } from "./src/navigation/RootNavigation";
 
 // Redux store
 import { configureStore } from "./src/store/configureStore";
 const { store, persistor } = configureStore();
 
-const Loading = () => (
-  <View style={styles.loadingContainer}>
-    <Text>{StringValues.loading}</Text>
-  </View>
-);
+LogBox.ignoreLogs(["Require cycle:"]);
+interface TextWithDefaultProps extends Text {
+  defaultProps?: { allowFontScaling?: boolean; maxFontSizeMultiplier?: number };
+}
 
-const App = () => {
+interface TextInputWithDefaultProps extends TextInput {
+  defaultProps?: { allowFontScaling?: boolean; maxFontSizeMultiplier?: number };
+}
+
+(Text as unknown as TextWithDefaultProps).defaultProps =
+  (Text as unknown as TextWithDefaultProps).defaultProps || {};
+(Text as unknown as TextWithDefaultProps).defaultProps!.allowFontScaling = true;
+(
+  Text as unknown as TextWithDefaultProps
+).defaultProps!.maxFontSizeMultiplier = 1.8;
+
+(TextInput as unknown as TextInputWithDefaultProps).defaultProps =
+  (TextInput as unknown as TextInputWithDefaultProps).defaultProps || {};
+(
+  TextInput as unknown as TextInputWithDefaultProps
+).defaultProps!.allowFontScaling = true;
+(
+  TextInput as unknown as TextInputWithDefaultProps
+).defaultProps!.maxFontSizeMultiplier = 1.8;
+
+export const App = () => {
   return (
     <View style={styles.container}>
       <Provider store={store}>
-        <PersistGate loading={<Loading />} persistor={persistor}>
+        <PersistGate loading={<Loader />} persistor={persistor}>
           {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-          <NavigationContainer
-            // TODO: Remove @ts-ignore
-            // @ts-ignore
-            ref={navigationRef}>
-            <RootNavigation />
+          <NavigationContainer ref={navigationRef}>
+            <RootStack />
           </NavigationContainer>
         </PersistGate>
       </Provider>
@@ -51,5 +76,3 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-
-export default App;

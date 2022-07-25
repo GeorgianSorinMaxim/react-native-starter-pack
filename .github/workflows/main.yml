@@ -14,7 +14,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 17
 
       - name: Install dependencies
         run: yarn
@@ -30,10 +30,6 @@ jobs:
       # Run linter
       - name: Run linter
         run: yarn lint
-
-      # Run Prettier
-      - name: Run prettier
-        run: yarn prettier
 
       # Tests
       - name: Run unit tests

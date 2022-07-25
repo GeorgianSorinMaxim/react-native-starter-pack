@@ -1,34 +1,31 @@
-// TODO: Use for POST requests
-// export const _doPost = async (url, body) => {
-//   return fetch(url, {
-//     method: "POST",
-//     headers: {
-//       Accept: "application/json",
-//       "Content-Type": "application/json"
-//     },
-//     body
-//   })
-//     .then(response => response.json())
-//     .then(responseJson => {
-//       return responseJson;
-//     })
-//     .catch(error => {
-//       return error;
-//     });
-// };
+export const _doPost = async (url: string, body: string) => {
+  return fetch(url, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body,
+  })
+    .then(response => response.json())
+    .then(responseJson => {
+      return responseJson;
+    })
+    .catch(error => {
+      return error;
+    });
+};
 
 export const _doGet = async (url: string, payload?: unknown): Promise<unknown> => {
   const headers = {
     "Content-Type": "application/json",
   };
 
-  const options = {
+  const options: RequestInit = {
     method: "GET",
     headers: new Headers(headers),
     mode: "cors",
-    cache: "default",
-    credentials: "include",
-    redirect: "error",
+    credentials: "include" as RequestCredentials_,
   };
 
   if (payload) {
@@ -37,13 +34,14 @@ export const _doGet = async (url: string, payload?: unknown): Promise<unknown> =
 
   return fetch(url, options).then(
     response =>
-      new Promise((resolve, reject) => {
+      new Promise((resolve, _reject) => {
         const result = {
           success: response.ok,
           statusCode: response.status,
           statusText: response.statusText,
           requestUrl: url,
           requestMethod: options.method,
+          requestBody: options.body,
         };
 
         if (response.ok) {
@@ -52,7 +50,6 @@ export const _doGet = async (url: string, payload?: unknown): Promise<unknown> =
             .then(json => resolve({ ...result, payload: json }))
             .catch(() => resolve(result));
         } else {
-          result.requestBody = options.body;
           resolve(result);
         }
       }),

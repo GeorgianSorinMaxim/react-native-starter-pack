@@ -1,10 +1,10 @@
-import { ActionTypes } from "../../actions/data";
-import { data } from "../data";
+import { dataActions } from "../../actions/data";
+import { data, University } from "../data";
 
 describe("Data reducer", () => {
   it("default", () => {
     const state = data(undefined, {
-      type: ActionTypes.DATA_FETCHED_FAILURE,
+      type: dataActions.fetchDataFailure.type,
       payload: [],
     });
 
@@ -14,21 +14,21 @@ describe("Data reducer", () => {
   });
 
   it("DATA_FETCHED_SUCCESS", () => {
-    const payload = ["mock"];
+    const payload: University[] = [{ name: "mock", url: "mock" }];
 
     const state = data(undefined, {
-      type: ActionTypes.DATA_FETCHED_SUCCESS,
+      type: dataActions.fetchDataSuccess.type,
       payload,
     });
 
-    expect(state).toEqual({ universities: ["mock"] });
+    expect(state).toEqual({ universities: [{ name: "mock", url: "mock" }] });
   });
 
   it("DATA_FETCHED_FAILURE", () => {
-    const payload = [];
+    const payload: [] = [];
 
     const state = data(undefined, {
-      type: ActionTypes.DATA_FETCHED_FAILURE,
+      type: dataActions.fetchDataFailure.type,
       payload,
     });
 

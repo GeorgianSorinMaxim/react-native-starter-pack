@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import { Picker, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 
-import Colors from "../constants/Colors";
+import { Colors } from "../constants/Colors";
 import { data } from "../utils/countries";
 
 interface CountryCodeValueType {
@@ -11,26 +12,20 @@ interface CountryCodeValueType {
   dialCode: string;
 }
 
-interface State {
-  itemIndex: number;
-}
-
 interface Props {
   onValueChange: (itemValue: CountryCodeValueType) => void;
 }
 
 const initialIndex = data.findIndex(obj => obj.code === "GB");
 
-class PhoneNumberPrefix extends Component<Props, State> {
-  state = {
-    itemIndex: initialIndex,
+export const PhoneNumberPrefix = ({ onValueChange }: Props) => {
+  const [itemIndex, setItemIndex] = useState<number>(initialIndex);
+
+  const setSelectedValue = (itemIndex: number) => {
+    setItemIndex(itemIndex);
   };
 
-  setSelectedValue = (itemIndex: number) => {
-    this.setState({ itemIndex });
-  };
-
-  renderPickerData = (item: CountryCodeValueType, index: number) => (
+  const renderPickerData = (item: CountryCodeValueType, index: number) => (
     <Picker.Item
       label={`${item.name} (${item.dialCode})`}
       value={index}
@@ -38,33 +33,25 @@ class PhoneNumberPrefix extends Component<Props, State> {
     />
   );
 
-  render() {
-    const { itemIndex } = this.state;
-    const { onValueChange } = this.props;
-    const itemValue = data[itemIndex];
+  const itemValue = data[itemIndex];
 
-    return (
-      <View style={[styles.picker, { backgroundColor: Colors.white }]}>
-        <View style={{ backgroundColor: Colors.lightGrey }}>
-          <TouchableOpacity
-            onPress={() => onValueChange(itemValue)}
-            style={styles.button}>
-            <Text style={[styles.buttonText, { color: Colors.blue }]}>
-              Done
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <Picker
-          selectedValue={itemIndex}
-          onValueChange={(itemIndex: number) =>
-            this.setSelectedValue(itemIndex)
-          }>
-          {data.map(this.renderPickerData)}
-        </Picker>
+  return (
+    <View style={[styles.picker, { backgroundColor: Colors.white }]}>
+      <View style={{ backgroundColor: Colors.lightGrey }}>
+        <TouchableOpacity
+          onPress={() => onValueChange(itemValue)}
+          style={styles.button}>
+          <Text style={[styles.buttonText, { color: Colors.blue }]}>Done</Text>
+        </TouchableOpacity>
       </View>
-    );
-  }
-}
+      <Picker
+        selectedValue={itemIndex}
+        onValueChange={(itemIndex: number) => setSelectedValue(itemIndex)}>
+        {data.map(renderPickerData)}
+      </Picker>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   picker: {
@@ -81,5 +68,3 @@ const styles = StyleSheet.create({
     padding: 12,
   },
 });
-
-export default PhoneNumberPrefix;

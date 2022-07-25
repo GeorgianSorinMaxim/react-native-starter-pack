@@ -42,7 +42,8 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "useUnknownInCatchVariables": true,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    "keyofStringsOnly": true
   },
   "include": ["./**/*", "./*"],
 

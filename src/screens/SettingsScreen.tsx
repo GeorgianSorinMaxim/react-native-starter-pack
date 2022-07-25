@@ -11,7 +11,7 @@ import {
   Title,
   Screen,
 } from "../components";
-import Colors from "../constants/Colors";
+import { Colors } from "../constants/Colors";
 
 import { authActions } from "../store/actions/auth";
 import { getUser } from "../store/selectors";
@@ -19,6 +19,26 @@ import { getUser } from "../store/selectors";
 import { contact } from "../utils/contact";
 
 import { StringValues } from "../constants/StringValues";
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 24,
+  },
+  bodyContainer: {
+    padding: 24,
+  },
+  textContainer: {
+    paddingVertical: 10,
+  },
+  headerText: {
+    paddingBottom: 4,
+    color: Colors.grey,
+  },
+  contentText: {
+    color: Colors.gold,
+    fontWeight: "bold",
+  },
+});
 
 export const SettingsScreen = () => {
   const dispatch = useDispatch();
@@ -92,7 +112,7 @@ export const SettingsScreen = () => {
   };
 
   return (
-    <Screen noHorizontalPadding={true}>
+    <Screen noHorizontalPadding>
       <View style={styles.container}>
         <Title label={StringValues.yourDetails} />
         <Divider />
@@ -101,14 +121,18 @@ export const SettingsScreen = () => {
             <View style={styles.textContainer}>
               <BodyText style={styles.headerText}>Name</BodyText>
               <BodyText style={styles.contentText}>
-                {user?.firstName} {user?.lastName}
+                {user?.firstName} {user.lastName}
               </BodyText>
             </View>
           ) : null}
-          <View style={styles.textContainer}>
-            <BodyText style={styles.headerText}>{StringValues.email}</BodyText>
-            <BodyText style={styles.contentText}>{user?.email}</BodyText>
-          </View>
+          {user?.email ? (
+            <View style={styles.textContainer}>
+              <BodyText style={styles.headerText}>
+                {StringValues.email}
+              </BodyText>
+              <BodyText style={styles.contentText}>{user.email}</BodyText>
+            </View>
+          ) : null}
           <View style={styles.textContainer}>
             <BodyText style={styles.headerText}>
               {StringValues.appVersion}
@@ -140,23 +164,3 @@ export const SettingsScreen = () => {
     </Screen>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 24,
-  },
-  bodyContainer: {
-    padding: 24,
-  },
-  textContainer: {
-    paddingVertical: 10,
-  },
-  headerText: {
-    paddingBottom: 4,
-    color: Colors.grey,
-  },
-  contentText: {
-    color: Colors.gold,
-    fontWeight: "bold",
-  },
-});

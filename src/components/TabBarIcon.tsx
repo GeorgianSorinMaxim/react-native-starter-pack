@@ -1,19 +1,35 @@
-import * as React from "react";
+import React from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 
-import Colors from "../constants/Colors";
+import { Colors } from "../constants/Colors";
+
+import { TabNavigatorRoutes } from "../navigation/AppNavigator";
 
 type IconProps = {
   name: string;
   focused: boolean;
 };
 
-export default function TabBarIcon(props: IconProps) {
+const getIconName = (routeName: string) => {
+  if (routeName === TabNavigatorRoutes.HOME) {
+    return "home-outline";
+  }
+  if (routeName === TabNavigatorRoutes.APPS) {
+    return "phone-portrait-outline";
+  }
+  if (routeName === TabNavigatorRoutes.SETTINGS) {
+    return "settings-outline";
+  }
+
+  return "";
+};
+
+export const TabBarIcon = ({ name, focused }: IconProps) => {
   return (
     <Icon
       size={20}
-      name={props.name}
-      color={props.focused ? Colors.gold : Colors.tabIconDefault}
+      name={getIconName(name)}
+      color={focused ? Colors.gold : Colors.tabIconDefault}
     />
   );
-}
+};

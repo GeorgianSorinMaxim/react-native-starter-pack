@@ -8,7 +8,7 @@ import {
   AppStateStatus,
 } from "react-native";
 
-import Colors from "../constants/Colors";
+import { Colors } from "../constants/Colors";
 import { BodyText, Card } from "../components";
 
 import { getRestaurants } from "../store/selectors";
@@ -18,6 +18,21 @@ import { appActions } from "../store/actions/app";
 import { authActions } from "../store/actions/auth";
 
 import { StringValues } from "../constants/StringValues";
+
+const styles = StyleSheet.create({
+  screenContainer: {
+    flex: 1,
+    paddingVertical: 12,
+    backgroundColor: Colors.white,
+  },
+  listContainer: {
+    marginHorizontal: 12,
+  },
+  centeredText: {
+    fontSize: 16,
+    textAlign: "center",
+  },
+});
 
 export const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -34,7 +49,12 @@ export const HomeScreen = () => {
       dispatch(authActions.validateTokenStart());
     }
 
-    dispatch(appActions.appStateUpdated({ appState, nextAppState }));
+    dispatch(
+      appActions.appStateUpdated({
+        prevState: appState.current,
+        newState: nextAppState,
+      }),
+    );
     appState.current = nextAppState;
   }, []);
 
@@ -48,9 +68,7 @@ export const HomeScreen = () => {
     };
   }, [handleAppStateChange]);
 
-  const renderItem = (item: University) => {
-    return <Card item={item} />;
-  };
+  const renderItem = (item: University) => <Card item={item} />;
 
   return (
     <View style={styles.screenContainer}>
@@ -72,18 +90,3 @@ export const HomeScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  screenContainer: {
-    flex: 1,
-    paddingVertical: 12,
-    backgroundColor: Colors.white,
-  },
-  listContainer: {
-    marginHorizontal: 12,
-  },
-  centeredText: {
-    fontSize: 16,
-    textAlign: "center",
-  },
-});

@@ -9,7 +9,7 @@ import {
 import FastImage from "react-native-fast-image";
 
 import Icon from "react-native-vector-icons/Ionicons";
-import Colors from "../constants/Colors";
+import { Colors } from "../constants/Colors";
 
 interface Props {
   data: string[];
@@ -50,7 +50,7 @@ export const Carousel = ({ data, height }: Props) => {
     return item ? (
       <View style={styles.elementContainer}>
         <FastImage
-          style={[styles.image, { height: height }]}
+          style={[styles.image, { height }]}
           source={{
             uri: item,
             priority: FastImage.priority.high,
@@ -134,5 +134,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-export default Carousel;

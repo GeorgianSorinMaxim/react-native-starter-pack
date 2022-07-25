@@ -94,7 +94,7 @@ export const register = async (
           Alert.alert("Your user has been created");
           return data;
         })
-        .catch((error: any) => {
+        .catch((error) => {
           Alert.alert(error);
           return error;
         });
@@ -127,4 +127,16 @@ export const getToken = async () => {
     return await currentUser.getIdToken(true);
   }
   return null;
+};
+
+export const getUser = async (userId: string) => {
+  const usersRef = firestore().collection("users").doc(userId);
+  const doc = await usersRef.get();
+
+  if (!doc.exists) {
+    return null;
+  }
+
+  const user = doc.data() as NewUserData;
+  return user;
 };

@@ -7,13 +7,12 @@ import {
   View,
 } from "react-native";
 
-import ImagePlaceholder from "./ImagePlaceholder";
+import { ImagePlaceholder } from "./ImagePlaceholder";
+import { BodyText } from "./BodyText";
 
-import Colors from "../constants/Colors";
-import BodyText from "./BodyText";
+import { Colors } from "../constants/Colors";
 
 import { University } from "../store/reducers/data";
-
 interface Props {
   item: University;
 }
@@ -87,5 +86,3 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
 });
-
-export default Card;

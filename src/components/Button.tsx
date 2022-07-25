@@ -2,15 +2,15 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 
-import Colors from "../constants/Colors";
+import { Colors } from "../constants/Colors";
 
-type ButtonProps = {
+type Props = {
   title: string;
   onPress: () => void;
   disabled?: boolean;
 };
 
-const Button = ({ title, onPress, disabled }: ButtonProps) => {
+export const Button = ({ title, onPress, disabled }: Props) => {
   return !disabled ? (
     <RectButton style={styles.buttonContainer} onPress={onPress}>
       <Text style={styles.title}>{title}</Text>
@@ -45,5 +45,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-
-export default Button;

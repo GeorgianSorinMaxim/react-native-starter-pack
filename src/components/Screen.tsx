@@ -1,15 +1,15 @@
-import React, { FC } from "react";
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import Colors from "../constants/Colors";
+import { Colors } from "../constants/Colors";
 
 type Props = {
   children: React.ReactNode;
   noHorizontalPadding?: boolean;
 };
 
-const Screen: FC<Props> = ({ children, noHorizontalPadding }) => (
+export const Screen = ({ children, noHorizontalPadding }: Props) => (
   <View
     style={[
       noHorizontalPadding
@@ -40,5 +40,3 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 });
-
-export default Screen;

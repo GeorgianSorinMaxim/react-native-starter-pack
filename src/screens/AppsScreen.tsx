@@ -1,8 +1,17 @@
 import * as React from "react";
 import { StyleSheet, View } from "react-native";
 
-import Colors from "../constants/Colors";
+import { Colors } from "../constants/Colors";
 import { Carousel } from "../components";
+
+const styles = StyleSheet.create({
+  screenContainer: {
+    flex: 1,
+    paddingTop: 12,
+    paddingBottom: 32,
+    backgroundColor: Colors.white,
+  },
+});
 
 export const AppsScreen = () => {
   const images = ["", ""];
@@ -13,12 +22,3 @@ export const AppsScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  screenContainer: {
-    flex: 1,
-    paddingTop: 12,
-    paddingBottom: 32,
-    backgroundColor: Colors.white,
-  },
-});

@@ -1,3 +1,5 @@
+// eslint-disable no-shadow
+// eslint-disable no-unused-vars
 export type Action<T extends string> = {
   type: T;
 };
