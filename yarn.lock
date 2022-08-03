@@ -7365,10 +7365,10 @@ react-native-secure-key-store@^2.0.9:
   resolved "https://registry.npmjs.org/react-native-secure-key-store/-/react-native-secure-key-store-2.0.9.tgz#9094d4d914145a301864b941c6289f57058780a5"
   integrity sha512-9qi1rOlv4qNSpJIjqcIB7d0EQSwo2Yho8NVBT/Jc9NeYibDLHdArLXl8jn8H6nlf+8alk/bXqr4rPINrCTtmog==
 
-react-native-share@^7.6.6:
-  version "7.6.6"
-  resolved "https://registry.npmjs.org/react-native-share/-/react-native-share-7.6.6.tgz#85137c994cde6a286da1eb84530de2d0751e2408"
-  integrity sha512-nhNjiNvTxg3PKmOg3/tQnWJjw2NpjcimxorEIV3JFEPcU6vE/bO2vWTf0OGOLMHMqyV2B6M0/7KwqET8yWk1rA==
+react-native-share@^7.7.0:
+  version "7.7.0"
+  resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-7.7.0.tgz#1db4cc0d9e86418ea1987c205f6f7ddfbfed8d85"
+  integrity sha512-cMmlMe4x7ER+K/XXsLASD4aarYPZJmpXhMubH3QOGzLFCDtW39bm489ZJYx9mfgdRLJVIitoDzKYA/HvM6qprw==
 
 react-native-svg-transformer@^1.0.0:
   version "1.0.0"
