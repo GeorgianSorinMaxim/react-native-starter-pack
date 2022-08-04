@@ -1454,10 +1454,10 @@
   resolved "https://registry.npmjs.org/@react-native-firebase/remote-config/-/remote-config-15.1.1.tgz#1e2e6686f0941c88fd301c769bd034b140682a67"
   integrity sha512-TRmZtvlmqZ5ESVbNtpLpRd2BYYzdv9UarRt2juJqnHU2q16V2Guns8FCJh2PQOz3dBojcRSQudsJCXUhZHaiaw==
 
-"@react-native-picker/picker@^2.4.2":
-  version "2.4.2"
-  resolved "https://registry.npmjs.org/@react-native-picker/picker/-/picker-2.4.2.tgz#2925eb8e76ff6b584c80529adc251df963be9141"
-  integrity sha512-0nY8638h1J3wKz6P3IJMpOoxJDdOj7Dk/K2hP/xpqP3KnIY0lmoqYlhyNihuyVPocDGajf6SA7LFFsFepQ56ag==
+"@react-native-picker/picker@^2.4.3":
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.3.tgz#36a2efae4b874e5b4479fd4f089e7e0bae0c1a79"
+  integrity sha512-YdfRdYdu3jwkeSuBpNMlxQb8HE6zqLmBKwzU8l/RszXRNcXLZQdiq+fR56hHpwjNc+L447eJrnovC5n6cnbkzg==
 
 "@react-native/assets@1.0.0":
   version "1.0.0"
