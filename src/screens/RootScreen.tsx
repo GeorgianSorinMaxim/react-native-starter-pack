@@ -27,6 +27,7 @@ export const RootScreen = () => {
 
   const onAuthStateChanged = (user: FirebaseAuthTypes.User | null) => {
     if (user) {
+      // TODO: This action is dispatched twice?
       dispatch(authActions.fetchUserDetailsStart({ userId: user.uid }));
       setUser(user);
     } else {

@@ -15,7 +15,6 @@ import { AppsScreen } from "../screens/AppsScreen";
 
 import { TabBarIcon } from "../components/TabBarIcon";
 import { Colors } from "../constants/Colors";
-import { isSmallScreen } from "../utils/dimensions";
 
 import { ScreenNames } from "./ScreenNames";
 
@@ -67,9 +66,9 @@ const renderScreenOptions = ({
     </Text>
   ),
   tabBarStyle: {
-    height: isSmallScreen ? 80 : 100,
+    height: 100,
     paddingTop: 10,
-    paddingBottom: isSmallScreen ? 20 : 40,
+    paddingBottom: 40,
   },
   tabBarActiveTintColor: Colors.gold,
 });
