@@ -7,6 +7,8 @@ import { Alert } from "react-native";
 import DeviceInfo from "react-native-device-info";
 import uuid from "react-native-uuid";
 
+import { logError } from "../logger";
+
 export type UserPayload = {
   additionalUserInfo: {
     isNewUser: boolean;
@@ -57,7 +59,7 @@ export const logout = (): Promise<boolean> => {
     .signOut()
     .then(() => true)
     .catch(error => {
-      console.log("Logout error: ", error);
+      logError("Logout error", error);
       return false;
     });
 };
@@ -104,14 +106,13 @@ export const register = async (
     })
     .catch(error => {
       if (error.code === "auth/email-already-in-use") {
-        console.log("That email address is already in use!");
+        logError("Registration error", "Email address is already in use");
       }
 
       if (error.code === "auth/invalid-email") {
-        console.log("That email address is invalid!");
+        logError("Registration error", "Email address is invalid");
       }
 
-      console.error(error);
       Alert.alert(error.code);
       return error.code;
     });
@@ -150,8 +151,8 @@ export const deleteUser = async () => {
   try {
     await currentUser?.delete();
     return true;
-  } catch (error) {
-    console.log("deleteUser error", error);
+  } catch (error: unknown) {
+    logError("Delete user error");
     return false;
   }
 };

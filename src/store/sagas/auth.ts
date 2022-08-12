@@ -24,11 +24,13 @@ import {
 import { navigate } from "../../navigation/RootNavigation";
 import { ScreenNames } from "../../navigation/ScreenNames";
 
+import { logError } from "../../api/logger";
+
 const onError = () => {
   try {
     AsyncStorage.removeItem("token");
   } catch (error) {
-    console.log(`onError - error: ${error}`);
+    logError("Auth - onError");
   }
 
   Alert.alert(
@@ -65,7 +67,7 @@ export const onLogin = function* (action: LoginStart) {
       try {
         yield AsyncStorage.setItem("token", token);
       } catch (error) {
-        console.log("onLogin - AsyncStorage.set error: ", error);
+        logError("Auth - onLogin - AsyncStorage.set error");
       }
     }
 
@@ -82,7 +84,7 @@ export const onLogin = function* (action: LoginStart) {
       onLoginFailed();
     }
   } catch (error) {
-    console.log("onLogin error:", error);
+    logError("Auth - onLogin - error", error);
     yield put(authActions.loginFailure());
     onLoginFailed();
   }
@@ -109,7 +111,7 @@ export const onRegister = function* (action: SignupStart) {
       yield put(authActions.signupFailure());
     }
   } catch (error) {
-    console.log("onRegister error:", error);
+    logError("Auth - onRegister - error", error);
   }
 };
 
@@ -120,7 +122,7 @@ export const onLogout = function* () {
     try {
       yield AsyncStorage.removeItem("token");
     } catch (error) {
-      console.log("onLogout: AsyncStorage.removeItem error: ", error);
+      logError("Auth - onLogout - AsyncStorage.removeItem error");
     }
 
     if (res) {
@@ -132,7 +134,7 @@ export const onLogout = function* () {
     // Navigate to the LOGIN screen
     yield call(navigate, ScreenNames.LOGIN);
   } catch (error) {
-    console.log("onLogout error:", error);
+    logError("Auth - onLogout - error", error);
   }
 };
 
@@ -186,12 +188,12 @@ export const onFetchUser = function* (action: FetchUserDetailsStart) {
     );
 
     if (userPayload) {
-      yield put(authActions.signupSuccess(userPayload));
+      yield put(authActions.fetchUserDetailsSuccess(userPayload));
     } else {
       yield put(authActions.fetchUserDetailsFailure());
     }
   } catch (error) {
-    console.log("onFetchUser error:", error);
+    logError("Auth - onFetchUser - error", error);
     yield put(authActions.fetchUserDetailsFailure());
   }
 };
@@ -206,7 +208,7 @@ export const onDeleteUser = function* () {
       yield put(authActions.deleteAccountFailure());
     }
   } catch (error) {
-    console.log("onDeleteUser error:", error);
+    logError("Auth - onDeleteUser - error", error);
     yield put(authActions.deleteAccountFailure());
   }
 };
