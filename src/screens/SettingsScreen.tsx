@@ -25,6 +25,8 @@ import { NavigatorStackParamList } from "../navigation/AppNavigator";
 
 import { StringValues } from "../constants/StringValues";
 
+import { logError } from "../api/logger";
+
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 24,
@@ -84,8 +86,8 @@ export const SettingsScreen = () => {
       setIp(ip);
       setOsVersion(osVersion);
       setUuid(uuidVal.toString());
-    } catch (err) {
-      return console.log("getDeviceData error:", err);
+    } catch (_error) {
+      logError("Error getting device data");
     }
   };
 
@@ -149,8 +151,8 @@ export const SettingsScreen = () => {
   const onTermsPress = () => {
     try {
       Linking.openURL("http://www.devxldn.com");
-    } catch (err) {
-      console.log("Linking error: ", err);
+    } catch (error) {
+      logError("Error opening terms link");
     }
   };
 

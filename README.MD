@@ -17,49 +17,51 @@
 
 ### Install the app
 
-`$ yarn`
+$ `yarn`
 
-`$ react-native link`
+$ `react-native link`
 
-`$ cd ios && pod install`
+$ `cd ios && pod install`
 
 ### Run the app in an iOS / Android simulator
 
-`$ yarn start`
+$ `yarn start`
 
-`$ yarn ios`
+$ `yarn ios`
 
-`$ yarn android`
+$ `yarn android`
 
 ### Run TypeScript checks
 
-`$ yarn tsc`
+$ `yarn tsc`
 
 ### Run the tests
 
-`$ yarn test`
+$ `yarn test`
 
 ### Run the linter
 
-`$ yarn lint`
+$ `yarn lint`
 
 ### Run Prettier
 
-`$ yarn prettier --write`
+$ `yarn prettier --write`
 
 ### Architecture
 
 - The application state is stored using Redux.
-- Login / registration using the Firebase Web SDK.
-- redux-saga is used as the Redux middleware for managing the side effects (e.g. data fetching).
-- The Redux store is persisted with redux-persist (not necessary the current funcionality of the app, but useful as the application would grow).
-- The navigation is done using react-navigation. This library has been added since as the app would grow, there would be a need for navigation fairly quickly.
-- Unit tests are written with Jest.
-- Reselect (https://github.com/reduxjs/reselect) is used because in a production app because we could compute derived data, allowing Redux to store the minimal possible state.
-- Eslint (for TypeScript) is used in the project for checking the JS/TS errors.
-- TypeScript is used in the project.
-- react-native-vector-icons has been used to improve the UI apprerance using icons in the navigator and in other UI elements.
-  - Icons: https://infinitered.github.io/ionicons-version-3-search/
+- `redux-saga` is used as the Redux middleware for managing the side effects (e.g. data fetching, login flow, etc).
+- The Redux store is persisted with `redux-persist`. This capability is not necessary for the current functionality of the app, but useful as the application would grow.
+- The login / registration flow is implemented with `react-native-firebase`.
+- The navigation is done using `react-navigation`. This library has been added since as the app would grow, there would be a need for navigation fairly quickly.
+- TypeScript is used in the project with strict rules and no usage for `@ts-ignore`.
+- ESLint (for TypeScript) is used in the project for checking the JS/TS errors.
+- `react-native-vector-icons` is used for improving the UI look-and-feel using icons in the navigator and in other UI elements.
+  - Icons used: https://infinitered.github.io/ionicons-version-3-search/
+- Environment variables are managed with `react-native-config`.
+- The device info is managed with `react-native-device-info` and `react-native-uuid`.
+- Images are cached in the app with `react-native-fast-image`.
+- Reselect (https://github.com/reduxjs/reselect) should used because in a production app because we could compute derived data, allowing Redux to store the minimal possible state.
 
 ### Components
 
@@ -74,36 +76,39 @@
 - Divider for elements
 - Multi-purpose modal
 - Screen container
-- WebView container with `react-native-webview` and `uri-js`
 
 ### Changelog
 
 - DONE in July 2022
 
-  - Add auto-login with token verification with `jwt-decode`
   - Upgraded `react`, `react-native` & other dependencies
   - Enabled Hermes
-  - Refactored `/screens` and `/components` to use hooks and functional components
   - Added `react-native-firebase`
   - Made the TS rules strict (e.g. turn on rules like `noImplicitAny`, no `@ts-ignroe` or `: any` types) and fixed all TS issues
+  - Added auto-login with token verification with `jwt-decode`
+  - Refactored `/screens` and `/components` to use hooks and functional components
   - Improved and extended the types and transformed `networkingApi.js` into `.ts`
   - Added progress indicators and spinners with `react-native-progress`
   - Added `react-native-config`
+  - Added logging with Crashlytics
 
 ### WIP features and improvements
 
-- Add logging and tracking service: Bugsnag, Analytics (GA) and Crashlytics with `react-native-firebase`, `react-native-device-info` and `react-native-uuid`
+- Test logging service
 - Login / Register screen: Add image on background like on Harrods's app and validation
   - UI improvements with `react-native-keyboard-aware-scroll-view`
+- Build a CI with AppCenter CI to build and sign the app
+- Add CodePush for over-the-air updates
 - Create a design system with small components for Text, Heading, Subheading, Divider, Loader, etc
+  - Use `TextAreaWithLabel` + `PhoneNumberPrefix` + `OptionSwitch` + `HyperLink` + `GenericModal` + `Dropdown`
+- Add a WebView container with `react-native-webview` and `uri-js`
 - Run the app in different environments: dev, prod, uat with `react-native-config`
 - Add feature flagging + A/B testing capabilities with Firebase Remote Config + Firebase Realtime Database using with `react-native-firebase`
 - Render SVGs with `react-native-svg` and `react-native-svg-transformer`
 - Add push notifications with Firebase / Azure / Iterable
 - Replace `Jest` with `react-native-testing-library` and write tests (e.g. for /components, networkingApi.js and for the navigator)
-- Build a CI with AppCenter CI to build and sign the app
-- Add CodePush for over-the-air updates
 - Add `pre-commit` hooks
+- Add tracking service with Analytics (GA) and `react-native-firebase`
 
 - Use biometric authentication and store user credentials in the KeyChain and KeyStore with `react-native-secure-key-store`
 - Animate UI elements with `react-native-reanimated`
