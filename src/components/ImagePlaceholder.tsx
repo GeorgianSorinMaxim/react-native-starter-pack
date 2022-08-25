@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 
 import Icon from "react-native-vector-icons/Ionicons";
-import { Colors } from "../constants/Colors";
+import { colors } from "../theme";
 
 interface Props {
   size?: number;
@@ -19,7 +19,7 @@ export const ImagePlaceholder = (props: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.veryLightGrey,
+    backgroundColor: colors["grey-50"],
     width: 100,
     height: 100,
     alignItems: "center",
@@ -29,6 +29,6 @@ const styles = StyleSheet.create({
     padding: 0,
     margin: 0,
     alignSelf: "center",
-    color: Colors.grey,
+    color: colors.grey,
   },
 });

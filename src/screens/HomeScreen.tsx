@@ -8,11 +8,11 @@ import {
   AppStateStatus,
 } from "react-native";
 
-import { Colors } from "../constants/Colors";
+import { colors } from "../theme";
 import { BodyText, Article } from "../components";
 
 import { getNewsArticles } from "../store/selectors";
-import { NewsArticle } from "../store/reducers/data";
+import { NewsArticle } from "../types/api-types";
 
 import { appActions } from "../store/actions/app";
 import { authActions } from "../store/actions/auth";
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     paddingVertical: 12,
-    backgroundColor: Colors.white,
+    backgroundColor: colors.white,
   },
   listContainer: {
     marginHorizontal: 12,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
 export const HomeScreen = () => {
   const dispatch = useDispatch();
 
-  const restaurants = useSelector(getNewsArticles);
+  const news = useSelector(getNewsArticles);
 
   const appState = useRef(AppState.currentState);
 
@@ -60,7 +60,8 @@ export const HomeScreen = () => {
 
   useEffect(() => {
     const subscription = AppState.addEventListener("change", nextAppState =>
-      handleAppStateChange(nextAppState));
+      handleAppStateChange(nextAppState),
+    );
 
     return () => {
       subscription.remove();
@@ -71,10 +72,10 @@ export const HomeScreen = () => {
 
   return (
     <View style={styles.screenContainer}>
-      {restaurants.length > 0 ? (
+      {news.length > 0 ? (
         <View style={styles.listContainer}>
           <FlatList
-            data={restaurants}
+            data={news}
             keyExtractor={({ _id }) => _id}
             renderItem={({ item }) => renderItem(item)}
             style={styles.listContainer}

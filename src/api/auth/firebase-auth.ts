@@ -7,45 +7,14 @@ import { Alert } from "react-native";
 import DeviceInfo from "react-native-device-info";
 import uuid from "react-native-uuid";
 
-export type UserPayload = {
-  additionalUserInfo: {
-    isNewUser: boolean;
-    profile: unknown;
-    providerId: string;
-    username: string | null;
-  };
-  user: {
-    displayName: string | null;
-    email: string;
-    emailVerified: boolean;
-    isAnonymous: boolean;
-    metadata: unknown;
-    phoneNumber: string | null;
-    photoURL: string | null;
-    providerData: unknown;
-    providerId: string;
-    refreshToken: string;
-    tenantId: string | null;
-    uid: string;
-  };
-};
+import { logError } from "../logger";
 
-export type NewUserData = {
-  id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  uuid: string;
-  platform: string;
-  version: string;
-  osVersion: string;
-  createdAt: string;
-};
+import { FirebaseUser, UserData } from "../../types/api-types";
 
 export const login = (
   username: string,
   password: string,
-): Promise<UserPayload> => {
+): Promise<FirebaseUser> => {
   return auth()
     .signInWithEmailAndPassword(username, password)
     .then(user => user)
@@ -56,7 +25,10 @@ export const logout = (): Promise<boolean> => {
   return auth()
     .signOut()
     .then(() => true)
-    .catch(_error => false);
+    .catch(error => {
+      logError("Logout error", error);
+      return false;
+    });
 };
 
 export const register = async (
@@ -64,7 +36,7 @@ export const register = async (
   lastName: string,
   email: string,
   password: string,
-): Promise<NewUserData> => {
+): Promise<UserData> => {
   return auth()
     .createUserWithEmailAndPassword(email, password)
     .then(response => {
@@ -101,14 +73,17 @@ export const register = async (
     })
     .catch(error => {
       if (error.code === "auth/email-already-in-use") {
-        console.log("That email address is already in use!");
+        logError("Registration", "Email address is already in use");
       }
 
       if (error.code === "auth/invalid-email") {
-        console.log("That email address is invalid!");
+        logError("Registration", "Email address is already in use");
       }
 
-      console.error(error);
+      if (error.code === "auth/invalid-email") {
+        logError("Registration", "Email address is invalid");
+      }
+
       Alert.alert(error.code);
       return error.code;
     });
@@ -137,6 +112,18 @@ export const getUser = async (userId: string) => {
     return null;
   }
 
-  const user = doc.data() as NewUserData;
+  const user = doc.data() as UserData;
   return user;
+};
+
+export const deleteUser = async () => {
+  const { currentUser } = auth();
+
+  try {
+    await currentUser?.delete();
+    return true;
+  } catch (error: unknown) {
+    logError("Delete user", error);
+    return false;
+  }
 };

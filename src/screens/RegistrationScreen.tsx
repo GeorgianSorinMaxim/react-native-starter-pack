@@ -10,9 +10,10 @@ import {
   InputWithLabel,
   NavigationLink,
   Screen,
-  Title,
+  Heading,
+  Box,
 } from "../components";
-import { Colors } from "../constants/Colors";
+import { colors } from "../theme";
 
 import { authActions } from "../store/actions/auth";
 import {
@@ -91,7 +92,7 @@ export const RegistrationScreen = () => {
   return (
     <Screen>
       <View style={styles.titleContainer}>
-        <Title label={StringValues.newAccount} />
+        <Heading>{StringValues.newAccount}</Heading>
       </View>
 
       <InputWithLabel
@@ -133,16 +134,19 @@ export const RegistrationScreen = () => {
         onPress={onRegisterPress}
       />
 
-      <NavigationLink
-        text={StringValues.alreadyHaveAccount}
-        onPress={onLoginLinkPress}
-      />
+      <Box marginTop="large">
+        <NavigationLink
+          text={StringValues.alreadyHaveAccount}
+          onPress={onLoginLinkPress}
+          capitalized
+        />
+      </Box>
 
       {isRegistering ? (
         <Progress.Circle
           size={24}
           indeterminate
-          color={Colors.gold}
+          color={colors.purple}
           style={styles.loader}
         />
       ) : null}

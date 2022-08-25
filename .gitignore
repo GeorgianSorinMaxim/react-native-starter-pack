@@ -22,6 +22,7 @@ DerivedData
 *.xcuserstate
 project.xcworkspace
 ios/.xcode.env.local
+ios/Pods
 
 # Android/IntelliJ
 #
@@ -50,8 +51,6 @@ buck-out/
 *.vscode/
 
 # Ruby / CocoaPods
-/ios/Pods/
-/vendor/bundle/
-
+vendor/bundle/
 
 .env

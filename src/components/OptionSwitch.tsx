@@ -1,7 +1,9 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 
-import { Colors } from "../constants/Colors";
+import { BodyText } from "./BodyText";
+
+import { colors } from "../theme";
 
 interface Props {
   value: boolean | null;
@@ -14,19 +16,21 @@ export const OptionSwitch = ({ value, onValueChange, required }: Props) => (
     style={[
       styles.container,
       required
-        ? { borderBottomColor: Colors.required, borderBottomWidth: 1 }
+        ? { borderBottomColor: colors.error, borderBottomWidth: 1 }
         : null,
     ]}>
     <TouchableOpacity onPress={() => onValueChange(true)}>
-      <Text style={[styles.labelStyle, value === true ? styles.active : null]}>
+      <BodyText
+        style={[styles.labelStyle, value === true ? styles.active : null]}>
         Yes
-      </Text>
+      </BodyText>
     </TouchableOpacity>
 
     <TouchableOpacity onPress={() => onValueChange(false)}>
-      <Text style={[styles.labelStyle, value === false ? styles.active : null]}>
+      <BodyText
+        style={[styles.labelStyle, value === false ? styles.active : null]}>
         No
-      </Text>
+      </BodyText>
     </TouchableOpacity>
   </View>
 );
@@ -45,17 +49,17 @@ const styles = StyleSheet.create({
     padding: 12,
     paddingHorizontal: 24,
     fontSize: 16,
-    color: Colors.black,
+    color: colors.black,
     borderWidth: 1,
-    borderColor: Colors.grey,
-    backgroundColor: Colors.lightGrey,
+    borderColor: colors.grey,
+    backgroundColor: colors["grey-100"],
     borderRadius: 6,
   },
   active: {
     fontWeight: "600",
     borderWidth: 1,
-    borderColor: Colors.lightGrey,
-    backgroundColor: Colors.white,
-    color: Colors.black,
+    borderColor: colors["grey-100"],
+    backgroundColor: colors.white,
+    color: colors.black,
   },
 });

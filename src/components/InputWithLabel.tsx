@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import {
   StyleProp,
   StyleSheet,
-  Text,
   TextInput,
   TextStyle,
   View,
   ViewStyle,
   KeyboardTypeOptions,
 } from "react-native";
-import { Colors } from "../constants/Colors";
+import { colors } from "../theme";
+
+import { BodyText } from "./BodyText";
 
 interface Props {
   value: string;
@@ -55,7 +56,7 @@ export const InputWithLabel = (props: Props) => {
   const labelStyle: TextStyle = {
     position: "absolute",
     left: 10,
-    color: Colors.black,
+    color: colors.white,
     top: isSmallLabel ? 4 : 14,
     fontSize: isSmallLabel ? 12 : 16,
   };
@@ -65,20 +66,24 @@ export const InputWithLabel = (props: Props) => {
   return (
     <View style={style}>
       {hideLabelWhenFocused ? (
-        <Text style={styles.outsideLabel}>{label}</Text>
+        <BodyText style={styles.outsideLabel}>{label}</BodyText>
       ) : null}
-      {!hideLabelWhenFocused ? <Text style={labelStyle}>{label}</Text> : null}
+      {!hideLabelWhenFocused ? (
+        <BodyText style={labelStyle}>{label}</BodyText>
+      ) : null}
 
       {showRequired ? (
-        <Text style={styles.requiredLabelStyle}>Required</Text>
+        <BodyText style={styles.requiredLabelStyle}>Required</BodyText>
       ) : null}
 
-      {error ? <Text style={styles.requiredLabelStyle}>{error}</Text> : null}
+      {error ? (
+        <BodyText style={styles.requiredLabelStyle}>{error}</BodyText>
+      ) : null}
 
       {maxLength ? (
-        <Text style={styles.maxLength}>
+        <BodyText style={styles.maxLength}>
           {value.length}/{maxLength}
-        </Text>
+        </BodyText>
       ) : null}
 
       <TextInput
@@ -89,7 +94,7 @@ export const InputWithLabel = (props: Props) => {
           isFocused ? styles.focused : null,
           hideLabelWhenFocused ? styles.textInputWithNoLabel : null,
           maxLength ? styles.textInputWithCounter : null,
-          showRequired ? { borderBottomColor: Colors.required } : null,
+          showRequired ? { borderBottomColor: colors.error } : null,
         ]}
         onFocus={onFocus}
         onBlur={onBlur}
@@ -112,12 +117,12 @@ const styles = StyleSheet.create({
     paddingRight: 8,
     marginBottom: 16,
     paddingBottom: 6,
-    color: Colors.black,
-    borderColor: Colors.darkGrey,
+    color: colors.primary,
+    borderColor: colors.primary,
     borderWidth: 1,
   },
   focused: {
-    borderColor: Colors.gold,
+    borderColor: colors.purple,
   },
   textInputWithCounter: {
     paddingRight: 45,
@@ -131,19 +136,19 @@ const styles = StyleSheet.create({
     top: 4,
     right: 10,
     fontSize: 12,
-    color: Colors.required,
+    color: colors.error,
   },
   maxLength: {
     position: "absolute",
     bottom: 4,
     right: 10,
     fontSize: 12,
-    color: Colors.black,
+    color: colors.primary,
   },
   outsideLabel: {
     marginBottom: 6,
-    color: Colors.darkGrey,
-    fontSize: 10,
+    color: colors.primary,
+    fontSize: 12,
     textTransform: "uppercase",
   },
 });

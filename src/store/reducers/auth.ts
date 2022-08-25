@@ -2,19 +2,14 @@ import { Reducer } from "redux";
 
 import { authActions, AuthActionTypes } from "../actions/auth";
 
-export type User = {
-  id: string;
-  email: string;
-  firstName?: string;
-  lastName?: string;
-};
+import { UserData } from "../../types/api-types";
 
 export type AuthState = {
   isLoginInProgress: boolean;
   loginError?: boolean;
   isRegistrationInProgress: boolean;
   registeringError?: boolean;
-  user: User | null;
+  user: UserData | null;
 };
 
 export const DEFAULT_STATE: AuthState = {
@@ -83,12 +78,14 @@ export const auth: Reducer<AuthState, AuthActionTypes> = (
         ...state,
         isLoginInProgress: false,
         loginError: false,
+        user: null,
       };
     case authActions.logoutFailure.type:
       return {
         ...state,
         isLoginInProgress: false,
         loginError: true,
+        user: null,
       };
     case authActions.validateTokenStart.type:
       return {

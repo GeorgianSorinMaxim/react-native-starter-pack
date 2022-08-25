@@ -11,16 +11,16 @@ import { DateTime } from "luxon";
 import { ImagePlaceholder } from "./ImagePlaceholder";
 import { BodyText } from "./BodyText";
 
-import { Colors } from "../constants/Colors";
+import { colors } from "../theme";
 
-import { NewsArticle } from "../store/reducers/data";
+import { NewsArticle } from "../types/api-types";
 interface Props {
   item: NewsArticle;
 }
 
 const styles = StyleSheet.create({
   container: {
-    borderColor: Colors.grey,
+    borderColor: colors.grey,
     borderWidth: 1,
     borderRadius: 6,
     marginBottom: 12,
@@ -43,20 +43,20 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: "bold",
-    color: Colors.black,
+    color: colors.black,
     overflow: "hidden",
   },
   date: {
     fontWeight: "bold",
-    color: Colors.darkGrey,
+    color: colors["grey-500"],
     marginVertical: 8,
   },
   source: {
     fontStyle: "italic",
-    color: Colors.darkGrey,
+    color: colors["grey-500"],
   },
   summary: {
-    color: Colors.black,
+    color: colors.black,
     overflow: "hidden",
     paddingTop: 12,
   },

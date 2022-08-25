@@ -9,7 +9,7 @@ import {
 import FastImage from "react-native-fast-image";
 
 import Icon from "react-native-vector-icons/Ionicons";
-import { Colors } from "../constants/Colors";
+import { colors } from "../theme";
 
 interface Props {
   data: string[];
@@ -29,7 +29,7 @@ const WIDTH = Dimensions.get("window").width;
 const keyExtractor = (item: string, index: number) => `${item} ${index}`;
 const ImagePlaceholder = (props: ImageHeight) => (
   <View style={[{ height: props.height }, styles.imagePlaceholder]}>
-    <Icon name="image-outline" color={Colors.grey} size={50} />
+    <Icon name="image-outline" color={colors.grey} size={50} />
   </View>
 );
 
@@ -121,14 +121,14 @@ const styles = StyleSheet.create({
     height: 8,
     borderRadius: 4,
     marginHorizontal: 3,
-    backgroundColor: Colors.grey,
+    backgroundColor: colors.grey,
   },
   inactive: {
     opacity: 0.4,
   },
   imagePlaceholder: {
     width: WIDTH,
-    backgroundColor: Colors.lightGrey,
+    backgroundColor: colors["grey-100"],
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",

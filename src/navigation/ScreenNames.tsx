@@ -3,7 +3,7 @@ export const ScreenNames = {
   LOGIN: "Login",
   REGISTRATION: "Registration",
   HOME: "Home",
-  APPS: "Apps",
+  NEWS: "News",
   SETTINGS: "Settings",
   TABS: "Tabs",
 } as const;

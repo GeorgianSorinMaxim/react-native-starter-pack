@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>864491570252-osdcqvsveivffofvhjj5mr5qhigq79bn.apps.googleusercontent.com</string>
+	<string>1035690501200-dbc7vu6aljpsfuvplkji67qn25du6npt.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.864491570252-osdcqvsveivffofvhjj5mr5qhigq79bn</string>
+	<string>com.googleusercontent.apps.1035690501200-dbc7vu6aljpsfuvplkji67qn25du6npt</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAUPyBlNr8GcTtemspFZ23Y1BDFLzYRn0E</string>
+	<string>AIzaSyBTkOjLZ3jpmEYZrpGW_8ydHViVJaLaZSg</string>
 	<key>GCM_SENDER_ID</key>
-	<string>864491570252</string>
+	<string>1035690501200</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.app.Hurt</string>
+	<string>com.apply</string>
 	<key>PROJECT_ID</key>
-	<string>reactnative-43696</string>
+	<string>apply-rn</string>
 	<key>STORAGE_BUCKET</key>
-	<string>reactnative-43696.appspot.com</string>
+	<string>apply-rn.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:864491570252:ios:6217f0f5fb532df700e0e9</string>
-	<key>DATABASE_URL</key>
-	<string>https://reactnative-43696.firebaseio.com</string>
+	<string>1:1035690501200:ios:03b43d0cb8b9889cdd9d55</string>
 </dict>
 </plist>

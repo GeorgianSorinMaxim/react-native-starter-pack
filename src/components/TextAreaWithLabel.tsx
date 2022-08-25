@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import {
   StyleProp,
   StyleSheet,
-  Text,
   TextInput,
   TextStyle,
   View,
   ViewStyle,
 } from "react-native";
 
-import { Colors } from "../constants/Colors";
+import { BodyText } from "./BodyText";
+
+import { colors } from "../theme";
 
 interface Props {
   value: string;
@@ -39,7 +40,7 @@ export const TextAreaWithLabel = ({
   const labelStyle: TextStyle = {
     position: "absolute",
     left: 10,
-    color: Colors.grey,
+    color: colors.grey,
     zIndex: 10,
     elevation: 9,
     top: isSmallLabel ? 4 : 14,
@@ -48,16 +49,16 @@ export const TextAreaWithLabel = ({
 
   return (
     <View style={style}>
-      <Text style={labelStyle}>{label}</Text>
+      <BodyText style={labelStyle}>{label}</BodyText>
 
       {required && value === "" ? (
-        <Text style={styles.requiredLabelStyle}>Required</Text>
+        <BodyText style={styles.requiredLabelStyle}>Required</BodyText>
       ) : null}
 
       {maxLength ? (
-        <Text style={styles.maxLength}>
+        <BodyText style={styles.maxLength}>
           {value.length}/{maxLength}
-        </Text>
+        </BodyText>
       ) : null}
 
       <TextInput
@@ -67,9 +68,7 @@ export const TextAreaWithLabel = ({
         defaultValue={value}
         style={[
           styles.textareaInput,
-          required && value === ""
-            ? { borderBottomColor: Colors.required }
-            : null,
+          required && value === "" ? { borderBottomColor: colors.error } : null,
         ]}
         onFocus={onFocus}
         onBlur={onBlur}
@@ -83,9 +82,9 @@ export const TextAreaWithLabel = ({
 const styles = StyleSheet.create({
   textareaInput: {
     fontSize: 20,
-    color: Colors.black,
+    color: colors.black,
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: Colors.black,
+    borderColor: colors.black,
     paddingTop: 16,
     paddingBottom: 4,
     paddingLeft: 8,
@@ -96,7 +95,7 @@ const styles = StyleSheet.create({
   requiredLabelStyle: {
     position: "absolute",
     right: 10,
-    color: Colors.required,
+    color: colors.error,
     top: 4,
     fontSize: 12,
     zIndex: 10,
@@ -105,7 +104,7 @@ const styles = StyleSheet.create({
   maxLength: {
     position: "absolute",
     right: 10,
-    color: Colors.grey,
+    color: colors.grey,
     bottom: 4,
     fontSize: 12,
     zIndex: 10,

@@ -1,7 +1,7 @@
 import React from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 
-import { Colors } from "../constants/Colors";
+import { colors } from "../theme";
 
 import { TabNavigatorRoutes } from "../navigation/AppNavigator";
 
@@ -14,8 +14,8 @@ const getIconName = (routeName: string) => {
   if (routeName === TabNavigatorRoutes.HOME) {
     return "home-outline";
   }
-  if (routeName === TabNavigatorRoutes.APPS) {
-    return "phone-portrait-outline";
+  if (routeName === TabNavigatorRoutes.NEWS) {
+    return "newspaper-outline";
   }
   if (routeName === TabNavigatorRoutes.SETTINGS) {
     return "settings-outline";
@@ -29,7 +29,7 @@ export const TabBarIcon = ({ name, focused }: IconProps) => {
     <Icon
       size={20}
       name={getIconName(name)}
-      color={focused ? Colors.gold : Colors.tabIconDefault}
+      color={focused ? colors.tabIconFocused : colors.tabIconUnfocused}
     />
   );
 };

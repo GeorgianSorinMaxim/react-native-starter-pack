@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { Alert, StyleSheet } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { Alert, View, StyleSheet } from "react-native";
 import * as Progress from "react-native-progress";
+import LinearGradient from "react-native-linear-gradient";
 
 import {
   Button,
   InputWithLabel,
   NavigationLink,
   Screen,
-  Title,
+  Heading,
+  Box,
 } from "../components";
-import { Colors } from "../constants/Colors";
+import { colors } from "../theme";
 
 import { authActions } from "../store/actions/auth";
 import { getLoginStatus, getLoginError } from "../store/selectors";
@@ -28,9 +30,8 @@ type LoginScreenProp = StackNavigationProp<
 >;
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    paddingTop: 100,
-    paddingBottom: 12,
+  linearGradient: {
+    flex: 1,
   },
   loader: {
     paddingVertical: 24,
@@ -77,44 +78,51 @@ export const LoginScreen = () => {
   };
 
   return (
-    <Screen>
-      <View style={styles.titleContainer}>
-        <Title label={StringValues.login} />
-      </View>
+    <LinearGradient
+      colors={[colors["grey-400"], colors.white]}
+      style={styles.linearGradient}>
+      <Screen transparent>
+        <Box flex={1} marginTop="extraLarge" marginBottom="small">
+          <Heading>{StringValues.login}</Heading>
+        </Box>
 
-      <InputWithLabel
-        hideLabelWhenFocused
-        value={email}
-        onChangeText={onEmailChange}
-        label={StringValues.email}
-      />
-      <InputWithLabel
-        hideLabelWhenFocused
-        value={password}
-        onChangeText={onPasswordChange}
-        label={StringValues.password}
-        secureTextEntry
-      />
-
-      <Button
-        disabled={isSubmitting}
-        title={StringValues.login.toUpperCase()}
-        onPress={onLoginPress}
-      />
-
-      <NavigationLink
-        text={StringValues.createAccount}
-        onPress={onRegistrationLinkPress}
-      />
-
-      {isSubmitting ? (
-        <Progress.Circle
-          size={24}
-          indeterminate
-          color={Colors.gold}
-          style={styles.loader}
+        <InputWithLabel
+          hideLabelWhenFocused
+          value={email}
+          onChangeText={onEmailChange}
+          label={StringValues.email}
         />
-      ) : null}
-    </Screen>
+        <InputWithLabel
+          hideLabelWhenFocused
+          value={password}
+          onChangeText={onPasswordChange}
+          label={StringValues.password}
+          secureTextEntry
+        />
+
+        <Button
+          disabled={isSubmitting}
+          title={StringValues.login.toUpperCase()}
+          onPress={onLoginPress}
+        />
+
+        <Box marginTop="large">
+          <NavigationLink
+            text={StringValues.createAccount}
+            onPress={onRegistrationLinkPress}
+            capitalized
+          />
+        </Box>
+
+        {isSubmitting ? (
+          <Progress.Circle
+            size={24}
+            indeterminate
+            color={colors.purple}
+            style={styles.loader}
+          />
+        ) : null}
+      </Screen>
+    </LinearGradient>
   );
 };

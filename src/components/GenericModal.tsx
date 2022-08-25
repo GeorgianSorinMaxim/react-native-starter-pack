@@ -3,14 +3,15 @@ import {
   Modal,
   StyleProp,
   StyleSheet,
-  Text,
   TextStyle,
   TouchableOpacity,
   View,
   ViewStyle,
 } from "react-native";
 
-import { Colors } from "../constants/Colors";
+import { BodyText } from "./BodyText";
+
+import { colors } from "../theme";
 
 export type ButtonOptions = {
   title: string;
@@ -49,17 +50,21 @@ export const GenericModal = (props: Props) => {
         <View
           style={[
             modalStyle || styles.modalContainer,
-            { backgroundColor: Colors.white },
+            { backgroundColor: colors.white },
           ]}>
-          <Text
-            style={[styles.modalHeader, titleStyle || { color: Colors.blue }]}>
+          <BodyText
+            style={[
+              styles.modalHeader,
+              titleStyle || { color: colors.babyBlue },
+            ]}>
             {title}
-          </Text>
+          </BodyText>
 
           {body ? (
-            <Text style={[styles.body, bodyStyle || { color: Colors.black }]}>
+            <BodyText
+              style={[styles.body, bodyStyle || { color: colors.black }]}>
               {body}
-            </Text>
+            </BodyText>
           ) : null}
 
           {children || null}
@@ -69,29 +74,29 @@ export const GenericModal = (props: Props) => {
               <TouchableOpacity
                 onPress={secondaryButton.onPress}
                 style={buttonShapeStyle || styles.callToAction}>
-                <Text
+                <BodyText
                   style={[
                     styles.modalButton,
                     secondaryButton.style
                       ? secondaryButton.style
-                      : { color: Colors.grey },
+                      : { color: colors.grey },
                   ]}>
                   {secondaryButton.title}
-                </Text>
+                </BodyText>
               </TouchableOpacity>
             ) : null}
             <TouchableOpacity
               onPress={primaryButton.onPress}
               style={buttonShapeStyle || styles.callToAction}>
-              <Text
+              <BodyText
                 style={[
                   styles.modalButton,
                   primaryButton.style
                     ? primaryButton.style
-                    : { color: Colors.grey },
+                    : { color: colors.grey },
                 ]}>
                 {primaryButton.title}
-              </Text>
+              </BodyText>
             </TouchableOpacity>
           </View>
         </View>

@@ -1,13 +1,7 @@
-import React from "react";
-import {
-  Alert,
-  Linking,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import React, { memo } from "react";
+import { Alert, Linking, TouchableOpacity } from "react-native";
 
-import { Colors } from "../constants/Colors";
+import { BodyText, BodyTextProps } from "./BodyText";
 
 type Props = {
   text: string;
@@ -16,21 +10,20 @@ type Props = {
 
 const openUrl = (url: string) =>
   Linking.openURL(url).catch(() =>
-    Alert.alert(`Error:, ${url} could not be opened!`));
+    Alert.alert(`Error:, ${url} could not be opened!`),
+  );
 
-export const HyperLink = ({ text, url }: Props) => (
-  <TouchableOpacity style={styles.linkContainer} onPress={() => openUrl(url)}>
-    <Text style={styles.linkText}>{text}</Text>
-  </TouchableOpacity>
+export const HyperLink = memo(
+  ({ text, url, ...rest }: BodyTextProps & Props) => (
+    <TouchableOpacity onPress={() => openUrl(url)}>
+      <BodyText
+        capitalized
+        color="purple"
+        fontWeight="regular"
+        size="large"
+        {...rest}>
+        {text}
+      </BodyText>
+    </TouchableOpacity>
+  ),
 );
-
-const styles = StyleSheet.create({
-  linkContainer: {
-    alignSelf: "center",
-  },
-  linkText: {
-    fontSize: 14,
-    color: Colors.link,
-    textDecorationLine: "underline",
-  },
-});

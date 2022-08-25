@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
@@ -10,21 +10,20 @@ import { RootScreen } from "../screens/RootScreen";
 import { LoginScreen } from "../screens/LoginScreen";
 import { RegistrationScreen } from "../screens/RegistrationScreen";
 import { HomeScreen } from "../screens/HomeScreen";
+import { NewsScreen } from "../screens/NewsScreen";
 import { SettingsScreen } from "../screens/SettingsScreen";
-import { AppsScreen } from "../screens/AppsScreen";
 
-import { TabBarIcon } from "../components/TabBarIcon";
-import { Colors } from "../constants/Colors";
-import { isSmallScreen } from "../utils/dimensions";
+import { BodyText, TabBarIcon } from "../components";
+import { colors } from "../theme";
 
 import { ScreenNames } from "./ScreenNames";
 
 const styles = StyleSheet.create({
   title: {
-    color: Colors.gold,
+    color: colors.tabIconFocused,
   },
   unfocusedTitle: {
-    color: Colors.grey,
+    color: colors.tabIconUnfocused,
   },
 });
 
@@ -32,15 +31,15 @@ export type NavigatorStackParamList = {
   [ScreenNames.ROOT]: undefined | object;
   [ScreenNames.TABS]: undefined | object;
   [ScreenNames.HOME]: undefined | object;
+  [ScreenNames.NEWS]: undefined | object;
   [ScreenNames.SETTINGS]: undefined | object;
-  [ScreenNames.APPS]: undefined | object;
   [ScreenNames.REGISTRATION]: undefined | object;
   [ScreenNames.LOGIN]: undefined | object;
 };
 
 export const TabNavigatorRoutes = {
   HOME: ScreenNames.HOME,
-  APPS: ScreenNames.APPS,
+  NEWS: ScreenNames.NEWS,
   SETTINGS: ScreenNames.SETTINGS,
 } as const;
 
@@ -62,16 +61,16 @@ const renderScreenOptions = ({
     return <TabBarIcon focused={focused} name={route.name} />;
   },
   tabBarLabel: ({ focused }: { focused: boolean }) => (
-    <Text style={[styles.title, !focused ? styles.unfocusedTitle : null]}>
+    <BodyText style={[styles.title, !focused ? styles.unfocusedTitle : null]}>
       {route.name}
-    </Text>
+    </BodyText>
   ),
   tabBarStyle: {
-    height: isSmallScreen ? 80 : 100,
+    height: 100,
     paddingTop: 10,
-    paddingBottom: isSmallScreen ? 20 : 40,
+    paddingBottom: 40,
   },
-  tabBarActiveTintColor: Colors.gold,
+  tabBarActiveTintColor: colors.tabIconFocused,
 });
 
 const Tabs = createBottomTabNavigator();
@@ -81,8 +80,12 @@ const TabsNavigator = () => {
     <Tabs.Navigator
       initialRouteName={ScreenNames.HOME}
       screenOptions={renderScreenOptions}>
-      <Tabs.Screen name={ScreenNames.HOME} component={HomeScreen} />
-      <Tabs.Screen name={ScreenNames.APPS} component={AppsScreen} />
+      <Tabs.Screen
+        name={ScreenNames.HOME}
+        component={HomeScreen}
+        options={{ headerShown: false }}
+      />
+      <Tabs.Screen name={ScreenNames.NEWS} component={NewsScreen} />
       <Tabs.Screen name={ScreenNames.SETTINGS} component={SettingsScreen} />
     </Tabs.Navigator>
   );

@@ -26,6 +26,8 @@
   },
   "requires_arc": true,
   "dependencies": {
-    "React-Core": []
+    "React-Core": [
+
+    ]
   }
 }

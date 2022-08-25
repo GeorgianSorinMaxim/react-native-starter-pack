@@ -117,6 +117,8 @@
     "no-prototype-builtins": "off",
     "arrow-body-style": "off",
     "@typescript-eslint/ban-types": "off",
-    "react/jsx-closing-bracket-location": "off"
+    "react/jsx-closing-bracket-location": "off",
+    "function-paren-newline": "off",
+    "guard-for-in": "off"
   }
 }

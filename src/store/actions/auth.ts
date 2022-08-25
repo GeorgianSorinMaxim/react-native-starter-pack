@@ -4,7 +4,7 @@ import {
   payloadType,
 } from "./action-creator-factories";
 
-import { UserPayload, NewUserData } from "../../api/auth/firebase-auth";
+import { FirebaseUser, UserData } from "../../types/api-types";
 
 export const authActions = {
   loginStart: actionCreatorWithPayload(
@@ -13,7 +13,7 @@ export const authActions = {
   ),
   loginSuccess: actionCreatorWithPayload(
     "LOGIN_SUCCESS",
-    payloadType<{ user: UserPayload }>(),
+    payloadType<{ user: FirebaseUser }>(),
   ),
   loginFailure: actionCreator("LOGIN_FAILURE"),
   signupStart: actionCreatorWithPayload(
@@ -27,7 +27,7 @@ export const authActions = {
   ),
   signupSuccess: actionCreatorWithPayload(
     "SIGNUP_SUCCESS",
-    payloadType<NewUserData>(),
+    payloadType<UserData>(),
   ),
   signupFailure: actionCreator("SIGNUP_FAILURE"),
   logoutStart: actionCreator("LOGOUT_START"),
@@ -42,9 +42,12 @@ export const authActions = {
   ),
   fetchUserDetailsSuccess: actionCreatorWithPayload(
     "FETCH_USER_DETAILS_SUCCESS",
-    payloadType<NewUserData>(),
+    payloadType<UserData>(),
   ),
   fetchUserDetailsFailure: actionCreator("FETCH_USER_DETAILS_FAILURE"),
+  deleteAccountStart: actionCreator("DELETE_ACCOUNT_START"),
+  deleteAccountSuccess: actionCreator("DELETE_ACCOUNT_SUCCESS"),
+  deleteAccountFailure: actionCreator("DELETE_ACCOUNT_FAILURE"),
 };
 
 export type LoginStart = ReturnType<typeof authActions.loginStart>;
@@ -79,6 +82,16 @@ export type FetchUserDetailsFailure = ReturnType<
   typeof authActions.fetchUserDetailsFailure
 >;
 
+export type DeleteAccountStart = ReturnType<
+  typeof authActions.deleteAccountStart
+>;
+export type DeleteAccountSuccess = ReturnType<
+  typeof authActions.deleteAccountSuccess
+>;
+export type DeleteAccountFailure = ReturnType<
+  typeof authActions.deleteAccountFailure
+>;
+
 export type AuthActionTypes =
   | LoginStart
   | LoginSuccess
@@ -94,4 +107,7 @@ export type AuthActionTypes =
   | SignupFailure
   | FetchUserDetailsStart
   | FetchUserDetailsSuccess
-  | FetchUserDetailsFailure;
+  | FetchUserDetailsFailure
+  | DeleteAccountStart
+  | DeleteAccountSuccess
+  | DeleteAccountFailure;

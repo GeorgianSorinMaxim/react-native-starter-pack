@@ -10,6 +10,7 @@ const persistConfig = {
   key: "root",
   version: 0,
   storage: AsyncStorage,
+  whitelist: ["accounts"],
   blacklist: ["auth"],
 };
 

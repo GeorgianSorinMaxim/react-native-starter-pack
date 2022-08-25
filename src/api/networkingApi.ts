@@ -1,9 +1,14 @@
-export const _doPost = async (url: string, body: string) => {
+export const makePostRequest = async (
+  url: string,
+  body?: string,
+  extraHeaders?: object,
+) => {
   return fetch(url, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
+      ...extraHeaders,
     },
     body,
   })
@@ -16,7 +21,7 @@ export const _doPost = async (url: string, body: string) => {
     });
 };
 
-export const _doGet = async (
+export const makeGetRequest = async (
   url: string,
   headers?: object,
   payload?: unknown,

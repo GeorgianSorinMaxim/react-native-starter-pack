@@ -1,4 +1,4 @@
-package com.hurt.generated;
+package com.apply.generated;
 
 import java.util.Arrays;
 import java.util.List;

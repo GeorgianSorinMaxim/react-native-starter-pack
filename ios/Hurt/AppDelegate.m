@@ -45,7 +45,7 @@ static void InitializeFlipper(UIApplication *application) {
     [bridge moduleForClass:[RCTDevLoadingView class]];
   #endif
 
-  RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge moduleName:@"Hurt" initialProperties:nil];
+  RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge moduleName:@"Apply" initialProperties:nil];
 
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
 

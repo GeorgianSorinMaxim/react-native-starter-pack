@@ -1,0 +1,33 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/AvenirLTStd-Black.otf",
+      "sha1": "eb534ac4079db239cdd489df7a1aa2b874b5b599"
+    },
+    {
+      "path": "src/assets/fonts/AvenirLTStd-Book.otf",
+      "sha1": "db6bfde1c5f1f6d8129df5dce9484d88d3646f0d"
+    },
+    {
+      "path": "src/assets/fonts/AvenirLTStd-Roman.otf",
+      "sha1": "a614776d8ee6be9ed01ccc136ac5daed16ba604b"
+    },
+    {
+      "path": "src/assets/fonts/TiemposHeadline-Black.otf",
+      "sha1": "dfbebfd75b5a746d431ada72d429ace293e56aba"
+    },
+    {
+      "path": "src/assets/fonts/TiemposHeadline-Bold.otf",
+      "sha1": "dfb4ada4e66bbbd4b4b87e9f8e1c09e151ea1c47"
+    },
+    {
+      "path": "src/assets/fonts/TiemposHeadline-Light.otf",
+      "sha1": "cc166b979b2296ad4138f137766dba771ba886b8"
+    },
+    {
+      "path": "src/assets/fonts/TiemposHeadline-Regular.otf",
+      "sha1": "96c55b97053f962ccc2210d4279caec484074c97"
+    }
+  ]
+}

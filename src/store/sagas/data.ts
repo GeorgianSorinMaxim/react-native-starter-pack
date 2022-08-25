@@ -3,9 +3,11 @@ import Config from "react-native-config";
 
 import { dataActions } from "../actions/data";
 
-import { _doGet } from "../../api/networkingApi";
+import { makeGetRequest } from "../../api/networkingApi";
 
-import { NewsArticle, University } from "../reducers/data";
+import { NewsArticle } from "../../types/api-types";
+
+import { logError } from "../../api/logger";
 
 type NewsResponse = {
   payload: {
@@ -14,21 +16,13 @@ type NewsResponse = {
   success?: boolean;
 };
 
-type UniversitiesResponse = {
-  payload: University[];
-  success?: boolean;
-};
-
 export const fetchNewsArticles = async (url: string): Promise<unknown> => {
   const headers = {
     "x-api-key": Config.NEWSCATCHER_API_KEY,
   };
 
-  return _doGet(url, headers);
+  return makeGetRequest(url, headers);
 };
-
-export const fetchUniversitiesData = async (url: string): Promise<unknown> =>
-  _doGet(url);
 
 export const onFetchNewsArticles = function* () {
   try {
@@ -43,29 +37,11 @@ export const onFetchNewsArticles = function* () {
       yield put(dataActions.fetchArticlesFailure());
     }
   } catch (error) {
-    console.log("onFetchNewsArticles error:", error);
+    logError("Data - onFetchNewsArticles", error);
     yield put(dataActions.fetchArticlesFailure());
   }
 };
 
-export const onFetchUniversityList = function* () {
-  try {
-    const fetchData: UniversitiesResponse = yield call(
-      fetchUniversitiesData,
-      Config.UNIVERSITIES_API_URL,
-    );
-
-    if (fetchData && fetchData.success) {
-      yield put(dataActions.fetchUniversitiesSuccess(fetchData.payload));
-    } else {
-      yield put(dataActions.fetchUniversitiesFailure());
-    }
-  } catch (error) {
-    console.log("onFetchUniversityList error:", error);
-    yield put(dataActions.fetchUniversitiesFailure());
-  }
-};
-
 export function* dataSaga() {
-  yield all([call(onFetchNewsArticles), call(onFetchUniversityList)]);
+  yield all([call(onFetchNewsArticles)]);
 }

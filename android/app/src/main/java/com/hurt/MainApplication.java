@@ -1,4 +1,4 @@
-package com.hurt;
+package com.apply;
 
 import android.app.Application;
 
@@ -8,7 +8,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.facebook.react.config.ReactFeatureFlags;
-import com.hurt.generated.BasePackageList;
+import com.apply.generated.BasePackageList;
 import com.facebook.react.ReactNativeHost;
 
 import com.microsoft.codepush.react.CodePush;
@@ -20,7 +20,7 @@ public class MainApplication extends Application implements ReactApplication {
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
     protected String getJSBundleFile() {
-        return CodePush.getJSBundleFile();
+      return CodePush.getJSBundleFile();
     }
 
     @Override

@@ -18,6 +18,8 @@
     "tvos": "9.0"
   },
   "dependencies": {
-    "React-Core": []
+    "React-Core": [
+
+    ]
   }
 }

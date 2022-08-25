@@ -1,8 +1,9 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { RectButton } from "react-native-gesture-handler";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 
-import { Colors } from "../constants/Colors";
+import { BodyText } from "./BodyText";
+
+import { colors } from "../theme";
 
 type Props = {
   title: string;
@@ -12,12 +13,16 @@ type Props = {
 
 export const Button = ({ title, onPress, disabled }: Props) => {
   return !disabled ? (
-    <RectButton style={styles.buttonContainer} onPress={onPress}>
-      <Text style={styles.title}>{title}</Text>
-    </RectButton>
+    <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
+      <BodyText color="white" fontWeight="bold" spacingSize="large" capitalized>
+        {title}
+      </BodyText>
+    </TouchableOpacity>
   ) : (
     <View style={styles.disabledButtonContainer}>
-      <Text style={styles.title}>{title}</Text>
+      <BodyText color="white" fontWeight="bold" spacingSize="large" capitalized>
+        {title}
+      </BodyText>
     </View>
   );
 };
@@ -28,20 +33,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderBottomWidth: 0,
     paddingHorizontal: 15,
-    backgroundColor: Colors.gold,
+    backgroundColor: colors.purple,
   },
   disabledButtonContainer: {
     paddingVertical: 15,
     alignItems: "center",
     borderBottomWidth: 0,
     paddingHorizontal: 15,
-    backgroundColor: Colors.grey,
-  },
-  title: {
-    fontSize: 12,
-    color: Colors.white,
-    alignSelf: "center",
-    letterSpacing: 4,
-    fontWeight: "bold",
+    backgroundColor: colors.grey,
   },
 });

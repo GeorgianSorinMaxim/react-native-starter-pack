@@ -3,7 +3,6 @@ import {
   Modal,
   StyleProp,
   StyleSheet,
-  Text,
   TextInput,
   TouchableOpacity,
   View,
@@ -13,7 +12,10 @@ import { Picker } from "@react-native-picker/picker";
 
 import Icon from "react-native-vector-icons/FontAwesome";
 import { PhoneNumberPrefix } from ".";
-import { Colors } from "../constants/Colors";
+
+import { BodyText } from "./BodyText";
+
+import { colors } from "../theme";
 
 interface CountryCodeValueType {
   name: string;
@@ -22,7 +24,7 @@ interface CountryCodeValueType {
   dialCode: string;
 }
 
-interface PickerElement {
+export interface PickerElement {
   key: string;
   value: string;
 }
@@ -93,7 +95,7 @@ export const Dropdown = (props: Props) => {
   return (
     <View>
       <TouchableOpacity onPress={showPicker} style={[styles.container, style]}>
-        <View pointerEvents="none">
+        <BodyText>
           <TextInput
             placeholder={placeholder}
             value={value}
@@ -101,14 +103,12 @@ export const Dropdown = (props: Props) => {
               styleInput,
               styles.textInput,
               value
-                ? { fontSize: 20, color: Colors.black }
-                : { fontSize: 16, color: Colors.grey },
-              required && !value
-                ? { borderBottomColor: Colors.required }
-                : null,
+                ? { fontSize: 20, color: colors.black }
+                : { fontSize: 16, color: colors.grey },
+              required && !value ? { borderBottomColor: colors.error } : null,
             ]}
           />
-        </View>
+        </BodyText>
         <View style={[styles.dropdownArrow, styleArrow]}>
           <Icon name="chevron-down" size={22} color="rgba(0,0,0,0.35)" />
         </View>
@@ -117,12 +117,10 @@ export const Dropdown = (props: Props) => {
       {pickerData && renderPicker ? (
         <Modal animationType="slide" visible transparent>
           <View style={styles.contentContainer}>
-            <View style={[styles.picker, { backgroundColor: Colors.white }]}>
-              <View style={{ backgroundColor: Colors.lightGrey }}>
+            <View style={[styles.picker, { backgroundColor: colors.white }]}>
+              <View style={{ backgroundColor: colors["grey-100"] }}>
                 <TouchableOpacity onPress={onValueChange} style={styles.button}>
-                  <Text style={[styles.buttonText, { color: Colors.blue }]}>
-                    Done
-                  </Text>
+                  <BodyText style={{ color: colors.babyBlue }}>Done</BodyText>
                 </TouchableOpacity>
               </View>
               <Picker
@@ -154,8 +152,8 @@ const styles = StyleSheet.create({
     height: 46,
     padding: 10,
     marginBottom: 8,
-    color: Colors.black,
-    borderColor: Colors.black,
+    color: colors.black,
+    borderColor: colors.black,
     borderWidth: StyleSheet.hairlineWidth,
   },
   dropdownArrow: {

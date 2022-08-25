@@ -3,6 +3,10 @@ import { put, all, call, takeEvery } from "redux-saga/effects";
 import AsyncStorage from "@react-native-community/async-storage";
 import jwt_decode from "jwt-decode";
 import { DateTime } from "luxon";
+import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
+
+// TODO: Used for testing
+// AsyncStorage.clear()
 
 import {
   LoginStart,
@@ -18,22 +22,33 @@ import {
   register,
   getUser,
   getToken,
+  deleteUser,
 } from "../../api/auth/firebase-auth";
 
 import { navigate } from "../../navigation/RootNavigation";
 import { ScreenNames } from "../../navigation/ScreenNames";
 
+import { logError } from "../../api/logger";
+
 const onError = () => {
-  // Remove the local storage items
   try {
     AsyncStorage.removeItem("token");
   } catch (error) {
-    console.log(`onError - error: ${error}`);
+    logError("Auth - onError");
   }
 
   Alert.alert(
     "Session expired",
     "Please login again",
+    [{ text: "OK", onPress: () => {} }],
+    { cancelable: false },
+  );
+};
+
+const onLoginFailed = () => {
+  Alert.alert(
+    "Login failed",
+    "Please try to login again",
     [{ text: "OK", onPress: () => {} }],
     { cancelable: false },
   );
@@ -56,21 +71,26 @@ export const onLogin = function* (action: LoginStart) {
       try {
         yield AsyncStorage.setItem("token", token);
       } catch (error) {
-        console.log("onLogin - AsyncStorage.set error: ", error);
+        logError("Auth - onLogin - AsyncStorage.set error");
       }
     }
 
     if (userPayload && userPayload.user.uid) {
       yield put(authActions.loginSuccess({ user: userPayload }));
-
+      yield put(
+        authActions.fetchUserDetailsStart({ userId: userPayload.user.uid }),
+      );
       yield put(dataActions.fetchArticlesStart());
 
       navigate(ScreenNames.TABS, { screen: ScreenNames.HOME });
     } else {
       yield put(authActions.loginFailure());
+      onLoginFailed();
     }
   } catch (error) {
-    console.log("onLogin error:", error);
+    logError("Auth - onLogin", error);
+    yield put(authActions.loginFailure());
+    onLoginFailed();
   }
 };
 
@@ -90,23 +110,23 @@ export const onRegister = function* (action: SignupStart) {
 
     if (res && res.id) {
       yield put(authActions.signupSuccess(res));
-      navigate(ScreenNames.LOGIN);
+      navigate(ScreenNames.HOME);
     } else {
       yield put(authActions.signupFailure());
     }
   } catch (error) {
-    console.log("onRegister error:", error);
+    logError("Auth - onRegister", error);
   }
 };
 
 export const onLogout = function* () {
   try {
-    const res: Awaited<ReturnType<typeof logout>> = yield logout();
+    const res: Awaited<ReturnType<typeof logout>> = yield call(logout);
 
     try {
       yield AsyncStorage.removeItem("token");
     } catch (error) {
-      console.log("onLogout: AsyncStorage.removeItem error: ", error);
+      logError("Auth - onLogout - AsyncStorage.removeItem error");
     }
 
     if (res) {
@@ -115,10 +135,10 @@ export const onLogout = function* () {
       yield put(authActions.logoutFailure());
     }
 
-    // Navigate to the login screen
-    yield call(navigate, "Login", {});
+    // Navigate to the LOGIN screen
+    yield call(navigate, ScreenNames.LOGIN);
   } catch (error) {
-    console.log("onLogout error:", error);
+    logError("Auth - onLogout", error);
   }
 };
 
@@ -172,25 +192,51 @@ export const onFetchUser = function* (action: FetchUserDetailsStart) {
     );
 
     if (userPayload) {
-      yield put(authActions.signupSuccess(userPayload));
+      yield put(authActions.fetchUserDetailsSuccess(userPayload));
     } else {
       yield put(authActions.fetchUserDetailsFailure());
     }
   } catch (error) {
-    console.log("onFetchUser error:", error);
+    logError("Auth - onFetchUser", error);
     yield put(authActions.fetchUserDetailsFailure());
+  }
+};
+
+export const onDeleteUser = function* () {
+  try {
+    const res: Awaited<ReturnType<typeof deleteUser>> = yield call(deleteUser);
+
+    if (res) {
+      yield put(authActions.deleteAccountSuccess());
+    } else {
+      yield put(authActions.deleteAccountFailure());
+    }
+  } catch (error) {
+    logError("Auth - onDeleteUser", error);
+    yield put(authActions.deleteAccountFailure());
+  }
+};
+
+export const onCheckIfUserIsLoggedIn = function* () {
+  try {
+    const user: FirebaseAuthTypes.User | null = auth().currentUser;
+    if (user) {
+      yield put(authActions.fetchUserDetailsStart({ userId: user.uid }));
+    }
+  } catch (error) {
+    logError("Auth - onCheckIfUserIsLoggedIn", error);
   }
 };
 
 export function* authSaga() {
   yield all([
-    // Verify token at app startup
+    call(onCheckIfUserIsLoggedIn),
     takeEvery(authActions.loginStart.type, onLogin),
     takeEvery(authActions.signupStart.type, onRegister),
-    takeEvery(authActions.loginFailure.type, onLogout),
     takeEvery(authActions.logoutStart.type, onLogout),
-    // Validate token at app state change
-    takeEvery(authActions.validateTokenStart.type, onValidateToken),
+    // TODO: Remove if will use Firebase Auth in production
+    // takeEvery(authActions.validateTokenStart.type, onValidateToken),
     takeEvery(authActions.fetchUserDetailsStart.type, onFetchUser),
+    takeEvery(authActions.deleteAccountStart.type, onDeleteUser),
   ]);
 }

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
-import { Colors } from "../constants/Colors";
+import { BodyText } from "./BodyText";
+
+import { colors } from "../theme";
 import { data } from "../utils/countries";
 
 interface CountryCodeValueType {
@@ -36,12 +38,14 @@ export const PhoneNumberPrefix = ({ onValueChange }: Props) => {
   const itemValue = data[itemIndex];
 
   return (
-    <View style={[styles.picker, { backgroundColor: Colors.white }]}>
-      <View style={{ backgroundColor: Colors.lightGrey }}>
+    <View style={[styles.picker, { backgroundColor: colors.white }]}>
+      <View style={{ backgroundColor: colors["grey-100"] }}>
         <TouchableOpacity
           onPress={() => onValueChange(itemValue)}
           style={styles.button}>
-          <Text style={[styles.buttonText, { color: Colors.blue }]}>Done</Text>
+          <BodyText style={[styles.buttonText, { color: colors.babyBlue }]}>
+            Done
+          </BodyText>
         </TouchableOpacity>
       </View>
       <Picker
