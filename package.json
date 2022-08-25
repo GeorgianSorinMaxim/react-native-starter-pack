@@ -1,8 +1,8 @@
 {
   "scripts": {
     "start": "react-native start",
-    "android": "react-native run-android",
-    "ios": "react-native run-ios --simulator=\"iPhone 13\" ",
+    "android": "ENVFILE=.env && react-native run-android",
+    "ios": "ENVFILE=.env && react-native run-ios --simulator=\"iPhone 13\" ",
     "test": "jest --watchAll",
     "lint": "eslint \"./src/**/*.{ts,tsx}\" -c .eslint.json",
     "lint-fix": "eslint --fix \"**/*.js\"",
