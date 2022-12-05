@@ -82,7 +82,7 @@
     "@types/react-redux": "^7.1.24",
     "@types/redux-logger": "^3.0.9",
     "@types/redux-saga": "^0.10.5",
-    "@typescript-eslint/eslint-plugin": "^5.30.7",
+    "@typescript-eslint/eslint-plugin": "^5.45.1",
     "@typescript-eslint/parser": "^5.30.6",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^28.1.3",
