@@ -39,7 +39,7 @@
     "cross-fetch": "^3.1.5",
     "eslint-config-airbnb": "^19.0.4",
     "jwt-decode": "^3.1.2",
-    "luxon": "^1.24.1",
+    "luxon": "^1.28.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-native": "^0.69.1",
