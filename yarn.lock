@@ -1452,10 +1452,10 @@
   resolved "https://registry.npmjs.org/@react-native-firebase/database/-/database-15.1.1.tgz#88507dba748ef8fde005fd19d419f62625870864"
   integrity sha512-6JoKNfOc5q4DRimctCFqriihpjpW66v6mGeLvVFQT7omROsdFmq5KZBlkWxHr4F7xL/4Z0VR/ugQfQkgJBCvDQ==
 
-"@react-native-firebase/firestore@^15.2.0":
-  version "15.2.0"
-  resolved "https://registry.npmjs.org/@react-native-firebase/firestore/-/firestore-15.2.0.tgz#ef05d14865120907034f2b61177aa33d318ec6e9"
-  integrity sha512-hyGJeP82yLvhU17baH4TA3IUEr6HUg6QNFX2oluJTm2o8ZzWndOzZ+nM3bV3g62ttKV4g/m8lc/dmqepC0J/UA==
+"@react-native-firebase/firestore@^16.7.0":
+  version "16.7.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/firestore/-/firestore-16.7.0.tgz#975fd79ab628aad844ad4da6c01ae4e47ee07508"
+  integrity sha512-steov9b55UWMAiGZ9u09FfZboMeiJh0OzfCIqPlPRQleeq26lG7upei4o1BS1+4yXvUD5eu+Ldyr6+C4gzhxmg==
 
 "@react-native-firebase/messaging@^15.1.1":
   version "15.1.1"
