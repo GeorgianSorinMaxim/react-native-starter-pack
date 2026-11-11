@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import { memo } from "react";
 import { Alert, Linking, TouchableOpacity } from "react-native";
 
 import { BodyText, BodyTextProps } from "./BodyText";

@@ -1,36 +1,21 @@
-name: Git Checks
+name: Checks
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
-  build:
-    name: Run tests, linter, TS
-    runs-on: macOS-latest
+  checks:
+    name: Typecheck, lint, test
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v1
+      - uses: actions/setup-node@v4
         with:
-          node-version: 17
+          node-version: 22
+          cache: npm
 
-      - name: Install dependencies
-        run: yarn
-
-      - name: Pod Install
-        working-directory: ios
-        run: pod install
-
-      # TS
-      - name: Run TypeScript
-        run: yarn tsc
-
-      # Run linter
-      - name: Run linter
-        run: yarn lint
-
-      # Tests
-      - name: Run unit tests
-        run: yarn jest
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test -- --ci

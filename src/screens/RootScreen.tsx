@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
+import { getAuth, onAuthStateChanged, User } from "@react-native-firebase/auth";
 
 import { Screen, Loader } from "../components";
 
@@ -19,11 +19,9 @@ type RootScreenProp = StackNavigationProp<
 export const RootScreen = () => {
   const navigation = useNavigation<RootScreenProp>();
 
-  const [user, setUser] = useState<FirebaseAuthTypes.User | null>(
-    auth().currentUser,
-  );
+  const [user, setUser] = useState<User | null>(getAuth().currentUser);
 
-  const onAuthStateChanged = (user: FirebaseAuthTypes.User | null) => {
+  const handleAuthStateChanged = (user: User | null) => {
     if (user) {
       setUser(user);
     } else {
@@ -32,7 +30,7 @@ export const RootScreen = () => {
   };
 
   useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    const subscriber = onAuthStateChanged(getAuth(), handleAuthStateChanged);
     return subscriber;
   }, []);
 

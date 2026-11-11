@@ -1,6 +1,4 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import * as Progress from "react-native-progress";
+import { StyleSheet, View, ActivityIndicator } from "react-native";
 
 import { BodyText } from "./BodyText";
 
@@ -11,12 +9,7 @@ import { colors } from "../theme";
 export const Loader = () => (
   <View style={styles.loadingContainer}>
     <BodyText>{StringValues.loading}</BodyText>
-    <Progress.Circle
-      size={24}
-      indeterminate
-      color={colors.purple}
-      style={styles.loader}
-    />
+    <ActivityIndicator color={colors.purple} style={styles.loader} />
   </View>
 );
 

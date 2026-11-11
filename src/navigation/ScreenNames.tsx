@@ -8,4 +8,5 @@ export const ScreenNames = {
   TABS: "Tabs",
 } as const;
 
-export type Screen<T extends keyof typeof ScreenNames> = typeof ScreenNames[T];
+export type Screen<T extends keyof typeof ScreenNames> =
+  (typeof ScreenNames)[T];

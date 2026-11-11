@@ -1,10 +1,20 @@
-import auth from "@react-native-firebase/auth";
-import firestore from "@react-native-firebase/firestore";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+} from "@react-native-firebase/auth";
+import {
+  doc,
+  getDoc,
+  getFirestore,
+  setDoc,
+} from "@react-native-firebase/firestore";
 import { DateTime } from "luxon";
 
 import { Alert } from "react-native";
 
-import DeviceInfo from "react-native-device-info";
+import * as DeviceInfo from "../../utils/deviceInfo";
 import uuid from "react-native-uuid";
 
 import { logError } from "../logger";
@@ -15,17 +25,15 @@ export const login = (
   username: string,
   password: string,
 ): Promise<FirebaseUser> => {
-  return auth()
-    .signInWithEmailAndPassword(username, password)
-    .then(user => user)
-    .catch(error => error.code);
+  return signInWithEmailAndPassword(getAuth(), username, password)
+    .then(user => user as unknown as FirebaseUser)
+    .catch((error: { code: string }) => error.code as unknown as FirebaseUser);
 };
 
 export const logout = (): Promise<boolean> => {
-  return auth()
-    .signOut()
+  return signOut(getAuth())
     .then(() => true)
-    .catch(error => {
+    .catch((error: unknown) => {
       logError("Logout error", error);
       return false;
     });
@@ -37,8 +45,7 @@ export const register = async (
   email: string,
   password: string,
 ): Promise<UserData> => {
-  return auth()
-    .createUserWithEmailAndPassword(email, password)
+  return createUserWithEmailAndPassword(getAuth(), email, password)
     .then(response => {
       const uid = response.user.uid;
       const platform = DeviceInfo.getSystemName();
@@ -58,20 +65,17 @@ export const register = async (
         createdAt,
       };
 
-      const usersRef = firestore().collection("users");
-      return usersRef
-        .doc(uid)
-        .set(data)
+      return setDoc(doc(getFirestore(), "users", uid), data)
         .then(() => {
           Alert.alert("Your user has been created");
-          return data;
+          return data as unknown as UserData;
         })
-        .catch(error => {
-          Alert.alert(error);
+        .catch((error: unknown) => {
+          Alert.alert(String(error));
           return error;
         });
     })
-    .catch(error => {
+    .catch((error: { code: string }) => {
       if (error.code === "auth/email-already-in-use") {
         logError("Registration", "Email address is already in use");
       }
@@ -85,12 +89,12 @@ export const register = async (
       }
 
       Alert.alert(error.code);
-      return error.code;
-    });
+      return error.code as unknown as UserData;
+    }) as Promise<UserData>;
 };
 
 export const getToken = async () => {
-  const { currentUser } = auth();
+  const { currentUser } = getAuth();
   if (currentUser) {
     const idTokenResult = await currentUser.getIdTokenResult();
     const expirationTime = DateTime.fromISO(idTokenResult.expirationTime);
@@ -105,19 +109,18 @@ export const getToken = async () => {
 };
 
 export const getUser = async (userId: string) => {
-  const usersRef = firestore().collection("users").doc(userId);
-  const doc = await usersRef.get();
+  const snapshot = await getDoc(doc(getFirestore(), "users", userId));
 
-  if (!doc.exists) {
+  if (!snapshot.exists()) {
     return null;
   }
 
-  const user = doc.data() as UserData;
+  const user = snapshot.data() as UserData;
   return user;
 };
 
 export const deleteUser = async () => {
-  const { currentUser } = auth();
+  const { currentUser } = getAuth();
 
   try {
     await currentUser?.delete();

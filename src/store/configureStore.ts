@@ -1,5 +1,11 @@
-import AsyncStorage from "@react-native-community/async-storage";
-import { createStore, applyMiddleware, Middleware } from "redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  Action,
+  applyMiddleware,
+  createStore,
+  Middleware,
+  Reducer,
+} from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import createSagaMiddleware from "redux-saga";
 
@@ -17,15 +23,14 @@ const persistConfig = {
 const getMiddleware = (sagaMiddleware: Middleware) => {
   const allMiddleware = [sagaMiddleware];
 
-  if (__DEV__ && !process.env.JEST_WORKER_ID) {
-    const createDebugger = require("redux-flipper").default;
-    allMiddleware.push(createDebugger());
-  }
-
   return applyMiddleware(...allMiddleware);
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+// redux-persist still types reducers against Redux 4, so we widen the type here.
+const persistedReducer = persistReducer(
+  persistConfig,
+  rootReducer as unknown as Reducer<ReturnType<typeof rootReducer>, Action>,
+);
 
 export const configureStore = () => {
   const sagaMiddleware = createSagaMiddleware();

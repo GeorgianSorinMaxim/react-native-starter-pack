@@ -53,4 +53,9 @@ buck-out/
 # Ruby / CocoaPods
 vendor/bundle/
 
-.env
+.env.expo
+dist
+web-build
+ios
+android
+expo-env.d.ts

@@ -1,4 +1,10 @@
-import crashlytics from "@react-native-firebase/crashlytics";
+import {
+  getCrashlytics,
+  log as crashlyticsLog,
+  recordError as crashlyticsRecordError,
+  setAttributes,
+  setUserId,
+} from "@react-native-firebase/crashlytics";
 
 import { FirebaseUser } from "../types/api-types";
 
@@ -11,17 +17,17 @@ export const logError = (name: string, error?: string | unknown) => {
 };
 
 export const log = (message: string) => {
-  crashlytics().log(message);
+  crashlyticsLog(getCrashlytics(), message);
 };
 
 export const recordError = (error: unknown) => {
-  crashlytics().recordError(error as Error);
+  crashlyticsRecordError(getCrashlytics(), error as Error);
 };
 
 export const setUser = ({ user }: FirebaseUser, loggedIn: boolean) => {
   if (user) {
-    crashlytics().setUserId(String(user.uid));
-    crashlytics().setAttributes({
+    setUserId(getCrashlytics(), String(user.uid));
+    setAttributes(getCrashlytics(), {
       loggedIn: String(loggedIn),
       userUuid: String(user.uid),
     });

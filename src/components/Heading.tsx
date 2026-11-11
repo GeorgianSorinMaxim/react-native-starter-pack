@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import { memo } from "react";
 
 import { HeadingSizingToken, theme } from "../theme";
 import { Text, TextProps } from "./Text";

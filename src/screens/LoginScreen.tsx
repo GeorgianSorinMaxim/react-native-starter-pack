@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Alert, StyleSheet } from "react-native";
+import { useState, useEffect } from "react";
+import { Alert, StyleSheet, ActivityIndicator } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import * as Progress from "react-native-progress";
-import LinearGradient from "react-native-linear-gradient";
+import { LinearGradient } from "expo-linear-gradient";
 
 import {
   Button,
@@ -115,12 +114,7 @@ export const LoginScreen = () => {
         </Box>
 
         {isSubmitting ? (
-          <Progress.Circle
-            size={24}
-            indeterminate
-            color={colors.purple}
-            style={styles.loader}
-          />
+          <ActivityIndicator color={colors.purple} style={styles.loader} />
         ) : null}
       </Screen>
     </LinearGradient>

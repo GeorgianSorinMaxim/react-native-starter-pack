@@ -26,6 +26,4 @@ export type FetchArticleDataFailure = ReturnType<
 >;
 
 export type DataActionTypes =
-  | FetchArticleDataStart
-  | FetchArticleDataSuccess
-  | FetchArticleDataFailure;
+  FetchArticleDataStart | FetchArticleDataSuccess | FetchArticleDataFailure;

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Alert, Linking } from "react-native";
-import DeviceInfo from "react-native-device-info";
+import * as DeviceInfo from "../utils/deviceInfo";
 import uuid from "react-native-uuid";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -43,19 +43,17 @@ export const SettingsScreen = () => {
   const [version, setVersion] = useState<string>("");
   const [readableVersion, setReadableVersion] = useState<string>("");
   const [systemName, setSystemName] = useState<string>("");
-  const [ip, setIp] = useState<string>("");
   const [osVersion, setOsVersion] = useState<string>("");
   const [uuidValue, setUuid] = useState<string>("");
 
   const getDeviceData = async () => {
     try {
-      const bundleId = await DeviceInfo.getBundleId();
-      const buildNumber = await DeviceInfo.getBuildNumber();
-      const version = await DeviceInfo.getVersion();
-      const readableVersion = await DeviceInfo.getReadableVersion();
-      const systemName = await DeviceInfo.getSystemName();
-      const ip = await DeviceInfo.getIpAddress();
-      const osVersion = await DeviceInfo.getSystemVersion();
+      const bundleId = DeviceInfo.getBundleId();
+      const buildNumber = DeviceInfo.getBuildNumber();
+      const version = DeviceInfo.getVersion();
+      const readableVersion = DeviceInfo.getReadableVersion();
+      const systemName = DeviceInfo.getSystemName();
+      const osVersion = DeviceInfo.getSystemVersion();
       const uuidVal = uuid.v1();
 
       setBundleId(bundleId);
@@ -63,7 +61,6 @@ export const SettingsScreen = () => {
       setVersion(version);
       setReadableVersion(readableVersion);
       setSystemName(systemName);
-      setIp(ip);
       setOsVersion(osVersion);
       setUuid(uuidVal.toString());
     } catch (_error) {
@@ -122,7 +119,6 @@ export const SettingsScreen = () => {
       App version: ${version} \n
       System: ${systemName} \n
       OS: ${osVersion} \n
-      IP: ${ip} \n
       UUID: ${uuidValue} \n
     `;
     contact(EMAIL, SUBJECT, BODY);

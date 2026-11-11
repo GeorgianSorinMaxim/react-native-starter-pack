@@ -117,12 +117,6 @@ export const auth: Reducer<AuthState, AuthActionTypes> = (
         loginError: false,
         user: action.payload,
       };
-    case authActions.validateTokenFailure.type:
-      return {
-        ...state,
-        loginError: true,
-        user: null,
-      };
   }
   return state;
 };
