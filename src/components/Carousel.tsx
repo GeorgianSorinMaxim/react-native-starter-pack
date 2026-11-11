@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Dimensions,
   FlatList,
@@ -6,9 +6,9 @@ import {
   StyleSheet,
   View,
 } from "react-native";
-import FastImage from "react-native-fast-image";
+import { Image } from "expo-image";
 
-import Icon from "react-native-vector-icons/Ionicons";
+import Icon from "@expo/vector-icons/Ionicons";
 import { colors } from "../theme";
 
 interface Props {
@@ -49,12 +49,10 @@ export const Carousel = ({ data, height }: Props) => {
   const renderItem = ({ item }: CarouselImage) => {
     return item ? (
       <View style={styles.elementContainer}>
-        <FastImage
+        <Image
           style={[styles.image, { height }]}
-          source={{
-            uri: item,
-            priority: FastImage.priority.high,
-          }}
+          source={{ uri: item }}
+          priority="high"
           key={item}
         />
       </View>

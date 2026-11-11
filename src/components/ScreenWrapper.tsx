@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 import { ColorSchemeName } from "react-native";
 
 import { ColorToken, SpacingToken, theme } from "../theme";
@@ -78,7 +78,9 @@ export const ScreenWrapper = memo(
     return (
       <>
         {colorScheme ? (
-          <FocusAwareStatusBar barStyle={`${colorScheme}-content`} />
+          <FocusAwareStatusBar
+            style={colorScheme === "dark" ? "dark" : "light"}
+          />
         ) : null}
 
         <Box backgroundColor={backgroundColor} flex={1} {...rest}>

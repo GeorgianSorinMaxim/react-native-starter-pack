@@ -1,5 +1,8 @@
 import { put, all, call } from "redux-saga/effects";
-import Config from "react-native-config";
+const Config = {
+  NEWSCATCHER_API_URL: process.env.EXPO_PUBLIC_NEWSCATCHER_API_URL ?? "",
+  NEWSCATCHER_API_KEY: process.env.EXPO_PUBLIC_NEWSCATCHER_API_KEY ?? "",
+};
 
 import { dataActions } from "../actions/data";
 

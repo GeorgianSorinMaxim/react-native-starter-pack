@@ -1,0 +1,7 @@
+# Smoke test: the app starts and shows the login screen when signed out.
+# Run with: maestro test .maestro (needs a dev build on a simulator/emulator)
+appId: com.example.starterpack
+---
+- launchApp:
+    clearState: true
+- assertVisible: "Login"

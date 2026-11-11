@@ -1,11 +1,11 @@
-import React from "react";
-import { StatusBar, StatusBarProps } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import type { ComponentProps } from "react";
 
 import { useIsFocused } from "@react-navigation/native";
 
-export const FocusAwareStatusBar = (props: StatusBarProps) => {
+export const FocusAwareStatusBar = (
+  props: ComponentProps<typeof StatusBar>,
+) => {
   const isFocused = useIsFocused();
-  return isFocused ? (
-    <StatusBar backgroundColor="transparent" translucent {...props} />
-  ) : null;
+  return isFocused ? <StatusBar {...props} /> : null;
 };

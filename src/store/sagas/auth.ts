@@ -1,9 +1,9 @@
 import { Alert } from "react-native";
 import { put, all, call, takeEvery } from "redux-saga/effects";
-import AsyncStorage from "@react-native-community/async-storage";
-import jwt_decode from "jwt-decode";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { jwtDecode } from "jwt-decode";
 import { DateTime } from "luxon";
-import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
+import { getAuth, User } from "@react-native-firebase/auth";
 
 // TODO: Used for testing
 // AsyncStorage.clear()
@@ -150,7 +150,7 @@ export const onValidateToken = function* () {
 
     if (token) {
       // Check JWT token validity
-      const decodedToken: { exp: number } = jwt_decode(token);
+      const decodedToken: { exp: number } = jwtDecode(token);
       if (decodedToken && decodedToken.exp) {
         // Convert Unix Timestamp to Milliseconds
         const expDate = DateTime.fromMillis(decodedToken.exp * 1000);
@@ -219,7 +219,7 @@ export const onDeleteUser = function* () {
 
 export const onCheckIfUserIsLoggedIn = function* () {
   try {
-    const user: FirebaseAuthTypes.User | null = auth().currentUser;
+    const user: User | null = getAuth().currentUser;
     if (user) {
       yield put(authActions.fetchUserDetailsStart({ userId: user.uid }));
     }

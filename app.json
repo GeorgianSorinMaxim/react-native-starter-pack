@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "Starter Pack",
+    "slug": "react-native-starter-pack",
+    "version": "2.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "bundleIdentifier": "com.example.starterpack"
+    },
+    "android": {
+      "package": "com.example.starterpack"
+    },
+    "plugins": [
+      "expo-image",
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./src/assets/fonts/AvenirLTStd-Black.otf",
+            "./src/assets/fonts/AvenirLTStd-Book.otf",
+            "./src/assets/fonts/AvenirLTStd-Roman.otf",
+            "./src/assets/fonts/TiemposHeadline-Black.otf",
+            "./src/assets/fonts/TiemposHeadline-Bold.otf",
+            "./src/assets/fonts/TiemposHeadline-Light.otf",
+            "./src/assets/fonts/TiemposHeadline-Regular.otf"
+          ]
+        }
+      ],
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth",
+      "@react-native-firebase/crashlytics",
+      "expo-font"
+    ]
+  }
+}

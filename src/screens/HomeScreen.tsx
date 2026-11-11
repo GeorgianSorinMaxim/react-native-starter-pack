@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback } from "react";
+import { useRef, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   AppState,
@@ -39,7 +39,7 @@ export const HomeScreen = () => {
 
   const news = useSelector(getNewsArticles);
 
-  const appState = useRef(AppState.currentState);
+  const appState = useRef<string>(AppState.currentState ?? "active");
 
   const handleAppStateChange = useCallback((nextAppState: AppStateStatus) => {
     if (

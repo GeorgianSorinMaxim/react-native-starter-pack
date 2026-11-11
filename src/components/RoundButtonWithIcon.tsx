@@ -1,6 +1,8 @@
-import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
+import type { ComponentProps } from "react";
+import Icon from "@expo/vector-icons/Ionicons";
+
+type IconName = ComponentProps<typeof Icon>["name"];
 
 import { BodyText } from "./BodyText";
 import { Box } from "./Box";
@@ -9,7 +11,7 @@ import { colors } from "../theme";
 
 type Props = {
   onPress: () => void;
-  icon: string;
+  icon: IconName;
   title?: string;
 };
 

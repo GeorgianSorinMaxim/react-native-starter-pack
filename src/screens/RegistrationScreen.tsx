@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { Alert, View, StyleSheet } from "react-native";
-import * as Progress from "react-native-progress";
+import { Alert, View, StyleSheet, ActivityIndicator } from "react-native";
 
 import {
   Button,
@@ -143,12 +142,7 @@ export const RegistrationScreen = () => {
       </Box>
 
       {isRegistering ? (
-        <Progress.Circle
-          size={24}
-          indeterminate
-          color={colors.purple}
-          style={styles.loader}
-        />
+        <ActivityIndicator color={colors.purple} style={styles.loader} />
       ) : null}
     </Screen>
   );

@@ -1,8 +1,7 @@
 import React, { memo } from "react";
 import {
   Linking,
-  NativeSyntheticEvent,
-  NativeTouchEvent,
+  GestureResponderEvent,
   TouchableOpacity,
   TouchableOpacityProps,
 } from "react-native";
@@ -28,9 +27,7 @@ export const CustomButton = memo(
   }: CustomButtonProps) => {
     const linkTo = useLinkTo();
 
-    const handleLinkPress = async (
-      e: NativeSyntheticEvent<NativeTouchEvent>,
-    ) => {
+    const handleLinkPress = async (e: GestureResponderEvent) => {
       if (onPress) {
         onPress(e);
       }
@@ -53,11 +50,14 @@ export const CustomButton = memo(
     };
 
     if (!wrapWithTouchableOpacity) {
-      return React.cloneElement(children, {
-        accessible: true,
-        accessibilityRole: typeof url !== "undefined" ? "link" : "button",
-        onPress: handleLinkPress,
-      });
+      return React.cloneElement(
+        children as React.ReactElement<Record<string, unknown>>,
+        {
+          accessible: true,
+          accessibilityRole: typeof url !== "undefined" ? "link" : "button",
+          onPress: handleLinkPress,
+        },
+      );
     }
 
     return (

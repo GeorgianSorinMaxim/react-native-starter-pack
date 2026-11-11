@@ -59,12 +59,12 @@ export const Box = memo(
       flexWrap === "wrap-reverse" ||
       (style &&
         ["wrap", "wrap-reverse"].includes(
-          StyleSheet.flatten(style).flexWrap || "",
+          StyleSheet.flatten(style)?.flexWrap || "",
         ));
 
     const isRow =
       flexDirection === "row" ||
-      (style && StyleSheet.flatten(style).flexDirection === "row");
+      (style && StyleSheet.flatten(style)?.flexDirection === "row");
 
     //  Apply some spacing between this component's children if the "spacing" prop exists
     if (spacing || !!Separator) {
@@ -94,10 +94,13 @@ export const Box = memo(
         if ((child as React.ReactElement).type === Box) {
           return (
             <>
-              {React.cloneElement(child as React.ReactElement, {
-                marginBottom: childMarginBottom,
-                marginRight: childMarginRight,
-              })}
+              {React.cloneElement(
+                child as React.ReactElement<Record<string, unknown>>,
+                {
+                  marginBottom: childMarginBottom,
+                  marginRight: childMarginRight,
+                },
+              )}
               {shouldAddSeperator ? (
                 <Box
                   marginBottom={childMarginBottom}

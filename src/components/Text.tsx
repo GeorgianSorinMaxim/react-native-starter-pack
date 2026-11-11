@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import { memo } from "react";
 import { Text as RNText, TextProps as RNTextProps } from "react-native";
 
 import { ColorToken, theme } from "../theme";
@@ -12,10 +12,7 @@ export interface TextProps extends RNTextProps {
 }
 
 type TextDecorationLineType =
-  | "underline"
-  | "line-through"
-  | "none"
-  | "underline line-through";
+  "underline" | "line-through" | "none" | "underline line-through";
 
 export const Text = memo(
   ({

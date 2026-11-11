@@ -1,5 +1,5 @@
-import React from "react";
-import Icon from "react-native-vector-icons/Ionicons";
+import type { ComponentProps } from "react";
+import Icon from "@expo/vector-icons/Ionicons";
 
 import { colors } from "../theme";
 
@@ -10,7 +10,9 @@ type IconProps = {
   focused: boolean;
 };
 
-const getIconName = (routeName: string) => {
+const getIconName = (
+  routeName: string,
+): ComponentProps<typeof Icon>["name"] => {
   if (routeName === TabNavigatorRoutes.HOME) {
     return "home-outline";
   }
@@ -21,7 +23,7 @@ const getIconName = (routeName: string) => {
     return "settings-outline";
   }
 
-  return "";
+  return "help-outline";
 };
 
 export const TabBarIcon = ({ name, focused }: IconProps) => {
